@@ -1,0 +1,24 @@
+<div class="form-input error">
+  <div class="clear"></div>
+  <div class="data-row">
+    <div class="data-box">
+      <div class="label">Pass Type</div>
+      <div class="data-value">{{type}}</div>
+    </div>
+    <div class="data-box">
+      <div class="label">Rate (₹)</div>
+      <input type="text" appNumberOnly [numberOnly]="numberOnly" placeholder="Hourly Rate" [(ngModel)]="rate"
+        (change)="updateTotal()" />
+    </div>
+    <div class="data-box">
+      <div class="label">Tax(%)</div>
+      <input type="text" appNumberOnly [numberOnly]="numberOnly" placeholder="Tax" [(ngModel)]="tax"
+        (change)="updateTotal()" />
+    </div>
+    <div class="data-box">
+      <div class="label">Total (₹)</div>
+      <input type="text" appNumberOnly [numberOnly]="numberOnly" readonly placeholder="Total"
+        [(ngModel)]="amount" />
+    </div>
+  </div>
+</div>

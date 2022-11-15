@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="21.689" height="14.56" viewBox="0 0 21.689 14.56">
+  <g id="credit-card" transform="translate(0.15 0.15)">
+    <g id="Group_58406" data-name="Group 58406" transform="translate(0 0)">
+      <g id="Group_58405" data-name="Group 58405">
+        <path id="Path_34479" data-name="Path 34479" d="M19.161,85.333H2.228A2.231,2.231,0,0,0,0,87.561v9.8a2.231,2.231,0,0,0,2.228,2.228H19.161a2.231,2.231,0,0,0,2.228-2.228v-9.8A2.231,2.231,0,0,0,19.161,85.333ZM20.5,97.364A1.338,1.338,0,0,1,19.161,98.7H2.228A1.338,1.338,0,0,1,.891,97.364v-9.8a1.338,1.338,0,0,1,1.337-1.337H19.161A1.338,1.338,0,0,1,20.5,87.561v9.8Z" transform="translate(0 -85.333)" fill="#b9c1cc" stroke="#b9c1cc" stroke-width="0.3"/>
+      </g>
+    </g>
+    <g id="Group_58408" data-name="Group 58408" transform="translate(0 2.674)">
+      <g id="Group_58407" data-name="Group 58407">
+        <path id="Path_34480" data-name="Path 34480" d="M20.944,149.333H.446a.446.446,0,0,0-.446.446v2.674a.446.446,0,0,0,.446.446h20.5a.446.446,0,0,0,.446-.446v-2.674A.446.446,0,0,0,20.944,149.333Zm-.446,2.674H.891v-1.782H20.5v1.782Z" transform="translate(0 -149.333)" fill="#b9c1cc" stroke="#b9c1cc" stroke-width="0.3"/>
+      </g>
+    </g>
+    <g id="Group_58410" data-name="Group 58410" transform="translate(2.674 8.912)">
+      <g id="Group_58409" data-name="Group 58409">
+        <path id="Path_34481" data-name="Path 34481" d="M69.793,298.667H64.446a.446.446,0,1,0,0,.891h5.347a.446.446,0,1,0,0-.891Z" transform="translate(-64 -298.667)" fill="#b9c1cc" stroke="#b9c1cc" stroke-width="0.3"/>
+      </g>
+    </g>
+    <g id="Group_58412" data-name="Group 58412" transform="translate(2.674 10.695)">
+      <g id="Group_58411" data-name="Group 58411">
+        <path id="Path_34482" data-name="Path 34482" d="M69.793,341.333H64.446a.446.446,0,1,0,0,.891h5.347a.446.446,0,0,0,0-.891Z" transform="translate(-64 -341.333)" fill="#b9c1cc" stroke="#b9c1cc" stroke-width="0.3"/>
+      </g>
+    </g>
+    <g id="Group_58414" data-name="Group 58414" transform="translate(15.151 8.021)">
+      <g id="Group_58413" data-name="Group 58413">
+        <path id="Path_34483" data-name="Path 34483" d="M364.9,277.333H364a1.338,1.338,0,0,0-1.337,1.337v.891A1.338,1.338,0,0,0,364,280.9h.891a1.338,1.338,0,0,0,1.337-1.337v-.891A1.338,1.338,0,0,0,364.9,277.333Zm.446,2.228a.446.446,0,0,1-.446.446H364a.446.446,0,0,1-.446-.446v-.891a.446.446,0,0,1,.446-.446h.891a.446.446,0,0,1,.446.446Z" transform="translate(-362.667 -277.333)" fill="#b9c1cc" stroke="#b9c1cc" stroke-width="0.3"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,53 @@
+<div class="box">
+  <label>Top Vehicle Category</label>
+
+  <div class="">
+    <div class="chart" *ngIf="$pCategory | async as data">
+      <apx-chart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [labels]="chartOptions.labels"
+        [dataLabels]="chartOptions.dataLabels"
+        [legend]="chartOptions.legend"
+        [colors]="chartOptions.colors"
+      ></apx-chart>
+    </div>
+    <!-- <div class="body" *ngIf="$pCategory | async as data">
+            <apx-chart [series]="chartOptions?.series" [chart]="chartOptions.chart" [xaxis]="{type:'category',categories:data.categories}" [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip" [dataLabels]="chartOptions.dataLabels" [legend]="chartOptions.legend"
+                [markers]="chartOptions.markers" [grid]="chartOptions.grid" [yaxis]="chartOptions.yaxis" [title]="chartOptions.title"></apx-chart>
+        </div> -->
+    <ul>
+      <li *ngFor="let item of categoryName">
+        <span class="clr" [style.background]="'#B82370'"></span
+        ><span>{{ item }}</span>
+      </li>
+    </ul>
+  </div>
+  <div class="parking-dropdown">
+    <form-dropdown
+      [value]="'Current Year'"
+      (actionSelect)="actionSelectDD($event)"
+      [options]="filterDropdown[0].options"
+      [optionWidth]="200"
+    >
+    </form-dropdown>
+  </div>
+  <!-- <div class="footer">
+        <form-dropdown style="width: 50%;" [label]="'Current Month'">
+            <div class="options-container">
+                <div class="options dropdown-content">
+                    <div class="dropdown-scroll">
+                        <ul>
+                            <li class="heading">
+                                <div class="value">Current Day</div>
+                            </li>
+                            <li class="heading">
+                                <div class="value">Current Year</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </form-dropdown>
+    </div> -->
+</div>

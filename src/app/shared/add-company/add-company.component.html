@@ -1,0 +1,134 @@
+<form-model [title]="editId===''?'Add Company':'Edit Copany'" [labelCancel]="'Cancel'" [cancelPosition]="'top'"
+  (actionCancel)="onCancel()" [labelPrimary]="editId === ''?'Save':'Update'" (actionPrimary)="onPrimary()"
+  [labelSecondary]="editId===''?'Save & Add Another':''" (actionSecondary)="onSecondry()">
+  <div class="form-addproduct">
+    <div class="form-row">
+      <div class="form-col-12">
+        <form-input [label]="'Company Name'" [(inputModel)]="formData.storeName"></form-input>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-12">
+        <form-input [label]="'Company Owner'" [(inputModel)]="formData.storeOwner"></form-input>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-6">
+        <form-model-dropdown [label]="'Related To'" [value]="formData.storeParentAc"
+          (actionClick)="openRelatedCompanyDD($event)">
+        </form-model-dropdown>
+      </div>
+      <div class="form-col-6">
+        <div class="ml-10">
+          <form-dropdown [label]="'Company Type'" [value]="formData.storeType"
+            (actionSelect)="actionSelectDD($event, 'storeType')" [options]="types">
+          </form-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-6">
+        <form-dropdown [label]="'Industry'" [value]="formData.storeIndustry"
+          (actionSelect)="actionSelectDD($event, 'storeIndustry')" [options]="industries">
+        </form-dropdown>
+      </div>
+      <div class="form-col-6">
+        <div class="ml-10">
+          <form-dropdown [label]="'Ownership'" [value]="formData.storeOwnership"
+            (actionSelect)="actionSelectDD($event, 'storeOwnership')" [options]="ownership">
+          </form-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-6">
+        <form-input [label]="'Annual Revenue'" [(inputModel)]="formData.annualRevenue" [numberOnly]="true"></form-input>
+      </div>
+      <div class="form-col-6">
+        <div class="ml-10">
+          <form-dropdown [label]="'Rating'" [value]="formData.storeRating"
+            (actionSelect)="actionSelectDD($event, 'storeRating')" [options]="rating">
+          </form-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-6">
+        <form-input [label]="'Employees'" [(inputModel)]="formData.totalEmployee" [numberOnly]="true"></form-input>
+      </div>
+      <div class="form-col-6">
+        <div class="ml-10">
+          <form-input [label]="'SIS Code'" [(inputModel)]="formData.storeSic"></form-input>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-6">
+        <form-input [label]="'Email'" [(inputModel)]="formData.storeEmail"></form-input>
+      </div>
+      <div class="form-col-6">
+        <div class="ml-10">
+          <form-input [label]="'Website'" [(inputModel)]="formData.storeWeb"></form-input>
+        </div>
+      </div>
+    </div>
+    <div class="subheading mt-10">Details</div>
+    <div class="form-row">
+      <div class="form-col-12">
+        <form-textarea [label]="'Description'" [max]="700" [(inputModel)]="formData.storeDesc"></form-textarea>
+      </div>
+    </div>
+    <div class="subheading mt-10">Phone</div>
+    <div class="form-row" *ngFor="let p of phoneTypes.phones;  let isLast = last; index as i">
+      <div class="form-col-3">
+        <form-dropdown [label]="'Phone'" [value]="p.type" (actionSelect)="actionChangePhoneType($event, i)"
+          [options]="phoneTypes.available">
+        </form-dropdown>
+      </div>
+      <div class="form-col-9">
+        <div class="ml-10">
+          <div class="right-block">
+            <div class="action-right" (click)="addMorePhone()" *ngIf="isLast && phoneTypes.phones.length < 3">
+              <img src="/assets/images/icons/icon_plus.png" alt="">
+            </div>
+            <div class="action-right" (click)="removePhone(i)" *ngIf="!isLast">
+              <img src="/assets/images/icons/icon_minus.png" alt="">
+            </div>
+          </div>
+          <div class="left-block">
+            <form-input [label]="'Add Phone'" [(inputModel)]="p.number" [numberOnly]="true"></form-input>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subheading mt-10">Address</div>
+    <div class="form-row" *ngFor="let p of addressTypes.addresses;  let isLast = last; index as i">
+      <div class="form-col-3">
+        <form-dropdown [label]="'Address'" [value]="p.type" (actionSelect)="actionChangeAddressType($event, i)"
+          [options]="addressTypes.available">
+        </form-dropdown>
+      </div>
+      <div class="form-col-9">
+        <div class="ml-10">
+          <div class="right-block">
+            <div class="action-right" (click)="addMoreAddress()" *ngIf="isLast && addressTypes.addresses.length < 2">
+              <img src="/assets/images/icons/icon_plus.png" alt="">
+            </div>
+            <div class="action-right" (click)="removeAddress(i)" *ngIf="!isLast">
+              <img src="/assets/images/icons/icon_minus.png" alt="">
+            </div>
+          </div>
+          <div class="left-block">
+            <form-model-dropdown [label]="'Address'" [value]="p.full"
+              (actionClick)="openAddAddressModal(i)">
+            </form-model-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form-model>
+<app-select-related-company *ngIf="showRelatedCompany" (actionCancel)="cancelRelatedCompany()"
+  (actionPrimary)="selectRelatedCompany($event)"></app-select-related-company>
+<app-add-address *ngIf="showAddressModal" (actionCancel)="cancelSetAddress()" (actionPrimary)="setAddress($event)" [address]="addressUpdate" ></app-add-address>

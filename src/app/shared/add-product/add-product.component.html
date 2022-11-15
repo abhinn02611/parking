@@ -1,0 +1,86 @@
+<form-model [title]="'Add Product'" [labelCancel]="'Cancel'" [cancelPosition]="'top'" (actionCancel)="onCancel()"
+  [labelPrimary]="editId === ''?'Save':'Update'" (actionPrimary)="onPrimary()"
+  [labelSecondary]="editId===''?'Save & Add Another':''" (actionSecondary)="onSecondry()">
+  <div class="form-addproduct">
+    <div class="subheading">Atributes</div>
+    <div class="form-row">
+      <div class="form-col-6">
+        <form-dropdown [label]="'Category'" [value]="formData.category_name"
+          (actionSelect)="actionCategorySelect($event)" [options]="categories" [footerText]="'Add/update List'"
+          (actionFooter)="openUpdateCategoryModal()">
+        </form-dropdown>
+      </div>
+      <div class="form-col-6">
+        <div class="ml-10">
+          <form-dropdown [label]="'Type'" [value]="formData.type_name" (actionSelect)="actionTypeSelect($event)"
+            [options]="types" [footerText]="(formData.category == '')?'':'Add/update List'"
+            (actionFooter)="openUpdateTypeModal()">
+          </form-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="subheading mt-10">Details</div>
+    <div class="form-row">
+      <div class="form-col-12">
+        <form-input [label]="'Product Name'" [(inputModel)]="formData.name"></form-input>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-6">
+        <form-input [label]="'SKU'" [(inputModel)]="formData.sku"></form-input>
+      </div>
+      <div class="form-col-6">
+        <div class="ml-10">
+          <form-input [label]="'HSN Code'" [(inputModel)]="formData.hsn"></form-input>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-6">
+        <form-input [label]="'Pack Of'" [(inputModel)]="formData.pack_of" [numberOnly]="true"></form-input>
+      </div>
+      <div class="form-col-6">
+        <div class="ml-10">
+          <form-input [label]="'Stock'" [(inputModel)]="formData.productStock" [numberOnly]="true"></form-input>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-12">
+        <form-textarea [label]="'Description'" [max]="700" [(inputModel)]="formData.discription"></form-textarea>
+      </div>
+    </div>
+    <div class="subheading mt-10">Prices</div>
+    <div class="form-row" *ngFor="let price of prices;  let isLast = last; index as i">
+      <div class="form-col-3">
+        <form-dropdown [label]="'Price'" [value]="priceTypesKV[price.type]"
+          (actionSelect)="actionChangePriceType($event, i)" [options]="priceTypesArray">
+        </form-dropdown>
+      </div>
+      <div class="form-col-9">
+        <div class="ml-10">
+          <div class="right-block">
+            <div class="action-right" (click)="addMorePrice()" *ngIf="isLast">
+              <img src="/assets/images/icons/icon_plus.png" alt="">
+            </div>
+            <div class="action-right" (click)="removePrice(i)" *ngIf="!isLast">
+              <img src="/assets/images/icons/icon_minus.png" alt="">
+            </div>
+          </div>
+          <div class="left-block">
+            <form-input [label]="currency" [(inputModel)]="price.price" [numberOnly]="true"></form-input>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="subheading mt-10">Images & Videos</div>
+    <div class="form-row">
+      <div class="form-col-12 mb-10">
+        <form-upload [label]="'Upload Thumbnail'" [files]="files" (filesChange)="filesChange($event)"></form-upload>
+      </div>
+    </div>
+  </div>
+</form-model>
+<app-add-category *ngIf="showAddCategory" (actionCancel)="cancelAddCategory()"></app-add-category>
+<app-add-types *ngIf="showAddType" (actionCancel)="cancelAddType()" [categoryId]="formData.category"
+  [categoryName]="formData.category_name"></app-add-types>

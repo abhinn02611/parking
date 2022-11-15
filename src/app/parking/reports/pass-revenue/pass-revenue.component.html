@@ -1,0 +1,28 @@
+<div class="box">
+  <label [ngStyle]="{ padding: '10px 15px' }">Pass Revenue</label>
+
+  <div class="" *ngIf="$pRevenue | async as data">
+    <apx-chart
+      [series]="chartOptions?.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="{ type: 'category', categories: data.categories }"
+      [stroke]="chartOptions.stroke"
+      [tooltip]="chartOptions.tooltip"
+      [dataLabels]="chartOptions.dataLabels"
+      [legend]="chartOptions.legend"
+      [markers]="chartOptions.markers"
+      [grid]="chartOptions.grid"
+      [yaxis]="chartOptions.yaxis"
+      [title]="chartOptions.title"
+    ></apx-chart>
+  </div>
+  <div class="parking-dropdown">
+    <form-dropdown
+      [value]="'Day'"
+      (actionSelect)="actionSelectDD($event)"
+      [options]="filterDropdown[0].options"
+      [optionWidth]="200"
+    >
+    </form-dropdown>
+  </div>
+</div>

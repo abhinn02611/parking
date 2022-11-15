@@ -1,0 +1,55 @@
+<form-model [title]="editId===''?'Add Order':'Edit Order'" [labelCancel]="'Cancel'" [cancelPosition]="'top'"
+  (actionCancel)="onCancel()" [labelPrimary]="editId === ''?'Save':'Update'" (actionPrimary)="onPrimary()"
+  [labelSecondary]="editId===''?'Save & Add Another':''" (actionSecondary)="onSecondry()"
+  [total]="total"
+  >
+  <div class="form-addproduct">
+    <div class="subheading mt-10">Related To</div>
+    <div class="form-row">
+      <div class="form-col-12">
+        <form-model-dropdown [label]="'Company'" [value]="formData.storeName"
+          (actionClick)="openRelatedCompanyDD($event)">
+        </form-model-dropdown>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-6">
+        <form-model-dropdown [label]="'Contact'" [value]="formData.contactName"
+          (actionClick)="openRelatedContactDD($event)">
+        </form-model-dropdown>
+      </div>
+      <div class="form-col-6">
+        <div class="ml-10">
+          <form-model-dropdown [label]="'Sales Owner'" [value]="formData.assignedToName"
+            (actionClick)="openOwnerContactDD($event)">
+          </form-model-dropdown>
+        </div>
+      </div>
+    </div>
+
+    <div class="subheading mt-10">Add Product</div>
+    <div class="form-row">
+      <div class="form-col-12">
+        <div *ngFor="let product of products; index as i">
+          <form-product [inputModel]="product" (inputModelChange)="updateProduct(i,$event)" (deleteProduct)="deleteProduct(i)"></form-product>
+        </div>
+        <div class="chooseProduct">
+          <div class="labelchoose">Choose Product</div>
+          <div class="action-right" (click)="addMoreProduct()">
+            <img src="/assets/images/icons/icon_plus.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form-model>
+<app-select-related-company *ngIf="showRelatedCompany" (actionCancel)="cancelRelatedCompany()"
+  (actionPrimary)="selectRelatedCompany($event)" [title]="'Add Company'" [selectedCompany]="formData.storeName"></app-select-related-company>
+
+<app-select-related-contact *ngIf="showRelatedContact" (actionCancel)="cancelRelatedContact()"
+  (actionPrimary)="selectRelatedContact($event)" [title]="'Add Contact'"></app-select-related-contact>
+
+<app-select-owner *ngIf="showOwnerContact" (actionCancel)="cancelOwnerContact()"
+  (actionPrimary)="selectOwnerContact($event)" [title]="'Add Owner'"></app-select-owner>
+
+<app-add-related-products *ngIf="showProductModal" (actionCancel)="addMoreProductCancel()" [getProduct]="true" (actionPrimary)="addMoreProductSelected($event)"></app-add-related-products>

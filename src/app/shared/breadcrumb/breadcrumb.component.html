@@ -1,0 +1,16 @@
+<div class="breandcrumb">
+  <ul>
+    <li *ngFor="let item of links">
+      <a class="mediumtext pointer" *ngIf="item.link" (click)="openLink(item.link)" >{{item.label}}</a>
+      <div class="mediumtext" *ngIf="!item.link" [ngClass]="{darktext: item.bold}">{{item.label}}</div>
+    </li>
+  </ul>
+  <div class="actions" *ngIf="pagination">
+    <div class="back">
+      <img src="/assets/images/icons/left-arrow.svg" alt="" />
+    </div>
+    <div class="next">
+        <img src="/assets/images/icons/left-arrow.svg" alt="" />
+    </div>
+  </div>
+</div>

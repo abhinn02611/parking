@@ -1,0 +1,67 @@
+<div class="form-dropdown-container" [ngClass]="{ ddopen: dropdownOpen }">
+  <div
+    class="form-dropdown open"
+    [ngClass]="{ open: inputOpen }"
+    (click)="toggleDropdown()"
+  >
+    <div class="inner-cnt">
+      <div class="row-first">
+        <div class="input" #input [ngStyle]="{ padding: inputPadding }">
+          {{ value }}
+        </div>
+        <div class="form-label" #preview [ngClass]="{ focus: inputOpen }">
+          {{ label }}
+        </div>
+      </div>
+      <div class="angle">
+        <img class="close" src="/assets/images/icons/downldpi.svg" alt="" />
+        <img class="open" src="/assets/images/icons/downldpi.svg" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="overlay" (click)="toggleDropdown()¯"></div> -->
+  <div class="options-container">
+    <div
+      class="options dropdown-content"
+      [ngStyle]="{
+        width: optionWidth ? optionWidth + 'px' : '100%'
+      }"
+    >
+      <div class="dropdown-scroll">
+        <ul>
+          <li class="heading" *ngIf="options">
+            <div class="value">{{ label }}</div>
+          </li>
+          <li
+            *ngFor="let option of options; let i = index"
+            (click)="selectOption(i)"
+            [ngClass]="{ selected: option.label == value }"
+          >
+            <!-- <div
+              class="icon"
+              [ngStyle]="{
+                visibility: value == option.label ? 'visible' : 'hidden'
+              }"
+            >
+              <img src="/assets/images/icons/icon_check.png" />
+            </div> -->
+            <div class="value">{{ option.label }}</div>
+          </li>
+        </ul>
+      </div>
+
+      <ng-content></ng-content>
+      <div
+        class="list-dropdown-option"
+        *ngIf="footerText"
+        (click)="onFooterActionClick()"
+      >
+        <div class="icon">
+          <img src="{{ footerIcon }}" />
+        </div>
+        <div class="value">{{ footerText }}</div>
+      </div>
+    </div>
+  </div>
+</div>

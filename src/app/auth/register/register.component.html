@@ -1,0 +1,204 @@
+<div class="page-wrapper">
+  <header>
+    <div class="logo">
+      <img src="/assets/images/sistem_logo.svg" />
+    </div>
+    <nav>
+      <ul>
+        <li>
+          <a [routerLink]="['/sales/details']">Help</a>
+        </li>
+        <li>
+          <a href="">Contact Sales</a>
+        </li>
+        <li>
+          <a href="/" class="highlight">Login</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <div class="content">
+    <div class="content-container">
+      <div class="intro" *ngIf="viewStep==1">
+        <div class="heading">Let’s get started</div>
+        <div class="text">You’ll have access to all the modules in Sistem, contact, tasks, lead, deals and other
+          business
+          tools. <br />
+          <strong>Signup your first two users are FREE, with no payment information required or software to <br />
+            download.
+            Go ahead and embrace the new technology.</strong>
+        </div>
+      </div>
+      <div>
+        <div class="progress">
+          <ul>
+            <li [ngClass]="{selected: (viewStep > 0) }"></li>
+            <li [ngClass]="{selected: (viewStep > 1) }"></li>
+            <li [ngClass]="{selected: viewStep > 2 }"></li>
+            <li [ngClass]="{selected: viewStep > 3 }"></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="center-box-outer">
+        <div class="center-box">
+          <div class="steps">
+
+           
+            <div class="step1" *ngIf="viewStep==1">
+              <div class="heading">Does your business have a domain?</div>
+              <div class="text">Your domain will make Sistem personalise, like sistem.app/business, this will also be a
+                default name for your Sistem.
+              </div>
+              <div class="red-text mt-40">{{errorMessage}}</div>
+
+              <div class="form-row  mt-5 ">
+                <label class="label">Website Address</label>
+                <div class="splittext wwwcontainer">
+                  <div class="www">www.</div>
+                  <input type="text" class="input-control" placeholder="yourwebsite.com" [(ngModel)]="inputWebsite" />
+                </div>
+              </div>
+              <div class="clear"></div>
+              <div class="form-row mt-30">
+                <label class="label">Sistem Domain</label>
+                <div class="splittext domaincontainer">
+                  <input type="text" class="input-control" placeholder="yourwebsite" [(ngModel)]="inputSystemDomain" />
+                  <div class="sistemapp">.sistem.app</div>
+                </div>
+              </div>
+              <div class="clear"></div>
+              <div class="mt-40 dt">
+                <div class="button pull-right" [ngClass]="{action: (processingStep==1)}" (click)="submitValidateDomain()">Next</div>
+              </div>
+            </div>
+
+
+
+
+            <div class="step2" *ngIf="viewStep==2">
+              <div class="heading">Your Information</div>
+              <div class="text">You’ll be the Sistem account admin while you’re creating the account. Don’t worry. You
+                can assign this role to someone else later.
+              </div>
+              <div class="red-text mt-40">{{errorMessage}}</div>
+              <div class="form-row mt-5" [ngClass]="{error: (errors.inputName!='')}">
+                <label class="label">Full Name</label>
+                <input type="text" class="input-control" placeholder="Your Name" [(ngModel)]="inputName" />
+                <div class="error-message" *ngIf="(errors.inputName!='')">{{errors.inputName}}</div>
+              </div>
+              <div class="form-row mt-20" [ngClass]="{error: (errors.inputEmail!='')}">
+                <label class="label">Business Email (Primary)</label>
+                <input type="text" class="input-control" placeholder="Email@yourbusiness.com" [(ngModel)]="inputEmail" />
+                <div class="error-message" *ngIf="(errors.inputEmail!='')">{{errors.inputEmail}}</div>
+              </div>
+              <div class="form-row mt-20" [ngClass]="{error: (errors.inputMobile!='')}">
+                <label class="label">Phone Number (Primary)</label>
+                <input type="text" class="input-control" placeholder="0000000000" [(ngModel)]="inputMobile" />
+                <!-- <div class="splittext phone">
+                  <div class="isd">+91</div>
+                  <div class="error-message" *ngIf="(errors.inputMobile!='')">{{errors.inputMobile}}</div>
+                </div> -->
+              </div>
+              <div class="clear"></div>
+              <div class="form-row mt-20" [ngClass]="{error: (errors.inputJob!='')}">
+                <label class="label">Job Title</label>
+                <input type="text" class="input-control" placeholder="Job Title" [(ngModel)]="inputJob" />
+                <div class="error-message" *ngIf="(errors.inputJob!='')">{{errors.inputJob}}</div>
+              </div>
+              <div class="clear"></div>
+
+              <div class="form-row mt-20" [ngClass]="{error: (errors.inputCountry!='')}">
+                <label class="label">Country</label>
+                <dropdown [options]='countries' [placeholder]='"Choose Country"' (onSelect)="inputCountry = $event[0]"></dropdown>
+                <div class="error-message" *ngIf="(errors.inputCountry!='')">{{errors.inputCountry}}</div>
+              </div>
+              <div class="clear"></div>
+
+              <div class="form-row mt-20" [ngClass]="{error: (errors.inputCurrency!='')}">
+                <label class="label">Currency</label>
+                <dropdown [options]='currencies' [placeholder]='"Choose Currency"' (onSelect)="inputCurrency = $event[0]"></dropdown>
+                <div class="error-message" *ngIf="(errors.inputCurrency!='')">{{errors.inputCurrency}}</div>
+              </div>
+              <div class="clear"></div>
+              <div class="mt-40 dt">
+                <div class="button pull-right" [ngClass]="{action: (processingStep==2)}" (click)="submitRegisterClient()">Next</div>
+              </div>
+              <div class="clear"></div>
+            </div>
+
+
+            <div class="step3" *ngIf="viewStep==3">
+              <div class="heading mb-10">Verify your Identity</div>
+              <div class="text">A massage with a verification code has been sent to your primary email id
+               {{inputEmail.substring(0, 2)}}****@***{{inputEmail.substring(inputEmail.length - 5, inputEmail.length)}} . Enter the code to verify your identity and continue.
+              </div>
+              <div class="red-text mt-40">{{errorMessage}}</div>
+              <div class="form-row mt-5">
+                <div class="otp-container">
+                  <input type="text" maxlength="1" class="otp" #otp1 [(ngModel)]="otppart1"
+                    (keyup)="moveNextInput(2, $event)" />
+                  <input type="text" maxlength="1" class="otp" #otp2 [(ngModel)]="otppart2"
+                    (keyup)="moveNextInput(3, $event)" />
+                  <input type="text" maxlength="1" class="otp" #otp3 [(ngModel)]="otppart3"
+                    (keyup)="moveNextInput(4, $event)" />
+                  <input type="text" maxlength="1" class="otp" #otp4 [(ngModel)]="otppart4"
+                    (keyup)="moveNextInput(5, $event)" />
+                  <input type="text" maxlength="1" class="otp" #otp5 [(ngModel)]="otppart5"
+                    (keyup)="moveNextInput(6, $event)" />
+                  <input type="text" maxlength="1" class="otp" #otp6 [(ngModel)]="otppart6"
+                    (keyup)="moveNextInput(7, $event)" />
+                </div>
+              </div>
+              <div class="clear"></div>
+              <div class="resend-message">Disn’t get the verification code? <a class="resend">Resend</a></div>
+              <div class="clear"></div>
+              <div class="mt-40 dt">
+                <div class="button pull-right" [ngClass]="{action: (processingStep==3)}" (click)="submitVerifyOTP()">Next</div>
+              </div>
+            </div>
+
+
+
+            <div class="step3" *ngIf="viewStep==4">
+              <div class="heading mb-10">Create a Password</div>
+              <div class="text">You have verified account. Create your Sistem Password to jump right in! A strong
+                password protect your data.
+              </div>
+
+              <div class="clear"></div>
+              <div class="red-text mt-20">{{errorMessage}}</div>
+              <div class="form-row mt-5" [ngClass]="{error: (errors.inputPassword!='')}">
+                  <label class="label">Password</label>
+                  <input type="{{passwordType}}" class="input-control mt-10" placeholder="********" [(ngModel)]="inputPassword" />
+                  <div class="eye" (click)="togglePasswordType()">
+                    <img src="/assets/images/icons/icon_eye.png" alt="">
+                  </div>
+                  <div class="error-message" *ngIf="(errors.inputPassword!='')">{{errors.inputPassword}}</div>
+                </div>
+
+              <div class="resend-message">Passwords must be at least 6 characters long, and can’t be things like password, 123456, or abcdef.</div>
+              <div class="clear"></div>
+              <div class="mt-40 dt">
+                <div class="button pull-right" [ngClass]="{action: (processingStep==4)}" (click)="submitPassword()">Done</div>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="items">
+        &copy; 2018 sistem.app, All rights reserved. | <a href="#">Sistem Status</a> | <a href="#">Privacy</a> | <a
+          href="#">Terms & Conditions</a>
+      </div>
+    </footer>
+  </div>
+
+
+
+
+</div>

@@ -1,0 +1,136 @@
+<div class="sistem-content">
+
+  <div class="sistem-main">
+    <sistem-breadcrumb [links]="linksBreadcrumb"></sistem-breadcrumb>
+    <sistem-detailsheader [name]="product.product_name" [department]="product.product_code" (actionBack)="backToList()"
+      [company]="product.category_name" (actionAddNew)="addRelatedProduct()" (actionGroup)="onAction($event)">
+    </sistem-detailsheader>
+    <div class="sistem-split open" [ngClass]="{open: infoOpen}">
+      <div class="sistem-split-left">
+        <sistem-pageloader *ngIf="loading"></sistem-pageloader>
+        <div class="contacts" *ngIf="!loading">
+          <ul class="headings">
+            <li></li>
+            <li class="paragraph"></li>
+            <li class="paragraph" (click)="updateOrderBy('product_name')">
+              PRODUCT NAME
+              <div class="order-type" *ngIf="'product_name'==orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph" (click)="updateOrderBy('product_code')">
+              PRODUCT CODE
+              <div class="order-type" *ngIf="'product_code'==orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph" (click)="updateOrderBy('mrp')">
+              MRP
+              <div class="order-type" *ngIf="'mrp'==orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph" (click)="updateOrderBy('category_typename')">
+              TYPE
+              <div class="order-type" *ngIf="'category_typename'==orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph" (click)="updateOrderBy('category_name')">
+              CATEGORY
+              <div class="order-type" *ngIf="'category_name'==orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph" (click)="updateOrderBy('product_stock')">
+              STOCK
+              <div class="order-type" *ngIf="'product_stock'==orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+          </ul>
+          <ng-container *ngFor="let product of productListView | orderBy : orderBy: reverse; let index = index">
+            <ul class="content" [ngClass]="{'selected': isSelected(product['product_id'])}" style="cursor: pointer;"
+              (click)="openProductDetails(product['product_id'])">
+              <li>{{index+1}}</li>
+
+              <li class="productthumb">
+                <div class="productimage" *ngIf="isArray(product.images) && product.images.length > 0">
+                  <!-- <img src="{{product.image}}" alt="" /> -->
+                  <img src="{{product.images[0].small_url}}" alt="" />
+                </div>
+              </li>
+              <li class="highlight">{{product['product_name']}}</li>
+              <li class="paragraph">{{product['product_code']}}</li>
+              <li class="paragraph">{{currency}} {{product['mrp']}}</li>
+              <li class="paragraph">{{product['category_typename']}}</li>
+              <li class="paragraph">{{product['category_name']}}</li>
+              <li class="paragraph">{{product['product_stock']}}</li>
+            </ul>
+          </ng-container>
+
+
+        </div>
+      </div>
+      <div class="sistem-split-right" [ngClass]="{'fixed': sidebarFixed}">
+        <div class="info-window">
+          <div class="info-header">
+            <div class="heading subheading">Activity with Sudesh Srikant</div>
+            <div class="refresh">
+              <img src="/assets/images/icons/icon_reload.png" alt="" />
+            </div>
+          </div>
+          <div class="info-content">
+            <div class="scrollbar">
+              <div class="date smalltext">Today</div>
+              <div class="group">
+                <div class="activity" *ngFor="let a of [1,1]">
+                  <div class="icon">
+                    <img src="/assets/images/icons/detailsldpi.svg" alt="" />
+                  </div>
+                  <div class="content">
+                    <div class="heading highlight">Updated Profile</div>
+                    <div class="inrormation paragraph">Contact details updated - Phone No,
+                      Address</div>
+                    <div class="attributes">
+                      <div class="attribute smalltext">Time: Apr 25, 2014 11:26 AM</div>
+                      <div class="attribute pull-right smalltext">By Sistem Admin</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="date">24 August 18</div>
+              <div class="group">
+                <div class="activity" *ngFor="let a of [1,1,1,1,1,1,1,1,1,1,1,1]">
+                  <div class="icon">
+                    <img src="/assets/images/icons/detailsldpi.svg" alt="" />
+                  </div>
+                  <div class="content">
+                    <div class="heading highlight">Updated Profile</div>
+                    <div class="inrormation paragraph">Contact details updated - Phone No,
+                      Address</div>
+                    <div class="attributes">
+                      <div class="attribute smalltext">Time: Apr 25, 2014 11:26 AM</div>
+                      <div class="attribute pull-right smalltext">By Sistem Admin</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="norecord highlight">No recorded activity before September 3, 2018</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-add-related-products *ngIf="addRelatedProductModelOpen" [selections]="relatedIds" [productId]="productId"
+  (actionPrimary)="addedRelatedProduct($event)" (actionCancel)="canceledRelatedProduct()"></app-add-related-products>

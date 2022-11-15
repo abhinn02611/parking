@@ -1,0 +1,161 @@
+@import "src/styles/_variables.scss";
+.tasks-header {
+  transition: margin 0.3s linear;
+  padding-top: 20px;
+  height: 100%;
+  position: fixed;
+  top: 158px;
+  right: 0;
+  left: 64px;
+  padding-bottom: 160px;
+  bottom: 0;
+  .left {
+    float: left;
+    width: 350px;
+    height: 100%;
+    overflow-y: scroll;
+  }
+  .right {
+    margin-left: 380px;
+    padding-right: 24px;
+    height: 100%;
+  }
+}
+.task-list {
+  padding: 0px;
+  .task-group {
+    margin-top: -10px;
+    .date {
+      width: 100%;
+      display: table;
+      font-size: 14px;
+      color: $_subtext;
+      font-weight: 500;
+      margin: 10px 15px;
+    }
+    .tasks {
+      margin-top: 0px;
+      .task {
+        display: table;
+        width: 100%;
+        padding: 10px 10px;
+        margin-bottom: 0px;
+        border-bottom: 1px solid #f4f4f4;
+        &.completed {
+          background: $_background;
+          .right {
+            .circlecheck {
+              border: 1px solid #ff3b30;
+              &::before {
+                color: #ff3b30;
+                display: block;
+              }
+            }
+          }
+        }
+        .left {
+          width: 40px;
+          float: left;
+          display: flex;
+          align-items: center;
+          .circlebox {
+            width: 30px;
+            height: 30px;
+            background: #ff9500;
+            border-radius: 15px;
+            padding: 5px 5px;
+            margin-top: 6px;
+            &.green {
+              background: $_green;
+            }
+            &.yellow {
+              background: $_orange;
+            }
+            &.blue {
+              background: $_blue;
+            }
+            img {
+              width: 20px;
+              filter: brightness(0) invert(1);
+            }
+          }
+        }
+        .right {
+          margin-left: 40px;
+          padding-right: 30px;
+          position: relative;
+          .circlecheck {
+            padding: 8px 0;
+            border: 1px solid #d3d3d3;
+            width: 18px;
+            height: 18px;
+            border-radius: 9px;
+            margin: 1px 0px 0 8px;
+            position: relative;
+            cursor: pointer;
+            position: absolute;
+            right: 5px;
+            top: 15px;
+            cursor: pointer;
+            &::before {
+              content: "L";
+              position: absolute;
+              top: -2px;
+              left: 5px;
+              transform: rotate(40deg) scaleX(-1);
+              font-weight: 800;
+              color: #ff3b30;
+              font-size: 12px;
+              display: none;
+            }
+            &.circlechecked {
+              &::before {
+                display: block;
+              }
+            }
+          }
+
+          .title {
+            font-size: 15px;
+            font-weight: 500;
+            color: $_maintext;
+          }
+          .desc {
+            font-size: 15px;
+            font-weight: 400;
+            color: $_subtext;
+          }
+          .date {
+            padding: 2px 0px;
+            color: #566881;
+            width: auto;
+            margin: 0;
+            margin-right: 10px;
+            opacity: 0.8;
+            float: left;
+            position: relative;
+            font-size: 13px;
+            font-weight: 400;
+            padding-left: 20px;
+            &::before {
+              content: "";
+              width: 8px;
+              height: 8px;
+              background: #4cd964;
+              border-radius: 4px;
+              position: absolute;
+              left: 4px;
+              top: 7px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.calander-con {
+  height: 100%;
+  overflow: scroll;
+  padding-bottom: 20px;
+}

@@ -1,0 +1,15 @@
+<div class="form-input" [ngClass]="{ open: inputOpen }">
+  <textarea
+    type="text"
+    [(ngModel)]="value"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+    (keyup)="onKeyUp($event)"
+    #input
+    [(ngModel)]="inputModel"
+    (ngModelChange)="inputModelChange.emit(inputModel)"
+    [ngStyle]="getHeight(input)"
+  ></textarea>
+  <div class="label" (click)="onFocus()">{{ label }}</div>
+  <div class="length smalltext" *ngIf="max > 0">{{ textlength }}/{{ max }}</div>
+</div>

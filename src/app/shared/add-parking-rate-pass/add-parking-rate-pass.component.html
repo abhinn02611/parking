@@ -1,0 +1,59 @@
+<form-model
+  [title]="createFormModalTitle()"
+  [labelCancel]="'Cancel'"
+  [cancelPosition]="'bottom'"
+  (actionCancel)="onCancel()"
+  [labelPrimary]="editId === '' ? 'Save' : 'Update'"
+  (actionPrimary)="onPrimary()"
+>
+  <div class="form-addproduct">
+    <div class="form-row">
+      <div class="form-col-6">
+        <form-dropdown
+          [label]="'Pricing Type'"
+          [value]="'All Day'"
+          (actionSelect)="('')"
+          [options]="[{ label: 'All Day', value: 'All Day' }]"
+        >
+        </form-dropdown>
+      </div>
+      <div class="form-col-6">
+        <div class="ml-10">
+          <form-dropdown
+            [label]="'Status'"
+            [value]="formData.statusName"
+            (actionSelect)="actionStatusSelect($event)"
+            [options]="[
+              { label: 'Active', value: 'active' },
+              { label: 'Inactive', value: 'inactive' }
+            ]"
+          >
+          </form-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="subheading mt-10">
+      {{ editId == "" ? "Add" : "Edit" }} Rate{{ editId == "" ? "s" : "" }}
+    </div>
+
+    <div class="form-row">
+      <div class="form-col-12">
+        <div *ngFor="let rate of rates; index as i">
+          <form-rates-pass
+            [inputModel]="rate"
+            (inputModelChange)="updateRate(i, $event)"
+            (deleteRate)="deleteRate(i)"
+            [hideDelete]="editId != '' ? true : false"
+          ></form-rates-pass>
+        </div>
+      </div>
+    </div>
+  </div>
+</form-model>
+<!-- <app-add-category *ngIf="showAddCategory" (actionCancel)="cancelAddCategory()"></app-add-category> -->
+<app-add-types
+  *ngIf="showAddType"
+  (actionCancel)="cancelAddType()"
+  [categoryId]="formData.category"
+  [categoryName]="formData.category_name"
+></app-add-types>

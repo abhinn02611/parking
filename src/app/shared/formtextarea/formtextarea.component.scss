@@ -1,0 +1,38 @@
+@import "src/styles/_variables.scss";
+.form-input {
+  position: relative;
+  height: auto;
+  padding: 24px 0 0 0;
+  textarea {
+    border: 0;
+    background: transparent;
+    overflow: hidden;
+    color: $_maintext;
+    font-size: 16px;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .label {
+    position: absolute;
+    top: 17px;
+    left: 0px;
+    color: $_maintext;
+    font-size: 16px;
+    margin-left: 0px;
+    transition: font-size 0.2s linear, color 0.2s linear, top 0.2s linear;
+  }
+  &.open {
+    .label {
+      font-size: 12px;
+      color: $_subtext;
+      top: 5px;
+      left: 0px;
+    }
+  }
+  .length {
+    position: absolute;
+    bottom: -30px;
+    right: 0;
+  }
+}

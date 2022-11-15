@@ -1,0 +1,114 @@
+@import "src/styles/_variables.scss";
+.form-input {
+  position: relative;
+  height: auto;
+
+  padding: 15px 0;
+  border-bottom: 1px solid #edf1f5;
+
+  .clear {
+    clear: both;
+    float: none;
+  }
+  .line {
+    border-bottom: 1px solid $_hover;
+  }
+  .action-right {
+    width: 30px;
+    height: 30px;
+    padding: 6px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transform: rotate(45deg);
+    &:hover {
+      background-color: $_hover;
+    }
+    img {
+      width: 18px;
+    }
+  }
+
+  .data-row {
+    position: relative;
+    display: table;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .data-box-container {
+      display: flex;
+      .data-box {
+        flex-basis: 13%;
+        .label {
+          font-size: 12px;
+          color: $_subtext;
+          position: relative;
+          margin-bottom: 5px;
+          // .i_icon {
+          //   font-size: 16px;
+          //   display: inline-block;
+          //   position: relative;
+          //   width: 15px;
+          //   height: 12px;
+          //   cursor: pointer;
+          //   .i_text {
+          //     transform: rotate(90deg);
+          //     position: absolute;
+          //     left: 5px;
+          //     top: -2px;
+          //   }
+          // }
+          // .smalldd {
+          //   position: absolute;
+          //   top: 25px;
+          //   right: 0;
+          //   .items {
+          //     width: 70px;
+          //     background: #fff;
+          //     border: 1px solid #eee;
+          //     .item {
+          //       padding: 3px 5px;
+          //       font-size: 10px;
+          //       color: $_subtext;
+          //       border-bottom: 1px solid $_hover;
+          //       cursor: pointer;
+          //       &:hover {
+          //         background: $_hover;
+          //       }
+          //     }
+          //   }
+          // }
+        }
+        input {
+          border: 0;
+          background: transparent;
+          color: $_maintext;
+          font-size: 16px;
+          outline: none;
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+.drag-btn {
+  width: 56px;
+  height: 35px;
+  padding: 3px;
+  border-radius: 50%;
+  cursor: move;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  &:hover {
+      background-color: $_background;
+    }
+    img {
+      width: 12px;
+    }
+}

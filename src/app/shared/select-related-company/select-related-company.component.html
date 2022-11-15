@@ -1,0 +1,64 @@
+<form-model [title]="title" [labelCancel]="'Cancel'" [cancelPosition]="'bottom'"
+  (actionCancel)="actionCancel.emit()" [labelPrimary]="'Apply'" (actionPrimary)="onPrimary()"  [loaderPrimary]="loaderPrimary"
+  [labelSecondary]="''" [scroll]="false">
+  <div class="form-add-related-company">
+    <div class="search-box-fixed">
+      <div class="searchbox">
+        <input type="text" class="search-text" [(ngModel)]="searchKeyword" (keyup)="showResult()" >
+        <div class="search-icon">
+          <img src="/assets/images/icons/icon-search.png" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="rp-container">
+      <div class="related-companys">
+        <ul class="headings">
+          <li>
+            
+          </li>
+          <li class="paragraph"></li>
+          <li class="paragraph" (click)="updateOrderBy('store_name')">
+            COMPANY NAME
+            <div class="order-type" *ngIf="'store_name'==orderBy">
+              <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+              <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+            </div>
+          </li>
+          <li class="paragraph" (click)="updateOrderBy('store_type')">
+            TYPE
+            <div class="order-type" *ngIf="'store_type'==orderBy">
+              <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+              <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+            </div>
+          </li>
+          <li class="paragraph" (click)="updateOrderBy('store_address')">
+            LOCATION
+            <div class="order-type" *ngIf="'store_address'==orderBy">
+              <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+              <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+            </div>
+          </li>
+          
+        
+        </ul>
+        <ng-container *ngFor="let company of companyListView | orderBy : orderBy: reverse; let index = index">
+          <ul class="content" [ngClass]="{'selected': isSelected(company['store_id'])}" style="cursor: pointer;" (click)="selectItem(company)">
+            <li>
+              <div class="checkbox" [ngClass]="{'checked': isSelected(company['store_id'])}"></div>
+            </li>
+            <li class="companythumb">
+              <div class="companyimage" *ngIf="isArray(company.images) && company.images.length > 0">
+                <img
+                  src="{{company.images[0].small_url}}"
+                  alt="" />
+              </div>
+            </li>
+            <li class="highlight">{{company['store_name']}}</li>
+            <li class="paragraph">{{company['store_type']}}</li>
+            <li class="paragraph">{{company['store_address']}}</li>
+          </ul>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</form-model>

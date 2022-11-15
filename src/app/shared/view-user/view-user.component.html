@@ -1,0 +1,121 @@
+<form-model
+  *ngIf="user"
+  [title]="'User Details'"
+  [labelCancel]="'Close'"
+  [cancelPosition]="'bottom'"
+  (actionCancel)="onCancel()"
+  [labelPrimary]="'View All Sessions'"
+  (actionPrimary)="onPrimary()"
+>
+  <div class="form-addproduct">
+    <div class="user-det-main">
+      <list-user [user]="user"></list-user>
+      <div class="inner1" style="margin-top: -8px">
+        <span>{{ user?.firstName }}{{ user?.lastName }}</span>
+      </div>
+    </div>
+
+    <div style="margin: auto" class="form-row row viewUserMain">
+      <div class="form-col-3">
+        <form-input [label]="'Email'" [(inputModel)]="user.email"></form-input>
+      </div>
+      <div class="form-col-3">
+        <form-input
+          [label]="'Mobile No'"
+          [(inputModel)]="user.phone"
+        ></form-input>
+      </div>
+      <div class="form-col-3">
+        <form-input [label]="'Since'" [(inputModel)]="formatDate"></form-input>
+      </div>
+      <div class="form-col-3">
+        <form-input
+          [label]="'Created By'"
+          [(inputModel)]="user.type"
+        ></form-input>
+      </div>
+      <div class="form-col-12">
+        <form-input
+          [label]="'Address'"
+          [(inputModel)]="user.address"
+        ></form-input>
+      </div>
+    </div>
+
+    <div class="add-veh">
+      <p>Added Vehicles</p>
+    </div>
+
+    <div class="add-veh-main">
+      <div class="user-det-main" *ngFor="let vehicle of user.vehicles">
+        <div class="vehiclePic" [ngStyle]="{
+                                            'background-color': vehicle.bgcolor
+                                          }">
+          <!-- <img src="/assets/images/icons/system icon_bike.svg" alt="" /> -->
+          <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="-7 -10 80 80"
+            [ngStyle]="{ fill: vehicle['color']}">
+            <ng-container *ngFor="let path of getPaths(vehicle.name)">
+              <path [attr.d]="path" />
+            </ng-container>
+          </svg>
+        </div>
+        <div class="inner1" style="margin-left: 0px; padding-left: 5px">
+          <span>{{ vehicle.regNumber | uppercase }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="add-veh rec">
+      <p>Recent 5 Parking Sessions (Total {{ parkingTransaction.length }})</p>
+    </div>
+
+    <div class="rec-sess">
+      <div class="inner">
+        <p>VEHICLE</p>
+      </div>
+      <div class="inner">
+        <p>TYPE</p>
+      </div>
+      <div class="inner">
+        <p>IN TIME</p>
+      </div>
+      <div class="inner">
+        <p>TIME</p>
+      </div>
+      <div class="inner">
+        <p>PARKING</p>
+      </div>
+    </div>
+
+    <div
+      class="rec-sess main"
+      *ngFor="let transaction of parkingTransaction; let i = index"
+    >
+      <ng-container *ngIf="i > parkingTransaction.length - 6">
+        <div class="inner">
+          <p>{{ transaction?.vehicle?.regNumber | uppercase }}</p>
+        </div>
+        <div class="inner">
+          <p>{{ transaction.type }}</p>
+        </div>
+        <div class="inner">
+          <p>{{ setDate(transaction.inTime) }}</p>
+        </div>
+        <div class="inner">
+          <p>{{ transaction.hours ? transaction.hours + "h" : "--" }}</p>
+        </div>
+        <div class="inner">
+          <p>{{ transaction?.parking?.name }}</p>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</form-model>
+
+<confirm
+  *ngIf="confirmSuspendModelOpen"
+  [dialog]="true"
+  [labelConfirm]="jj"
+  (actionConfirm)="confirmSuspend()"
+  (actionCancel)="cancelSuspend()"
+></confirm>

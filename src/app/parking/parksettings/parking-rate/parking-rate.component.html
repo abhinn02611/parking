@@ -1,0 +1,163 @@
+<div class="details-right-inner">
+  <div class="park-rate-wrapper">
+    <div class="park-rate-main">
+      <p>P</p>
+    </div>
+    <div class="welcome-name">
+      <p>
+        Welcome {{ user?.firstName | titlecase }}
+        {{ user?.lastName | titlecase }}
+      </p>
+      <span
+        >Manage your info, team, privacy, and security to make Sistem Apps work
+        better for <br />
+        you and everyone associated.</span
+      >
+    </div>
+    <div class="parkPro-main">
+      <div>
+        <div class="inner">
+          <p>Parking Profile</p>
+          <div class="basic-info">
+            Basic info, like your name and photo, that you use on <br />
+            Sistem Apps
+          </div>
+          <div class="domain-main">
+            <div class="domain-inner">
+              <p>Parking</p>
+              <span
+                >{{ user.firstName ? user?.firstName : "-" }}
+                {{ user.lastName ? user?.lastName : "-" }}</span
+              >
+            </div>
+            <div class="domain-inner">
+              <p>Domain</p>
+              <span>{{ user?.domain ? user.domain : "-" }}</span>
+            </div>
+            <div class="domain-inner">
+              <p>Email</p>
+              <span>{{ user?.email ? user.email : "-" }}</span>
+            </div>
+            <div class="domain-inner">
+              <p>Phone</p>
+              <span>{{ user?.phone ? user?.phone : "-" }}</span>
+            </div>
+            <div class="domain-inner">
+              <p>Location</p>
+              <span>{{ user?.location ? user.location : "-" }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="inner-footer">
+          <a href="#" class="inner-update disable">Update Profile</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="inner">
+          <p>Subscriptions</p>
+          <div class="basic-info">
+            Your recurring payments for subscription services. <br />
+            Valid from
+            <span
+              ><b>{{ fromDate }}</b></span
+            >
+          </div>
+          <div class="domain-main">
+            <div class="domain-inner">
+              <div class="d-flex mb-15">
+                <p>Plan</p>
+                <a href="#" class="bus-plan-btn">Government Plan</a>
+              </div>
+            </div>
+            <div class="domain-inner">
+              <p>Licenses</p>
+              <span>Unlimited</span>
+            </div>
+            <div class="domain-inner">
+              <p>Active</p>
+              <span>{{ user.parkings.length }}</span>
+            </div>
+            <div class="domain-inner">
+              <p>Invited</p>
+              <span>-</span>
+            </div>
+          </div>
+        </div>
+        <div class="inner-footer">
+          <a href="#" class="inner-update disable">Manage Subscriptions</a>
+        </div>
+      </div>
+      <div>
+        <div class="inner">
+          <p>Apps</p>
+          <div class="basic-info">
+            Apps & modules available to Babara. 30 of 60 <br />
+            available Sistem modules are on for Babara. No other <br />
+            Sistem Apps have been added to this domain.
+          </div>
+          <ins>Available Modules</ins>
+          <p [ngStyle]="{ 'font-size': '14px' }">All Parking Sistem modules</p>
+          <div class="domain-main">
+            <div class="domain-inner">
+              <p>Apps</p>
+            </div>
+            <img
+              style="height: '45px'"
+              src="/assets/images/parking_icon.png"
+              alt="parking"
+            />
+          </div>
+        </div>
+        <div class="inner-footer">
+          <a href="https://sistem.app/" target="_blank" class="inner-update"
+            >More Sistem Apps</a
+          >
+        </div>
+      </div>
+      <div>
+        <div class="inner" style="height: 220px">
+          <p>Personalization</p>
+          <div class="basic-info">
+            Upload your logo, It will appear across all products and for all
+            users at Levy.
+          </div>
+          <div class="domain-main logo-inner">
+            <div class="domain-inner">
+              <div class="img-border">
+                <img
+                  style="height: 20px"
+                  src="/assets/images/parking_logo_red.svg"
+                />
+              </div>
+              <span style="margin-left: 25px">Default Logo</span>
+            </div>
+          </div>
+        </div>
+        <div class="inner-footer">
+          <a href="#" class="inner-update disable">Coming Soon</a>
+        </div>
+      </div>
+      <div>
+        <div class="inner" style="height: 180px">
+          <p>Account Storage</p>
+          <div class="basic-info">
+            Your account storage is shared across Sistem Apps, like Modules and
+            Files.
+          </div>
+          <div>– of 5 GB</div>
+        </div>
+        <div class="inner-footer">
+          <a href="#" class="inner-update disable">Upgrade storage</a>
+        </div>
+      </div>
+    </div>
+    <div class="setting-footer">
+      Only you can see your settings. Sistem App is committed to protecting your
+      privacy and security.
+    </div>
+  </div>
+
+  <!-- <div class="parkPro-main"></div> -->
+</div>
+<!-- </div> -->

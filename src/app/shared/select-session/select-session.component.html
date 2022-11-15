@@ -1,0 +1,74 @@
+<form-model [title]="'Choose Session'" [labelCancel]="'Cancel'" [cancelPosition]="'bottom'" (actionCancel)="actionCancel.emit()" [labelPrimary]="'Apply'" (actionPrimary)="onPrimary()" [loaderPrimary]="loaderPrimary" [labelSecondary]="''" [scroll]="false">
+    <div class="form-add-related-company">
+        <div class="filter">
+            <app-filter [filter]="filter" (onFilterChange)="applyFilter($event)"></app-filter>
+        </div>
+        <div class="rp-container">
+            <div class="related-companys">
+                <ul class="headings">
+                    <li>
+
+                    </li>
+                    <li class="paragraph">
+                        TYPE
+                    </li>
+                    <li class="paragraph">
+                        VEHICLE NO.
+                    </li>
+                    <li class="paragraph" (click)="updateOrderBy('inTime')">
+                        IN TIME
+                        <div class="order-type" *ngIf="'inTime'==orderBy">
+                            <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                            <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+                        </div>
+                    </li>
+                    <li class="paragraph" (click)="updateOrderBy('outTime')">
+                        OUT TIME
+                        <div class="order-type" *ngIf="'outTime'==orderBy">
+                            <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                            <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+                        </div>
+                    </li>
+                    <li class="paragraph" (click)="updateOrderBy('total')">
+                        COLLECTION
+                        <div class="order-type" *ngIf="'total'==orderBy">
+                            <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                            <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+                        </div>
+                    </li>
+
+                </ul>
+
+                <ng-container *ngFor="let session of sessionListView | orderBy : orderBy: reverse; let index = index">
+                    <ul class="content" [ngClass]="{'selected': isSelected(session['id'])}" style="cursor: pointer;" (click)="selectItem(session)">
+                        <li>
+                            <div class="checkbox" [ngClass]="{'checked': isSelected(session['id'])}"></div>
+                        </li>
+
+                        <li class="vehiclethumb">
+                            <div class="vehicleimage car" *ngIf="session['vehicle'] && session['vehicle']['vehicleTypeId'] == '3d3f97d3-4cf0-45a6-9bbd-15ab5a6df8d6'">
+                                <img src="/assets/images/icons/system icon_car.svg" alt="" />
+                            </div>
+                            <div class="vehicleimage auto" *ngIf="session['vehicle'] && session['vehicle']['vehicleTypeId'] == 'dce39137-6a58-44fc-ba9f-3868cb510a36'">
+                                <img src="/assets/images/icons/system icon_auto.svg" alt="" />
+                            </div>
+                            <div class="vehicleimage bike" *ngIf="session['vehicle'] && session['vehicle']['vehicleTypeId'] == 'e7e2ffc1-faec-48b5-b8b1-735f28c1d3ab'">
+                                <img src="/assets/images/icons/system icon_bike.svg" alt="" />
+                            </div>
+                            <div class="vehicleimage bus" *ngIf="session['vehicle'] && session['vehicle']['vehicleTypeId'] == '777f20d0-bba2-481c-b91a-2c8ba6561132'">
+                                <img src="/assets/images/icons/system icon_bus.svg" alt="" />
+                            </div>
+                            <div class="vehicleimage truck" *ngIf="session['vehicle'] && session['vehicle']['vehicleTypeId'] == '6d5b722a-f922-4749-b3c6-457524495ddd'">
+                                <img src="/assets/images/icons/system icon_bus.svg" alt="" />
+                            </div>
+                        </li>
+                        <li class="highlight">{{session.vehicle?.regNumber}}</li>
+                        <li class="paragraph">{{formatDate(session['inTime'])}}</li>
+                        <li class="paragraph">{{formatDate(session['outTime'])}}</li>
+                        <li class="paragraph">{{session['total']?'₹'+session['total']+'/-':''}}</li>
+                    </ul>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</form-model>

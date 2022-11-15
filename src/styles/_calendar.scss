@@ -1,0 +1,90 @@
+.calander-con{
+  .fc{
+    .fc-toolbar-title{
+      font-weight: 500;
+      font-size: 20px;
+    }
+  }
+  .fc .fc-button-primary:focus, .fc .fc-button-primary:active{
+    box-shadow: none !important;
+    border: 0 !important;
+    border-radius: 14px;
+  }
+  .fc.fc-direction-ltr .fc-button-group>.fc-button{
+    background: $_background;
+    border-radius: 14px;
+    color: $_maintext;
+    height: 28px;
+    padding: 0px 10px;
+    font-size: 12px;
+    border: 0;
+    margin-right: 10px;
+    font-weight: 500;
+    text-transform:capitalize;
+    
+    &:hover{
+      background: $_hover;
+      border-radius: 14px;
+    }
+  }
+  .fc-direction-ltr .fc-button-group>.fc-button:first-child{
+    background: $_background;
+    border-radius: 14px;
+    color: $_maintext;
+    width: 28px;
+    height: 28px;
+    padding: 0px;
+    font-size: 11px;
+    padding-left: 0px;
+    border: 0;
+    margin-right: 10px;
+    &:hover{
+      background: $_hover;
+    }
+  }
+  .fc-direction-ltr .fc-button-group>.fc-button:last-child{
+    background: $_background;
+    border-radius: 14px;
+    color: $_maintext;
+    width: 28px;
+    height: 28px;
+    padding: 0px;
+    font-size: 11px;
+    padding-left: 1px;
+    border: 0;
+    &:hover{
+      background: $_hover;
+    }
+  }
+  .fc-direction-ltr .fc-button-group>.fc-button.fc-dayGridMonth-button,
+  .fc-direction-ltr .fc-button-group>.fc-button.fc-timeGridWeek-button,
+  .fc-direction-ltr .fc-button-group>.fc-button.fc-timeGridDay-button{
+    width: auto;
+    display:block;
+    // visibility:hidden;
+    padding: 0 10px;
+    border-radius: 14px;
+    background: $_background;
+    &.fc-button-active{
+      background: $_maintext !important;
+      color: $_white !important;
+    }
+    &:hover{
+      background: $_hover;
+    }
+    &.fc-button-active{
+      color: $_maintext;
+      background: $_selection_background;
+    }
+  }
+  .fc-direction-ltr .fc-button-group>.fc-button.fc-dayGridMonth-button:first-letter,
+  .fc-direction-ltr .fc-button-group>.fc-button.fc-timeGridWeek-button:first-letter,
+  .fc-direction-ltr .fc-button-group>.fc-button.fc-timeGridDay-button:first-letter,
+  
+  {
+    // visibility: visible;
+  }
+  .fc .fc-daygrid-day.fc-day-today{
+    background: $_background;
+  }
+}

@@ -1,0 +1,71 @@
+<form-model [title]="showSessionModal?'Choose Session':title" [labelCancel]="'Cancel'" [cancelPosition]="'bottom'" (actionCancel)="onCancel()" [labelPrimary]="'Send'" (actionPrimary)="onPrimary()">
+    <div class="form-addproduct">
+        <div class="form-row">
+            <div class="form-col-12">
+                <form-input [label]="'Subject'" [(inputModel)]="formData.subject"></form-input>
+            </div>
+        </div>
+        <div class="form-row form-attach">
+            <div class="form-col-6">
+                <form-dropdown [label]="'Attachments*'" [value]="formData.attachments" (actionSelect)="actionSelectDD($event, 'attachments')" [options]="attachmentsTypes">
+                </form-dropdown>
+            </div>
+            <div class="form-col-6">
+                <form-dropdown [label]="'Operators'" [value]="" (actionSelect)="operatorSelectDD($event)" [options]="userList">
+                </form-dropdown>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-col-12">
+                <form-input [label]="'Add ID of People*'" [(inputModel)]="formData.inputEmails"></form-input>
+            </div>
+        </div>
+        <div class="hint">Add multiple email IDs separated with comma. Ex: xyz@xyz.com, abc@xyz.com</div>
+        <div class="label mt-10">Choose date</div>
+        <div class="chooser">
+            <div class="choose" [ngClass]="{selected: datetype == 'today'}" (click)="setDateType('today')">
+                <div class="choose-text">Today</div>
+                <div class="choose-circle"></div>
+            </div>
+            <div class="choose" [ngClass]="{selected: datetype == 'week'}" (click)="setDateType('week')">
+                <div class="choose-text">Week</div>
+                <div class="choose-circle"></div>
+            </div>
+            <div class="choose" [ngClass]="{selected: datetype == 'month'}" (click)="setDateType('month')">
+                <div class="choose-text">Month</div>
+                <div class="choose-circle"></div>
+            </div>
+            <div class="choose" [ngClass]="{selected: datetype == 'quarter'}" (click)="setDateType('quarter')">
+                <div class="choose-text">Quarter</div>
+                <div class="choose-circle"></div>
+            </div>
+            <div class="choose" [ngClass]="{selected: datetype == 'Choose Range'}" (click)="setDateType('Choose Range')">
+                <div class="choose-text">Choose Range</div>
+                <div class="choose-circle"></div>
+            </div>
+        </div>
+        <div class="range-box">
+            <div class="datepicker" *ngIf="datetype == 'Choose Range'">
+                <div class="mt-20"></div>
+                <nz-range-picker [(ngModel)]="range" (ngModelChange)="onDateChange($event)" nzFormat="dd-MM-yyyy"></nz-range-picker>
+            </div>
+        </div>
+        <div class="mt-20"></div>
+
+        <div class="label mt-10 choose-list">Or Choose from the list</div>
+        <div class="form-row mb-20">
+            <div class="form-col-12">
+                <div class="form-session" (click)="showSession()">
+                    <div class="label-session">Choose Sessions</div>
+                    <div class="value-session">{{formatSessions(showSessions)}}</div>
+                    <div class="caret-session">
+                        <img src="/assets/images/icons/next arrowldpi.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="label mt-10 sharing-b">Sharing as <strong>Babara Levy</strong> </div>
+        <div class="label mt-10 choose-list policy privacy-sistem">You should be aware of the privacy policy of sharing from Sistem Apps.The client might have restricted policy around it.Please refer to the <span style="color:#FF3B30;">Client Privacy Policy </span> and <span style="color:#FF3B30;"> Sistem Apps Sharing Policy.</span></div>
+    </div>
+
+    <app-select-session [parking_id]="parking_id" *ngIf="showSessionModal" [selectedSessions]="selectedSessions" (actionPrimary)="onSessionSelected($event)" (actionCancel)="hideSession()"></app-select-session>

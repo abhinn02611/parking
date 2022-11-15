@@ -1,0 +1,165 @@
+<div class="sistem-content">
+
+  <div class="sistem-main">
+    <div class="header">
+      <list-header [heading]="heading" (actionAddNew)="openAddNewModel()" (actionInfoToggle)="toggleInfo()"
+        [tags]="tags" [actions]="activeActions" (actionGroup)="onAction($event)">
+      </list-header>
+    </div>
+    <div class="sistem-split open" [ngClass]="{open: infoOpen}">
+      <div class="sistem-split-left">
+        <div class="loader" *ngIf="loading">
+          <img src="/assets/images/loader-colored.gif" />
+        </div>
+        <div class="contacts" *ngIf="!loading">
+          <ul class="headings">
+            <li></li>
+            <li>
+              <div class="checkbox" [ngClass]="{'checked': selectall}" (click)=selectallItem()></div>
+            </li>
+            <li class="paragraph" (click)="updateOrderBy('st_contact_email')">
+              CUSTOMER EMAIL
+              <div class="order-type" *ngIf="'st_contact_email'==orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph" (click)="updateOrderBy('st_contact_fname')">
+              CUSTOMER NAME
+              <div class="order-type" *ngIf="'st_contact_fname'==orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph" (click)="updateOrderBy('st_contact_reg_date')">
+              SINCE
+              <div class="order-type" *ngIf="'st_contact_reg_date'==orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph" (click)="updateOrderBy('sales_contact_pin')">
+              ZIP
+              <div class="order-type" *ngIf="'sales_contact_pin'==orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph" (click)="updateOrderBy('sales_contact_state')">
+              STATE
+              <div class="order-type" *ngIf="'sales_contact_state'==orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph" (click)="updateOrderBy('sales_contact_address_type')">
+              TYPE
+              <div class="order-type" *ngIf="'sales_contact_address_type'==orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph" (click)="updateOrderBy('st_contact_reg_date')">
+              LAST MODIFIED
+              <div class="order-type" *ngIf="'st_contact_reg_date'==orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li></li>
+          </ul>
+
+          <ng-container *ngFor="let contact of contactListView | orderBy : orderBy: reverse; let i = index">
+            <ul class="content" [ngClass]="{'selected': isSelected(contact.st_contact_id)}"
+              (click)="openContactDetails(contact['st_contact_id'])">
+              <li>{{i+1}}</li>
+              <li>
+                <div class="checkbox" [ngClass]="{'checked': isSelected(contact.st_contact_id)}"
+                  (click)=selectItem($event,contact)></div>
+              </li>
+              <li class="paragraph">{{contact?.st_contact_email}}</li>
+              <li class="highlight">{{contact?.st_contact_salutation + ' ' + contact.st_contact_fname + ' ' +
+                contact.st_contact_last_name}}</li>
+              <li class="paragraph">{{contact?.st_contact_reg_date}}</li>
+              <li class="paragraph">{{contact?.sales_contact_pin}}</li>
+              <li class="paragraph">{{contact?.sales_contact_state}}</li>
+              <li class="paragraph">{{contact?.sales_contact_address_type}}</li>
+              <li class="paragraph">{{contact?.st_contact_reg_date}}</li>
+              <li>
+                <div class="action">
+                  <list-action
+                    [menuConfig]="[
+                                  {label: 'Edit', icon:'editldpi.svg', action: editContact.bind(this, contact['st_contact_id'])},
+                                  {label: 'Delete', icon:'deleteldpi.svg', action: deleteContact.bind(this, contact['st_contact_id']), confirm: true,
+                                  confirmParam: {title: 'Delete Contact', content: 'Are you sure to delete this contact?', note: 'You can not undo the change.', label: 'Delete Contact'}}]">
+                  </list-action>
+                </div>
+              </li>
+            </ul>
+          </ng-container>
+
+        </div>
+      </div>
+      <div class="sistem-split-right" [ngClass]="{'fixed': sidebarFixed}">
+        <div class="info-window">
+          <div class="info-header">
+            <div class="heading subheading">Activity with Sudesh Srikant</div>
+            <div class="refresh">
+              <img src="/assets/images/icons/icon_reload.png" alt="" />
+            </div>
+          </div>
+          <div class="info-content">
+            <div class="scrollbar">
+              <div class="date smalltext">Today</div>
+              <div class="group">
+                <div class="activity" *ngFor="let a of [1,1]">
+                  <div class="icon">
+                    <img src="/assets/images/icons/detailsldpi.svg" alt="" />
+                  </div>
+                  <div class="content">
+                    <div class="heading highlight">Updated Profile</div>
+                    <div class="inrormation paragraph">Contact details updated - Phone No,
+                      Address</div>
+                    <div class="attributes">
+                      <div class="attribute smalltext">Time: Apr 25, 2014 11:26 AM</div>
+                      <div class="attribute pull-right smalltext">By Sistem Admin</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="date">24 August 18</div>
+              <div class="group">
+                <div class="activity" *ngFor="let a of [1,1,1,1,1,1]">
+                  <div class="icon">
+                    <img src="/assets/images/icons/detailsldpi.svg" alt="" />
+                  </div>
+                  <div class="content">
+                    <div class="heading highlight">Updated Profile</div>
+                    <div class="inrormation paragraph">Contact details updated - Phone No,
+                      Address</div>
+                    <div class="attributes">
+                      <div class="attribute smalltext">Time: Apr 25, 2014 11:26 AM</div>
+                      <div class="attribute pull-right smalltext">By Sistem Admin</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="norecord highlight">No recorded activity before September 3, 2018</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<app-add-contact *ngIf="addNewModelOpen" [editId]="editId" (actionSecondary)="cancelAddNew(true, true)"
+  (actionPrimary)="cancelAddNew(true)" (actionCancel)="cancelAddNew()"></app-add-contact>
+
+<confirm *ngIf="confirmDeleteModelOpen" [dialog]="true" (actionConfirm)="confirmDelete()"
+  (actionCancel)="cancelDelete()" [title]="'Delete Products'" [content]="'Are you sure to delete these contacts?'"
+  [note]="'You can not undo the change.'" [labelConfirm]="'Delete Contacts'"></confirm>

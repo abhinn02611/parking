@@ -1,0 +1,9 @@
+<div class="form-input error" [ngClass]="{open: inputOpen}">
+  
+  <input type="text" readonly  class="form-control" placeholder="{{placeholder}}" value="{{formatDate(selected)}}" (click)="openPicker()" />
+  <div class="label">{{label}}</div>
+  <div class="dp-container" *ngIf="dpOpen">
+    <dp-day-calendar  [(ngModel)]="selected" (onSelect)="closePicker($event)" [config]="config"></dp-day-calendar>  
+
+  </div>
+</div>

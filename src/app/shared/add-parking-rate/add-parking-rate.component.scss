@@ -1,0 +1,106 @@
+@import "src/styles/_variables.scss";
+.form-addproduct {
+  padding-bottom: 10px;
+  .form-row {
+    width: 100%;
+    display: table;
+    border-bottom: 1px solid #eee;
+    .form-col-3 {
+      width: 25%;
+      float: left;
+    }
+    .form-col-6 {
+      width: 50%;
+      float: left;
+    }
+    .form-col-9 {
+      width: 75%;
+      float: left;
+    }
+    .form-col-12 {
+      width: 100%;
+      float: left;
+    }
+    [class^="form-col-"] {
+      position: relative;
+      &:after {
+        content: "";
+        width: 1px;
+        height: 100%;
+        background: #eee;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      &:last-child {
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+  .right-block {
+    float: right;
+    width: 34px;
+    .action-right {
+      width: 34px;
+      height: 34px;
+      margin-top: 10px;
+      padding: 6px;
+      border-radius: 17px;
+      text-align: center;
+      img {
+        width: 100%;
+      }
+      &:hover {
+        background: $_hover;
+        cursor: pointer;
+      }
+    }
+  }
+  .left-block {
+    margin-right: 30px;
+  }
+}
+
+.chooseNewRate {
+  position: relative;
+  padding: 15px 0;
+
+  .labelchoose {
+    font-size: 15px;
+    color: $_maintext;
+    font-weight: 500;
+  }
+  .action-right {
+    position: absolute;
+    width: 34px;
+    padding: 8px;
+    right: 5px;
+    top: 10px;
+    cursor: pointer;
+    img {
+      width: 100%;
+    }
+  }
+}
+.instruction {
+  font-size: 11px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: $_subtext;
+  .red {
+    color: $_red;
+  }
+}
+
+.over {
+  border: 3px dotted rgb(245, 41, 41);
+}
+
+.draggable-list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0 !important;
+}

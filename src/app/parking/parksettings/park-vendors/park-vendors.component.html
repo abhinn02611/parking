@@ -1,0 +1,173 @@
+<div class="right-inner">
+  <div class="page-heading">Manage Vendors</div>
+  <div class="page-content">
+    Easiest way to get going on Sistem Apps is to import your existing database
+    to the Sistem Apps. Upload, Download or delete your data.
+  </div>
+  <div class="data-box">
+    <div class="data-box-row open">
+      <div class="header">
+        <div class="header-inner">
+          <div class="logo">
+            <img src="/assets/images/icons/productldpi.svg" />
+          </div>
+          <div class="right-part">
+            <div class="heading">Vendors</div>
+            <span>Never Imported</span>
+          </div>
+
+          <div class="right">
+            <div class="groupactions" style="display: none">
+              <div class="groupaction">
+                <div class="img">
+                  <img src="/assets/images/icons/editldpi.svg" />
+                </div>
+              </div>
+              <div class="groupaction">
+                <div class="img">
+                  <img src="/assets/images/icons/clone_1ldpi.svg" />
+                </div>
+              </div>
+              <div class="groupaction">
+                <div class="img">
+                  <img
+                    src="/assets/images/icons/deleteldpi.svg"
+                    style="width: 20px"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="add" (click)="onCreateVendor()">
+              <img src="/assets/images/icons/icon_plus_white.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="data-content">
+        <div class="line-header"></div>
+        <sistem-pageloader *ngIf="loading"></sistem-pageloader>
+        <div class="data-list" *ngIf="!loading">
+          <ul class="headings">
+            <li class="paragraph">
+              Company
+              <div class="order-type" *ngIf="'firstName' == orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph">
+              EMAIL
+              <div class="order-type" *ngIf="'lastName' == orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph">
+              PARKINGS
+              <div class="order-type" *ngIf="'email' == orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+
+            <li class="paragraph">
+              SINCE
+              <div class="order-type" *ngIf="'gender' == orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph">
+              STATUS
+              <div class="order-type" *ngIf="'gender' == orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li></li>
+          </ul>
+          <ng-container
+            *ngFor="
+              let vendor of vendorList | orderBy: orderBy:reverse;
+              let index = index
+            "
+          >
+            <div class="rowouter">
+              <ul class="content">
+                <li class="highlight">
+                  {{
+                    vendor.company
+                      ? (vendor.company | titlecase)
+                      : ("-" | titlecase)
+                  }}
+                </li>
+                <li class="highlight">
+                  {{ vendor.email ? vendor.email : "--" }}
+                </li>
+                <!-- <li class="paragraph">--</li> -->
+                <li class="paragraph parking">
+                  <!-- <label
+                    *ngIf="vendor.parkings && vendor.parkings.length == 1"
+                    >{{ vendor.parkings[0].name }}</label
+                  > -->
+                  <!-- <form-dropdown
+                    *ngIf="vendor.parkings && vendor.parkings.length > 1"
+                    [value]="vendor?.parkings ? vendor?.parkings[0]?.name : ''"
+                    [options]="vendor.parkings"
+                    [inputHeight]="0"
+                    [inputPadding]="0"
+                  ></form-dropdown> -->
+                  <label *ngIf="vendor.parkings && vendor.parkings.length > 0">
+                    {{ vendor.parkings.length }} parkings
+                  </label>
+                  <div class="options-content">
+                    <div>
+                      <li
+                        *ngFor="let vendorP of vendor.parkings; let i = index"
+                        class="value"
+                        [ngClass]="{ border: i !== vendor.parkings.length - 1 }"
+                      >
+                        {{ vendorP.name }}
+                      </li>
+                    </div>
+                  </div>
+                </li>
+                <li class="paragraph">{{ formatDate(vendor.createdAt) }}</li>
+                <li class="paragraph">
+                  {{ vendor.status === true ? "Active" : "Inactive" }}
+                </li>
+                <li>
+                  <div class="action">
+                    <list-action [menuConfig]="getMenuConfig(vendor)">
+                    </list-action>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="setting-footer">
+  Only you can see your settings. Sistem App is committed to protecting your
+  privacy and security.
+</div>
+
+<!-- <app-add-operator [editId]="editId" [operator]="operator" *ngIf="addOperatorModelOpen" (actionPrimary)="cancelAddOperator(true)" [parking_id]="parking_id" (actionCancel)="cancelAddOperator()"></app-add-operator> -->
+<app-add-vendor
+  *ngIf="isShowVendor"
+  [editId]="editId"
+  (onVendorPopupCancel)="closeVendor()"
+  [vendor]="editVendorDetails"
+></app-add-vendor>
+<app-add-parking-rate-pass
+  [editId]="editId"
+  [group]="editGroup"
+  *ngIf="addRateModelOpen"
+  (actionPrimary)="cancelAddRate(true)"
+  [parking_id]="parking_id"
+  (actionCancel)="cancelAddRate()"
+></app-add-parking-rate-pass>

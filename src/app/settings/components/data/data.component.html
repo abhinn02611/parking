@@ -1,0 +1,352 @@
+<div class="sistem-container menu-hide">
+  <div class="sistem-header">
+    <sistem-header></sistem-header>
+  </div>
+  <div class="sistem-content">
+
+    <div class="sistem-main">
+      <div class="setting-container">
+        <div class="left-menu" style="width: 260px; float: left;">
+          <app-settings-left></app-settings-left>
+        </div>
+        <div class="right-content" style="margin-left: 260px;">
+          <div class="dashboard">
+            <div class="user">
+              <div class="profile mb-20">
+                <div class="clear"></div>
+                <div class="name">Data management</div>
+                <div class="subtext">Easiest way to get going on Sistem Apps is to import your existing database to the
+                  Sistem Apps. Upload, Download or delete your data.</div>
+              </div>
+              <div class="data-container mt-30">
+                <div class="title">Import CSV data</div>
+                <div class="description">Connect with your existing Contact management Apps to directly import data to
+                  Sistem.</div>
+                <div class="data-box">
+                  <div class="data-box-row " [ngClass]="{open: activeBox == 1}">
+                    <div class="header">
+                      <div class="header-inner">
+                        <div class="logo">
+                          <img src="/assets/images/icons/contactldpi.svg" />
+                        </div>
+                        <div class="right-part">
+                          <div class="heading">Contact</div>
+                          <div class="sub-heading">Last imported on 25 May 2017</div>
+                        </div>
+                        <div class="arrow" (click)="toggleData(1)">
+                          <img src="/assets/images/icons/downldpi.svg" />
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="data-content">
+                      <div class="line-header"></div>
+                      <div class="data-section mt-20">Import</div>
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="data-info">
+                            Download the sample CSV file, then edit and upload the file. <br />
+                            <span class="note">Note:</span> Required fields are First Name, Last Name, Email Address,
+                            Role, Owner and Org Unit.
+                          </div>
+                          <div class="download-sample mt-20 mb-20">
+                            <div class="icon">
+                              <img src="/assets/images/icons/downloadldpi.svg" alt="">
+                            </div>
+                            <div class="text">Download sample file</div>
+                          </div>
+                          <div class="data-info">You can import up to 5000 records through an .xls, .xlsx, .vcf, or .csv
+                            file. To import more than 5000 records at a time, use a .csv file.</div>
+
+
+                        </div>
+                        <div class="col-6">
+                          <div class="drop-box">
+                            <div class="info-large">Drag and drop your file here.</div>
+                            <div class="info-small">- or -</div>
+                            <div class="download-button-container">
+                              <div class="button button_40">Upload CSV File</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="line"></div>
+
+                      <div class="data-section">Download Data</div>
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="data-info">You can import up to 3000 records through this wizard. To import more
+                            than 3000 records at a time, <a href="#">Request Data Backup</a>.</div>
+                        </div>
+                        <div class="col-6">
+                          <div class="only-download">
+                            <div class="button button_40">Download</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="data-box-row" [ngClass]="{open: activeBox == 2}">
+                    <div class="header">
+                      <div class="header-inner">
+                        <div class="logo">
+                          <img src="/assets/images/icons/companyldpi.svg" />
+                        </div>
+                        <div class="right-part">
+                          <div class="heading">Company</div>
+                          <div class="sub-heading">Never Imported</div>
+                        </div>
+                        <div class="arrow" (click)="toggleData(2)">
+                          <img src="/assets/images/icons/downldpi.svg" />
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="data-content">
+                      <div class="line-header"></div>
+                      <div class="data-section mt-20">Import</div>
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="data-info">
+                            Download the sample CSV file, then edit and upload the file. <br />
+                            <span class="note">Note:</span> Required fields are First Name, Last Name, Email Address,
+                            Role, Owner and Org Unit.
+                          </div>
+                          <div class="download-sample mt-20 mb-20">
+                            <div class="icon">
+                              <img src="/assets/images/icons/downloadldpi.svg" alt="">
+                            </div>
+                            <div class="text">Download sample file</div>
+                          </div>
+                          <div class="data-info">You can import up to 5000 records through an .xls, .xlsx, .vcf, or .csv
+                            file. To import more than 5000 records at a time, use a .csv file.</div>
+
+
+                        </div>
+                        <div class="col-6">
+                          <div class="drop-box">
+                            <div class="info-large">Drag and drop your file here.</div>
+                            <div class="info-small">- or -</div>
+                            <div class="download-button-container">
+                              <div class="button button_40">Upload CSV File</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="line"></div>
+
+                      <div class="data-section">Download Data</div>
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="data-info">You can import up to 3000 records through this wizard. To import more
+                            than 3000 records at a time, <a href="#">Request Data Backup</a>.</div>
+                        </div>
+                        <div class="col-6">
+                          <div class="only-download">
+                            <div class="button button_40">Download</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="data-box-row" [ngClass]="{open: activeBox == 3}">
+                    <div class="header">
+                      <div class="header-inner">
+                        <div class="logo">
+                          <img src="/assets/images/icons/productldpi.svg" />
+                        </div>
+                        <div class="right-part">
+                          <div class="heading">Product</div>
+                          <div class="sub-heading">Last imported on 25 May 2017</div>
+                        </div>
+                        <div class="arrow" (click)="toggleData(3)">
+                          <img src="/assets/images/icons/downldpi.svg" />
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="data-content">
+                      <div class="line-header"></div>
+                      <div class="data-section mt-20">Import</div>
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="data-info">
+                            Download the sample CSV file, then edit and upload the file. <br />
+                            <span class="note">Note:</span> Required fields are First Name, Last Name, Email Address,
+                            Role, Owner and Org Unit.
+                          </div>
+                          <div class="download-sample mt-20 mb-20">
+                            <div class="icon">
+                              <img src="/assets/images/icons/downloadldpi.svg" alt="">
+                            </div>
+                            <div class="text">Download sample file</div>
+                          </div>
+                          <div class="data-info">You can import up to 5000 records through an .xls, .xlsx, .vcf, or .csv
+                            file. To import more than 5000 records at a time, use a .csv file.</div>
+
+
+                        </div>
+                        <div class="col-6">
+                          <div class="drop-box">
+                            <div class="info-large">Drag and drop your file here.</div>
+                            <div class="info-small">- or -</div>
+                            <div class="download-button-container">
+                              <div class="button button_40">Upload CSV File</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="line"></div>
+
+                      <div class="data-section">Download Data</div>
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="data-info">You can import up to 3000 records through this wizard. To import more
+                            than 3000 records at a time, <a href="#">Request Data Backup</a>.</div>
+                        </div>
+                        <div class="col-6">
+                          <div class="only-download">
+                            <div class="button button_40">Download</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="data-box-row" [ngClass]="{open: activeBox == 4}">
+                    <div class="header">
+                      <div class="header-inner">
+                        <div class="logo">
+                          <img src="/assets/images/icons/leadsldpi.svg" />
+                        </div>
+                        <div class="right-part">
+                          <div class="heading">Lead</div>
+                          <div class="sub-heading">Last imported on 25 May 2017</div>
+                        </div>
+                        <div class="arrow" (click)="toggleData(4)">
+                          <img src="/assets/images/icons/downldpi.svg" />
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="data-content">
+                      <div class="line-header"></div>
+                      <div class="data-section mt-20">Import</div>
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="data-info">
+                            Download the sample CSV file, then edit and upload the file. <br />
+                            <span class="note">Note:</span> Required fields are First Name, Last Name, Email Address,
+                            Role, Owner and Org Unit.
+                          </div>
+                          <div class="download-sample mt-20 mb-20">
+                            <div class="icon">
+                              <img src="/assets/images/icons/downloadldpi.svg" alt="">
+                            </div>
+                            <div class="text">Download sample file</div>
+                          </div>
+                          <div class="data-info">You can import up to 5000 records through an .xls, .xlsx, .vcf, or .csv
+                            file. To import more than 5000 records at a time, use a .csv file.</div>
+
+
+                        </div>
+                        <div class="col-6">
+                          <div class="drop-box">
+                            <div class="info-large">Drag and drop your file here.</div>
+                            <div class="info-small">- or -</div>
+                            <div class="download-button-container">
+                              <div class="button button_40">Upload CSV File</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="line"></div>
+
+                      <div class="data-section">Download Data</div>
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="data-info">You can import up to 3000 records through this wizard. To import more
+                            than 3000 records at a time, <a href="#">Request Data Backup</a>.</div>
+                        </div>
+                        <div class="col-6">
+                          <div class="only-download">
+                            <div class="button button_40">Download</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="data-box-row" [ngClass]="{open: activeBox == 5}">
+                    <div class="header">
+                      <div class="header-inner">
+                        <div class="logo">
+                          <img src="/assets/images/icons/opportunityldpi.svg" />
+                        </div>
+                        <div class="right-part">
+                          <div class="heading">Opportunity</div>
+                          <div class="sub-heading">Last imported on 25 May 2017</div>
+                        </div>
+                        <div class="arrow" (click)="toggleData(5)">
+                          <img src="/assets/images/icons/downldpi.svg" />
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="data-content">
+                      <div class="line-header"></div>
+                      <div class="data-section mt-20">Import</div>
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="data-info">
+                            Download the sample CSV file, then edit and upload the file. <br />
+                            <span class="note">Note:</span> Required fields are First Name, Last Name, Email Address,
+                            Role, Owner and Org Unit.
+                          </div>
+                          <div class="download-sample mt-20 mb-20">
+                            <div class="icon">
+                              <img src="/assets/images/icons/downloadldpi.svg" alt="">
+                            </div>
+                            <div class="text">Download sample file</div>
+                          </div>
+                          <div class="data-info">You can import up to 5000 records through an .xls, .xlsx, .vcf, or .csv
+                            file. To import more than 5000 records at a time, use a .csv file.</div>
+
+
+                        </div>
+                        <div class="col-6">
+                          <div class="drop-box">
+                            <div class="info-large">Drag and drop your file here.</div>
+                            <div class="info-small">- or -</div>
+                            <div class="download-button-container">
+                              <div class="button button_40">Upload CSV File</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="line"></div>
+
+                      <div class="data-section">Download Data</div>
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="data-info">You can import up to 3000 records through this wizard. To import more
+                            than 3000 records at a time, <a href="#">Request Data Backup</a>.</div>
+                        </div>
+                        <div class="col-6">
+                          <div class="only-download">
+                            <div class="button button_40">Download</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<!-- <div class="sistem-content">
+    <div class="sistem-split open" [ngClass]="{ open: infoOpen }">
+        <sistem-pageloader *ngIf="loading"></sistem-pageloader>
+        <div class="db-content" *ngIf="!loading">
+            <div class="db-blocks">
+                <div class="db-block">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="box">
+  <div class="head">
+    <div class="heading">
+      {{ vParkingDetails?.title ? vParkingDetails?.title : ("--" | titlecase) }}
+    </div>
+    <div class="sub-heading">
+      {{ vParkingDetails?.address ? vParkingDetails?.address : "--" }}
+    </div>
+  </div>
+  <div class="content">
+    <div class="status">
+      <div class="icon">
+        <i class="icon-carret-up"></i>
+      </div>
+      <div class="status-message">
+        Currently
+        <strong>{{
+          vParkingDetails?.currently ? vParkingDetails?.currently : "-"
+        }}</strong>
+        Vehicle Parked
+      </div>
+    </div>
+    <div class="">
+      <apx-chart
+        [series]="chartOptions.series"
+        [chart]="chartOptions.chart"
+        [dataLabels]="chartOptions.dataLabels"
+        [plotOptions]="chartOptions.plotOptions"
+        [xaxis]="chartOptions.xaxis"
+        [stroke]="chartOptions.stroke"
+        [fill]="chartOptions.fill"
+        [yaxis]="chartOptions.yaxis"
+        [tooltip]="chartOptions.tooltip"
+        [grid]="chartOptions.grid"
+        [legend]="chartOptions.legend"
+      ></apx-chart>
+    </div>
+  </div>
+  <div class="footer-attribute">
+    <div class="arrtibutes">
+      <div class="attribute">
+        <div class="label">Today’s Vehicle Count</div>
+        <div class="value">
+          {{
+            vParkingDetails?.todayVehicleCount
+              ? vParkingDetails?.todayVehicleCount
+              : "-"
+          }}
+        </div>
+      </div>
+      <div class="attribute">
+        <div class="label">Today Open-Hours</div>
+        <div class="value">
+          {{ createOpeningHours() }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

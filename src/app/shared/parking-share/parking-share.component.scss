@@ -1,0 +1,187 @@
+@import "src/styles/_variables.scss";
+.form-addproduct {
+    padding-bottom: 50px;
+    .hint {
+        font-size: 10px;
+        color: #54688d;
+        padding: 5px 0;
+    }
+    .label {
+        font-size: 13px;
+        color: #171e27;
+        &.choose-list {
+            font-weight: 600;
+        }
+    }
+    .chooser {
+        display: inline-block;
+        width: 100%;
+        margin-top: 10px;
+        .choose {
+            position: relative;
+            padding: 8px 15px;
+            background-color: #f8f9fa;
+            border-radius: 22px;
+            width: auto;
+            float: left;
+            margin: 5px;
+            // margin-right: 10px;
+            padding-left: 33px;
+            height: 34px;
+            cursor: pointer;
+            font-size: 12px;
+            &:hover {
+                background: $_hover;
+            }
+            &.selected {
+                background: #171e27;
+                color: #fff;
+                .choose-circle {
+                    &::after {
+                        content: "L";
+                        position: absolute;
+                        left: 4px;
+                        top: -2px;
+                        font-weight: 600;
+                        color: #171e27;
+                        transform: rotate(40deg) scaleX(-1);
+                    }
+                }
+            }
+            .choose-circle {
+                position: absolute;
+                left: 8px;
+                top: 9px;
+                width: 16px;
+                height: 16px;
+                border-radius: 8px;
+                background: #fff;
+                border: 1px solid #edf1f5;
+            }
+        }
+    }
+    .form-row {
+        width: 100%;
+        display: table;
+        border-bottom: 1px solid #eee;
+        .form-col-3 {
+            width: 25%;
+            float: left;
+        }
+        .form-col-6 {
+            width: 50%;
+            float: left;
+        }
+        .form-col-9 {
+            width: 75%;
+            float: left;
+        }
+        .form-col-12 {
+            width: 100%;
+            float: left;
+        }
+        [class^="form-col-"] {
+            position: relative;
+            &:after {
+                content: "";
+                width: 1px;
+                height: 100%;
+                background: #eee;
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+            &:last-child {
+                &:after {
+                    display: none;
+                }
+            }
+        }
+    }
+    .right-block {
+        float: right;
+        width: 34px;
+        .action-right {
+            width: 34px;
+            height: 34px;
+            margin-top: 10px;
+            padding: 8px;
+            border-radius: 17px;
+            img {
+                width: 100%;
+            }
+            &:hover {
+                background: $_hover;
+                cursor: pointer;
+            }
+        }
+    }
+    .left-block {
+        margin-right: 30px;
+    }
+}
+
+.form-session {
+    position: relative;
+    cursor: pointer;
+    .label-session {
+        color: #566881;
+        font-size: 13px;
+        padding-top: 15px;
+    }
+    .value-session {
+        color: #171E27;
+        font-size: 15px;
+        padding-bottom: 10px;
+        height: 30px;
+    }
+    .caret-session {
+        width: 18px;
+        height: 18px;
+        position: absolute;
+        right: 7px;
+        top: 20px;
+        opacity: 0.5;
+        img {
+            width: 100%;
+        }
+    }
+}
+
+.range-box {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    .datepicker {
+        width: 100%;
+        nz-range-picker {
+            width: 100%;
+        }
+         ::ng-deep {
+            .ant-picker {
+                border: 0;
+                outline: none;
+                box-shadow: none;
+            }
+        }
+    }
+}
+
+.sharing-b {
+    font-size: 15px !important;
+    strong {
+        font-weight: 600;
+        color: #566881;
+    }
+    .policy {
+        color: #566881;
+    }
+}
+
+.privacy-sistem {
+    font-size: 11px !important;
+    color: #566881 !important;
+}
+
+.form-attach .form-dropdown {
+    margin-left: -5px !important;
+}

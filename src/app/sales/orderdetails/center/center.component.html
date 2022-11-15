@@ -1,0 +1,88 @@
+<div class="scroller">
+  <div class="section-header">
+    <div class="heading subheading">Add Your Activity</div>
+  </div>
+  <div class="modules">
+    <div class="module" (click)="actionEdit.emit()">
+      <div class="icon orange">
+        <img src="/assets/images/icons/productldpi.svg" alt="" />
+      </div>
+      <div class="label highlight">Products</div>
+    </div>
+    <div class="module" (click)="notesClick($event)">
+      <div class="icon darkblue">
+        <img src="/assets/images/icons/attachementsldpi.svg" alt="" />
+      </div>
+      <div class="label highlight">Notes</div>
+    </div>
+    <div class="module" (click)="attachmentClick($event)">
+      <div class="icon yellow">
+        <img src="/assets/images/icons/attachementsldpi.svg" alt="" />
+      </div>
+      <div class="label highlight">Attachments</div>
+    </div>
+    <div class="module" (click)="addTask()">
+      <div class="icon orange">
+        <img src="/assets/images/icons/tasksldpi.svg" alt="" />
+      </div>
+      <div class="label highlight">Tasks</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-header">
+  <div class="heading subheading">Products ({{ordervalues.length}})</div>
+</div>
+<div class="orderproducts">
+  <div class="orderproduct" *ngFor="let order of ordervalues">
+    <div class="single-order">
+      <div class="icon">
+        <img src={{getProductIcon(order)}} />
+      </div>
+      <div class="product-desc">
+        <div class="product-info">
+          <div class="product-name">{{order.pName}}</div>
+        </div>
+        <div class="data-row">
+          <div class="data-box">
+            <div class="label">Qty: </div>
+            <div class="input">{{order.pQuantity}}</div>
+          </div>
+          <div class="data-box">
+            <div class="label">Rate: </div>
+            <div class="input">{{currency}} {{commaNumber(order.pPrice)}}</div>
+          </div>
+          <div class="data-box">
+            <div class="label">Dis: </div>
+            <div class="input">{{currency}} {{(order.pDiscount)}}</div>
+          </div>
+          <div class="data-box">
+            <div class="label">Tax: </div>
+            <div class="input">{{currency}} {{commaNumber(order.pTax)}}</div>
+          </div>
+        </div>
+        <div class="data-price">
+          <div class="input">{{currency}} {{commaNumber(order.pNetTotal)}}</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="total-box">
+    <div class="total-items">Sub Total: {{currency}} {{commaNumber(subtotal)}}</div>
+    <div class="total-items">Discount: {{currency}} {{commaNumber(discount)}}</div>
+    <div class="total-items">Tax: {{currency}} {{commaNumber(tax)}}</div>
+    <div class="total-items total">Total: {{total}}</div>
+  </div>
+</div>
+<div class="products" *ngIf="ordervalues.length == 0">
+  <div class="no-content">No Product Available</div>
+</div>
+<div class="line mt-20 mb-40"></div>
+<app-attachments [add]="addAttachment.asObservable()" [type]="'order'" [id]="order.sales_orders_id"></app-attachments>
+
+<app-add-task *ngIf="addTaskModelOpen" (actionSecondary)="cancelAddtask(true, true)"
+  (actionPrimary)="cancelAddtask(true, true)" (actionCancel)="cancelAddtask()" [refId] = "order.sales_orders_uniq_id" [refType] = "'Order'"
+  [refDesc] = "'ORDER ID: '+order.sales_orders_uniq_id" [refCompany]="order"></app-add-task>
+<app-notes [add]="addNotes.asObservable()" [type]="'order'" [id]="order.sales_orders_id"></app-notes>

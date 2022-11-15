@@ -1,0 +1,152 @@
+@import "src/styles/_variables.scss";
+.scroller{
+    overflow-x: scroll;
+    display: block;
+    height: 100%;
+}
+.section-header{
+    display: table;
+    width: 100%;
+    .heading{
+        color: $_maintext;
+        float: left;
+        width: auto;
+    }
+    .action{
+        float: right;
+        margin-top: 0px;
+        margin-right: 5px;
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        &:hover{
+            background: $_hover;
+            cursor: pointer;
+        }
+        img{
+            opacity: 0.5;
+            width: 28px;
+            display: inline;
+        }
+    }
+}
+.activities{
+    padding:20px 20px 0px 10px;
+    .activity{
+        
+        margin-bottom: 20px;
+        .icon{
+            width: 24px;
+            height: 24px;
+            border-radius: 12px;
+            text-align: center;
+            background: $_background;
+            float: left;
+            &.red{
+                background: $_red;
+            }
+            &.green{
+                background: $_green;
+            }
+            &.blue{
+                background: $_blue;
+            }
+            &.skyblue{
+                background: $_skyblue;
+            }
+            &.yellow{
+                background: $_yellow;
+            }
+            img{
+                filter: invert(100);
+                display: inline-block;
+                width: 12px;
+                margin-top: 6px;
+
+            }
+        }
+        .content{
+            margin-left: 32px;
+            .heading{
+                color: $_maintext;
+            }
+            .details{
+                margin-right: 30px;
+                color: $_maintext;
+                padding: 2px 0;
+            }
+            .info{
+                margin-right: 30px;
+                color: $_subtext;
+                display: table;
+                width: 100%;
+                span{
+                    font-weight: 500;
+                }
+                .left{
+                    width: auto;
+                    float: left;
+                    font-weight: 500;
+                }
+                .right{
+                    width: auto;
+                    float: right;
+                    font-weight: 500;
+                }
+            }
+            .comments-box{
+                margin-top: 10px;
+                margin-bottom: 5px;
+                position: relative;
+                .comment{
+                    margin-right: 40px;
+                    height: 36px;
+                    border: 1px solid #eee;
+                    border-radius: 18px;
+                    input{
+                        background: none;
+                        padding: 5px 15px;
+                        border: 0;
+                        outline: none;
+                        margin-top: 3px;
+                        width: 100%;
+                        color: $_subtext;
+                    }
+                }
+                .like{
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 18px;
+                    border: 1px solid #eee;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    text-align: center;
+                    cursor: pointer;
+                    &:hover{
+                        background: $_hover;
+                    }
+                    img{
+                        display: inline-block;
+                        width: 18px;
+                        margin-top: 7px;
+                        opacity: 0.3;
+                    }
+                    &.liked{
+                        background: $_subtext-light;
+                        opacity: .6;
+                        img{
+                            filter: invert(100);
+                            opacity: 1;
+                        }
+                        &:hover{
+                            opacity: .4;
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+    
+}

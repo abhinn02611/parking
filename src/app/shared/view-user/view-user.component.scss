@@ -1,0 +1,250 @@
+@import "src/styles/_variables.scss";
+.vehicle_no {
+    font-size: 15px;
+    color: #171E27;
+    font-weight: 500;
+}
+
+.vehicle_no_val {
+    .left {
+        float: left;
+        padding-top: 5px;
+        .vehicleimage {
+            width: 24px;
+            height: 24px;
+            margin-top: 0px;
+            margin-left: 0px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: $_green;
+            &.car {
+                background: #FFCC00;
+            }
+            &.bike {
+                background: #5838D6;
+            }
+            &.auto {
+                background: #5AC8FA;
+            }
+            &.bus {
+                background: #007AFF;
+            }
+            &.truck {
+                background: #007AFF;
+            }
+            img {
+                display: inline-block;
+                width: 100%;
+                height: 100%;
+                -o-object-fit: contain;
+                object-fit: contain;
+                filter: brightness(0) invert(1);
+                padding: 2px;
+            }
+        }
+    }
+    .right {
+        margin-left: 10px;
+        font-size: 22px;
+        font-weight: 700;
+        display: inline-block;
+    }
+}
+
+.passinfo {
+    padding-top: 10px;
+    clear: both;
+    .passicon {
+        width: 45px;
+        float: left;
+    }
+    .active {
+        font-size: 15px;
+        color: #171E27;
+        font-weight: 600;
+        width: auto;
+        float: left;
+        margin-left: 10px;
+    }
+    .active_message {
+        font-size: 15px;
+        color: #4CD964;
+        font-weight: 400;
+        width: auto;
+        float: left;
+        margin-left: 10px;
+    }
+}
+
+.owner-heading {
+    padding-top: 20px;
+    clear: both;
+    color: #16315B;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.footer-info {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-size: 11px;
+    color: #566881;
+    .red {
+        color: #FF3B30;
+        cursor: pointer;
+        font-weight: 500;
+    }
+}
+
+.pass-data {
+    margin-bottom: 15px;
+    .title {
+        font-size: 13px;
+        color: #566881;
+        font-weight: 400;
+    }
+    .value {
+        font-size: 15px;
+        color: #171E27;
+        font-weight: 400;
+        &.value-icon {
+            margin-top: 5px;
+        }
+    }
+    .sec-1 {
+        width: 25%;
+        float: left;
+    }
+    .sec-2 {
+        width: 35%;
+        float: left;
+    }
+    .sec-3 {
+        width: 15%;
+        float: left;
+    }
+    .sec-4 {
+        width: 10%;
+        float: left;
+    }
+}
+
+.pass-time {
+    margin-bottom: 200px !important;
+    .value {
+        padding-top: 10px;
+    }
+    .value.value-icon {
+        padding-top: 27px;
+    }
+}
+
+.user-det-main {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    .inner {
+        width: 10%;
+        p {
+            background: #999;
+            width: 35px;
+            height: 35px;
+            border-radius: 50px;
+            margin: 0;
+        }
+    }
+    .inner1 {
+        width: 90%;
+        margin-left: 10px;
+        span {
+            color: #171E27;
+            font-size: 22px;
+            font-weight: 600;
+        }
+    }
+}
+
+.viewUserMain {
+    margin-top: 20px !important;
+    .form-col-3 {
+        width: 25%;
+    }
+    .form-col-4{
+        width: 33%;
+    }
+}
+
+.add-veh {
+    color: #16315B;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.add-veh-main {
+    display: flex;
+    flex-wrap: wrap;
+    .user-det-main {
+        width: 33.33%;
+        .inner {
+            p {
+                width: 25px;
+                height: 25px;
+                background: #007AFF;
+            }
+        }
+        .vehiclePic {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            img {
+                display: inline-block;
+                width: 100%;
+                height: 100%;
+                -o-object-fit: contain;
+                object-fit: contain;
+                filter: brightness(0) invert(1);
+                padding: 2px;
+            }
+        }
+        .inner1 {
+            margin-left: 20px;
+            span {
+                font-size: 15px;
+            }
+        }
+    }
+}
+
+.add-veh.rec {
+    margin-top: 30px;
+}
+
+.rec-sess {
+    display: flex;
+}
+
+.rec-sess .inner:nth-child(odd) {
+    width: 25%;
+}
+
+.rec-sess .inner:nth-child(even) {
+    width: 15%;
+}
+
+.rec-sess {
+    .inner {
+        p {
+            color: #566881;
+            font-size: 12px;
+        }
+    }
+}
+
+.rec-sess.main {
+    p {
+        color: #171E27 !important;
+        font-size: 13px !important;
+    }
+}

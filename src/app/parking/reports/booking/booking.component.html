@@ -1,0 +1,43 @@
+<div class="box">
+  <label>Bookings</label>
+
+  <div class="" *ngIf="$pBooking | async as data">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [dataLabels]="chartOptions.dataLabels"
+      [plotOptions]="chartOptions.plotOptions"
+      [responsive]="chartOptions.responsive"
+      [xaxis]="{ type: 'category', categories: data.categories }"
+      [legend]="chartOptions.legend"
+      [fill]="{ opacity: 1, colors: data.colors }"
+    ></apx-chart>
+  </div>
+  <div class="parking-dropdown">
+    <form-dropdown
+      [value]="'Day'"
+      (actionSelect)="actionSelectDD($event)"
+      [options]="filterDropdown[0].options"
+      [optionWidth]="200"
+    >
+    </form-dropdown>
+  </div>
+  <!-- <div class="footer">
+        <form-dropdown style="width: 50%;" [label]="'Current Month'">
+            <div class="options-container">
+                <div class="options dropdown-content">
+                    <div class="dropdown-scroll">
+                        <ul>
+                            <li class="heading">
+                                <div class="value">Current Day</div>
+                            </li>
+                            <li class="heading">
+                                <div class="value">Current Year</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </form-dropdown>
+    </div> -->
+</div>

@@ -1,0 +1,33 @@
+<div class="box mt0">
+  <label [ngStyle]="{ padding: '10px 15px' }">Total Amount Closed</label>
+
+  <!-- <div class="body">
+        <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis" [stroke]="chartOptions.stroke" [tooltip]="chartOptions.tooltip" [dataLabels]="chartOptions.dataLabels" [legend]="chartOptions.legend" [markers]="chartOptions.markers"
+            [grid]="chartOptions.grid" [yaxis]="chartOptions.yaxis" [title]="chartOptions.title"></apx-chart>
+    </div> -->
+
+  <div class="" *ngIf="$parkRevenue | async as data">
+    <apx-chart
+      [series]="chartOptions?.series"
+      [chart]="chartOptions.chart"
+      [xaxis]="{ type: 'category', categories: data.categories }"
+      [stroke]="chartOptions.stroke"
+      [tooltip]="chartOptions.tooltip"
+      [dataLabels]="chartOptions.dataLabels"
+      [legend]="chartOptions.legend"
+      [markers]="chartOptions.markers"
+      [grid]="chartOptions.grid"
+      [yaxis]="chartOptions.yaxis"
+      [title]="chartOptions.title"
+    ></apx-chart>
+  </div>
+  <div class="parking-dropdown">
+    <form-dropdown
+      [value]="'Day'"
+      (actionSelect)="actionSelectDD($event)"
+      [options]="filterDropdown[0].options"
+      [optionWidth]="200"
+    >
+    </form-dropdown>
+  </div>
+</div>

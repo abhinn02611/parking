@@ -1,0 +1,29 @@
+<div class="sistem-content">
+  <sistem-pageloader *ngIf="loading"></sistem-pageloader>
+  <div class="sistem-main" *ngIf="!loading">
+    <sistem-breadcrumb [links]="linksBreadcrumb"></sistem-breadcrumb>
+    <sistem-detailsheader [name]="company.store_name" [department]="company.store_ownership" (actionBack)="backToList()"
+      [company]="company.store_industry" (actionAddNew)="openAddNewModel()">
+    </sistem-detailsheader>
+
+    <div class="details-container">
+      <div class="details-left" [ngStyle]="leftStyle">
+        <div class="leftbox" #leftcontent [ngClass]="{'fixed': leftSidebarFixed}">
+          <sistem-companydetails-left [company]="company" (actionEdit)="openAddNewModel(true)" [currency]="currency">
+          </sistem-companydetails-left>
+        </div>
+      </div>
+      <div class="details-center">
+        <sistem-companydetails-center [company]="company" (taskAdded)="getCompanyData()" [tasks]="taskDetail">
+        </sistem-companydetails-center>
+      </div>
+      <div class="details-right" [ngClass]="{'fixed': sidebarFixed}">
+        <sistem-companydetails-right></sistem-companydetails-right>
+      </div>
+    </div>
+  </div>
+</div>
+<app-add-company *ngIf="addCompanyModelOpen" [editId]="editId" (actionSecondary)="cancelAddCompany(true, true)"
+  (actionPrimary)="moveToCompany($event)" (actionCancel)="cancelAddCompany()"></app-add-company>
+<app-add-related-companys *ngIf="addRelatedCompanyModelOpen" [selections]="relatedIds" [companyId]="companyId"
+  (actionPrimary)="addedRelatedCompany($event)" (actionCancel)="canceledRelatedCompany()"></app-add-related-companys>

@@ -1,0 +1,99 @@
+<header class="header-cnt">
+  <div class="inner-cnt">
+    <div class="logo" (click)="gotoDashboard()">
+      <img class="logo1" src="/assets/images/parking_icon.png" />
+      <img class="logo2" src="/assets/images/parking_logo.svg" />
+    </div>
+    <div *ngIf="showDropDown" class="ml-15">
+      <app-header-dropdown
+        [label]="'Select Parking'"
+        [value]="selectedParking ? selectedParking : ''"
+        (actionSelect)="actionSelectDD($event)"
+        [options]="filterDropdown"
+      >
+      </app-header-dropdown>
+    </div>
+  </div>
+
+  <div
+    class="header-search"
+    *ngIf="role.toLowerCase() === 'admin'"
+    [ngClass]="{ open: searchOpen }"
+  >
+    <img class="search-icon" src="/assets/images/icons/icon-search.png" />
+    <input
+      placeholder="Search Sistem"
+      (keyup)="onSearchParking($event)"
+      [(ngModel)]="searchKeyword"
+      (keyup)="showResult()"
+    />
+  </div>
+
+  <div class="header-right">
+    <div class="user-thumb" [ngClass]="{ selected: userOpen }">
+      <div class="user-thumb-border" (click)="toggleUser()">
+        <div class="user-initial">{{ initials }}</div>
+      </div>
+    </div>
+    <div class="user-popup" *ngIf="userOpen">
+      <div class="overlay" (click)="toggleUser()"></div>
+      <div class="popup-box">
+        <div class="">
+          <div class="user" *ngIf="profilePic == ''">
+            <div class="user-main">
+              <div class="user-initial">{{ initials }}</div>
+            </div>
+            <div class="user-det">
+              <div class="name">{{ username | titlecase }}</div>
+              <div class="designation">{{ useremail }}</div>
+              <div class="button-container">
+                <div class="button" (click)="Setting()">
+                  Sistem Account
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="info">
+            <div class="parking-option manages-by">
+              This account is managed by {{ user?.company }}
+            </div>
+            <!-- <span>Manage this account</span> -->
+            <div
+              *ngIf="
+                role.toLowerCase() === 'admin' ||
+                role.toLowerCase() === 'vendor'
+              "
+              class="parking-option name"
+              (click)="Setting()"
+            >
+              {{
+                role.toLowerCase() === "admin"
+                  ? "Manage this account"
+                  : "Manage this parking"
+              }}
+            </div>
+
+            <div class="parking-option name" (click)="logout()">Logout</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="module-popup" *ngIf="moduleOpen">
+    <div class="overlay" (click)="toggleModule()"></div>
+    <div class="popup-box">
+      <div class="icons-container" *ngFor="let m of modules">
+        <div
+          class="icon"
+          [ngClass]="{ selected: m.selected == true }"
+          (click)="gotoModule(m)"
+        >
+          <img src="{{ m.icon }}" />
+          <div class="title">{{ m.title }}</div>
+          <div class="selector" [ngStyle]="{ background: m.color }"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

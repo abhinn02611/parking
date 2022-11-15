@@ -1,0 +1,106 @@
+@import "src/styles/_variables.scss";
+.form-input {
+  position: relative;
+  height: auto;
+  padding: 0px 7px 0px 0px;
+  border-bottom: 1px solid $_hover;
+  .clear {
+    clear: both;
+    float: none;
+  }
+  .line {
+    border-bottom: 1px solid $_hover;
+  }
+  .action-right {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    position: absolute;
+    right: 0;
+    top: 10px;
+    padding: 6px;
+    cursor: pointer;
+    transform: rotate(45deg);
+    &:hover {
+      background-color: $_hover;
+    }
+    img {
+      width: 18px;
+    }
+  }
+
+  .data-row {
+    position: relative;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    display: table;
+    width: 100%;
+    margin-top: 5px;
+    .data-box {
+      width: 23%;
+      float: left;
+      .data-value {
+        padding: 3px 1px;
+        font-size: 14px;
+        color: $_subtext;
+      }
+      &:first-child {
+        width: 25%;
+      }
+      &:nth-child(2) {
+        width: 25%;
+      }
+      &:nth-child(3) {
+        width: 25%;
+      }
+      .label {
+        font-size: 12px;
+        color: $_subtext;
+        position: relative;
+        margin-bottom: 5px;
+        .i_icon {
+          font-size: 16px;
+          display: inline-block;
+          position: relative;
+          width: 15px;
+          height: 12px;
+          cursor: pointer;
+          .i_text {
+            transform: rotate(90deg);
+            position: absolute;
+            left: 5px;
+            top: -2px;
+          }
+        }
+        .smalldd {
+          position: absolute;
+          top: 25px;
+          right: 0;
+          .items {
+            width: 70px;
+            background: #fff;
+            border: 1px solid #eee;
+            .item {
+              padding: 3px 5px;
+              font-size: 10px;
+              color: $_subtext;
+              border-bottom: 1px solid $_hover;
+              cursor: pointer;
+              &:hover {
+                background: $_hover;
+              }
+            }
+          }
+        }
+      }
+      input {
+        border: 0;
+        background: transparent;
+        color: $_maintext;
+        font-size: 16px;
+        outline: none;
+        width: 100%;
+      }
+    }
+  }
+}

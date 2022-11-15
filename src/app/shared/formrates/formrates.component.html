@@ -1,0 +1,67 @@
+<div class="form-input error">
+  <div class="data-row">
+    <div class="data-box-container">
+      <div class="data-box">
+        <div class="label">From</div>
+        <input
+          type="text"
+          appNumberOnly
+          [numberOnly]="numberOnly"
+          placeholder="From"
+          [(ngModel)]="startHour"
+          (change)="updateTotal($event)"
+        />
+      </div>
+      <div class="data-box">
+        <div class="label">To</div>
+        <input
+          type="text"
+          appNumberOnly
+          [numberOnly]="numberOnly"
+          placeholder="To"
+          [(ngModel)]="endHour"
+          (change)="updateTotal($event)"
+        />
+      </div>
+      <div class="data-box" [ngStyle]="{ 'flex-basis': '22%' }">
+        <div class="label">Hourly Rate (₹)</div>
+        <input
+          type="text"
+          appNumberOnly
+          [numberOnly]="numberOnly"
+          placeholder="Hourly Rate"
+          [(ngModel)]="rate"
+          (change)="updateTotal()"
+        />
+      </div>
+      <div class="data-box">
+        <div class="label">Tax(%)</div>
+        <input
+          type="text"
+          appNumberOnly
+          [numberOnly]="numberOnly"
+          placeholder="Tax"
+          [(ngModel)]="tax"
+          (change)="updateTotal()"
+        />
+      </div>
+      <div class="data-box">
+        <div class="label">Total (₹)</div>
+        <input
+          type="text"
+          appNumberOnly
+          [numberOnly]="numberOnly"
+          readonly
+          placeholder="Total"
+          [(ngModel)]="total"
+        />
+      </div>
+    </div>
+    <div class="drag-btn" *ngIf="!hideDelete">
+      <img src="/assets/images/icons/dragNdrop.svg" alt="" />
+    </div>
+    <div class="action-right" (click)="deleteRate.emit()" *ngIf="!hideDelete">
+      <img src="/assets/images/icons/icon_plus.png" alt="" />
+    </div>
+  </div>
+</div>

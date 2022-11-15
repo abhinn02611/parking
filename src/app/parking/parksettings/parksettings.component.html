@@ -1,0 +1,29 @@
+<div class="sistem-container">
+
+    <!-- <div class="sistem-header">
+        <sistem-headerparking></sistem-headerparking>
+    </div> -->
+    <div class="sistem-content">
+        <div class="sistem-main">
+            <div class="details-container">
+                <div class="details-left">
+                    <div class="leftbox" #leftcontent>
+                        <app-parksettings-left (actionEdit)="openAddNewModel(true)" [activePath]="activePath" (actionNavigate)="navigateTo($event)"></app-parksettings-left>
+                    </div>
+                </div>
+                <div class="details-right">
+                    <div class="details-right-inner">
+                        <app-parksettings-park-dashboard *ngIf="activePath == path.PARKING_SETTING_DASHBOARD"></app-parksettings-park-dashboard>
+                        <app-parksettings-rates *ngIf="activePath == path.PARKING_SETTING_RATE"></app-parksettings-rates>
+                        <app-parksettings-passes *ngIf="activePath == path.PARKING_SETTING_PASS"></app-parksettings-passes>
+                        <app-parksettings-teams *ngIf="activePath == path.PARKING_SETTING_TEAM"></app-parksettings-teams>
+                        <app-parksettings-parking-rate *ngIf="activePath == path.PARKING_RATE"></app-parksettings-parking-rate>
+                        <app-parksettings-manageParking *ngIf="activePath == path.PARKING_MANAGE"></app-parksettings-manageParking>
+                        <app-parksettings-vendor *ngIf="activePath == path.PARKING_VENDOR"></app-parksettings-vendor>
+                        <app-park-vendors *ngIf="activePath == path.PARKING_SETTING_VENDORS"></app-park-vendors>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

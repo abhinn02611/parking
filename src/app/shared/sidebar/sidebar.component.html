@@ -1,0 +1,24 @@
+<div class="sidebar open">
+  <div class="width-container">
+    <div class="menu-switch" (click)="switchMenu()">
+      <img src="/assets/images/icons/menuldpi.svg" alt="" />
+    </div>
+    <ng-container *ngFor="let m of menus">
+      <a
+        class="menus"
+        [routerLink]="m.route"
+        [ngClass]="{ selected: m.selected == true }"
+      >
+        <div
+          class="left tooltip"
+          [attr.data-tooltip]="changeTitle(m.title)"
+          [ngStyle]="{ background: m.color }"
+        >
+          <img src="{{ m.icon }}" alt="" />
+        </div>
+        <div class="right">{{ changeTitle(m.title) }}</div>
+        <div class="bar" [ngStyle]="{ background: m.color }"></div>
+      </a>
+    </ng-container>
+  </div>
+</div>

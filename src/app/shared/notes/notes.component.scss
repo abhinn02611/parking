@@ -1,0 +1,81 @@
+@import "src/styles/_variables.scss";
+.section-header {
+  margin-bottom: 16px;
+  display: table;
+  width: 100%;
+
+  .heading {
+    color: $_maintext;
+    float: left;
+    width: auto;
+  }
+  .action {
+    color: $_red;
+    float: right;
+    width: auto;
+    padding-top: 1px;
+    cursor: pointer;
+  }
+  .loader {
+    color: $_subtext;
+    float: right;
+    width: auto;
+    padding-top: 2px;
+  }
+}
+.subheading {
+  color: $_maintext;
+}
+.textarea {
+  textarea {
+    border: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    min-height: 200px;
+  }
+}
+
+.notes {
+  margin-bottom: 16px;
+  display: inline-block;
+  border-bottom: 1px solid #eee;
+  width: 100%;
+  .notes-inner{
+    margin: 0 -10px;
+  }
+  .note-con {
+    width: 50%;
+    float: left;
+    margin-bottom: 10px;
+    height: 70px;
+    padding: 10px;
+  }
+  .note {
+    position: relative;
+    border-bottom: 1px solid #f4f4f4;
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 10px;
+    &.noborder {
+      border-bottom: 0;
+    }
+    .content {
+      padding-right: 20px;
+      height: 60px;
+      .name {
+        color: $_maintext;
+        margin-bottom: 4px;
+      }
+      .info {
+        margin-right: 30px;
+        color: $_subtext;
+        display: table;
+        width: 100%;
+        span {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

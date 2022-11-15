@@ -1,0 +1,11 @@
+@import "src/styles/_variables.scss";
+.total-text{
+  font-size: 18px;
+  color: $_maintext;
+  font-weight: 600;
+  margin-top: 6px;
+  ::ngdeep .dim{
+    font-weight: 400;
+    display: inline;
+  }
+}

@@ -1,0 +1,53 @@
+<form-model [labelCancel]="'Cancel'" [cancelPosition]="'bottom'" (actionCancel)="onCancel()" [labelPrimary]="'Save'"
+  (actionPrimary)="saveCategories()" [class]="'mini'" [loaderPrimary]="loaderPrimary" [confirm]="confirm"
+  [confirmParam]="{title: 'You have updated the existing types as well!', content: 'Updating the existing types will make impact on all the related products.', 
+note: 'You can not undo the change.', label: 'Delete Type'}">
+  <div class="form-addcategory">
+    <div class="subheading">Add/Update Types - {{categoryName}}</div>
+    <div class="mt-10"></div>
+    <div class="form-row" *ngFor="let new of newTypes;  let isLast = last; index as i">
+      <div class="form-col-12">
+        <div class="ml-0">
+          <div class="right-block">
+            <div class="action-right" (click)="addMoreType()" *ngIf="isLast">
+              <img src="/assets/images/icons/icon_plus.png" alt="">
+            </div>
+            <div class="action-right" (click)="removeType(i)" *ngIf="!isLast">
+              <img src="/assets/images/icons/icon_minus.png" alt="">
+            </div>
+          </div>
+          <div class="left-block">
+            <form-input [label]="'Add New'" [(inputModel)]="new.title"></form-input>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="extrasmalltext mt-10">Existing list</div>
+    <div *ngFor="let item of types; index as i;">
+      <ul class="existing-list mt-5" [ngClass]="{editmode: editId == item.value}">
+        <li>
+          <div class="el-title smalltext">{{item.label}}</div>
+          <div class="el-action">
+            <div class="remove" (click)="removeExistingType(i)">
+              <img src="/assets/images/icons/deleteldpi.svg" />
+            </div>
+            <div class="remove" (click)="editExistingCategory(item.value, item.label)">
+              <img src="/assets/images/icons/editldpi.svg" />
+            </div>
+          </div>
+        </li>   
+        <li class="editmode">
+          <div class="el-title smalltext">
+            <input type="text" [(ngModel)]="editTitle" class="smalltext" />
+          </div>
+          <div class="el-action">
+            <div class="check" (click)="updateExistingCategory(i)">
+              <img src="/assets/images/icons/checkmark.png" />
+            </div>
+  
+          </div>
+        </li> 
+      </ul>
+    </div>
+  </div>
+</form-model>

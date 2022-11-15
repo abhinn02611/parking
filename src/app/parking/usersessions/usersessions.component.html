@@ -1,0 +1,167 @@
+<div class="sistem-content">
+  <div class="sistem-main">
+    <sistem-breadcrumb
+      *ngIf="role === 'admin'"
+      [(links)]="linksBreadcrumb"
+    ></sistem-breadcrumb>
+    <div class="header">
+      <div class="header-container">
+        <div (click)="backNavigation()" class="img-container">
+          <img src="/assets/images/icons/left-arrow.svg" alt="" />
+        </div>
+        <list-header [heading]="heading" [showAddNewButton]="false" [tags]="tags" [actions]="activeActions"
+          (actionGroup)="onAction($event)" [showToggleInfoButton]="false" [ngStyle]="{padding: 0}">
+        </list-header>
+      </div>
+
+    </div>
+
+    <div class="filter" (scroll)="onScroll()" [ngClass]="headerFixed ? 'fixed': 'nofixed'">
+      <app-filter
+        [filter]="filter"
+        (onFilterChange)="handleClearAllFilter($event)"
+      ></app-filter>
+    </div>
+    <div class="sistem-split open" [ngClass]="{ open: infoOpen }">
+      <div class="sistem-split-left">
+        <sistem-pageloader *ngIf="loading"></sistem-pageloader>
+        <div class="contacts" *ngIf="!loading">
+          <ul class="headings">
+            <li></li>
+            <!-- <li>
+              <div class="checkbox" [ngClass]="{'checked': selectall}" (click)=selectallItem()></div>
+            </li> -->
+            <li class="paragraph">TYPE</li>
+            <li class="paragraph">VEHICLE NO.</li>
+            <li class="paragraph">BOOKING</li>
+            <li class="paragraph" (click)="updateOrderBy('inTime')">
+              IN Time
+              <div class="order-type" *ngIf="'inTime' == orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+
+            <li class="paragraph" (click)="updateOrderBy('outTime')">
+              OUT TIME
+              <div class="order-type" *ngIf="'outTime' == orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+
+            <li class="paragraph">ADVANCE</li>
+            <li class="paragraph">TOTAL TIME</li>
+            <li class="paragraph">COLLECTION</li>
+            <li class="paragraph">REFUND</li>
+            <li class="paragraph">TOTAL</li>
+            <li class="paragraph" (click)="updateOrderBy('paymentMode')">
+              MODE
+              <div class="order-type" *ngIf="'paymentMode' == orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+
+            <li class="paragraph">REFRENCE</li>
+            <li class="paragraph">PARKING</li>
+          </ul>
+          <ng-container
+            style="height: 50px; width: 100%"
+            *ngFor="let session of sessionListView; let index = index"
+          >
+            <ul
+              class="content"
+              [ngClass]="{ selected: isSelected(session['id']) }"
+              style="cursor: pointer"
+              (click)="openSessionDetails(session['id'])"
+            >
+              <li>{{ (filter.page - 1) * filter.limit + index + 1 }}</li>
+              <!-- <li (click)=selectItem($event,session)>
+                <div class="checkbox" [ngClass]="{'checked': isSelected(session['id'])}"></div>
+              </li> -->
+              <li class="vehiclethumb">
+                <div
+                  class="vehicleimage"
+                  [ngStyle]="{
+                    'background-color': session['vehicle']['bgcolor']
+                  }"
+                >
+                  <!-- <img [src]="session['vehicle']['imgSrc']" alt="" /> -->
+                  <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="-7 -10 80 80"
+                    [ngStyle]="{ fill: session['vehicle']['color']}">
+                    <ng-container *ngFor="let path of getPaths(session['vehicle']['vehicleName'])">
+                      <path [attr.d]="path" />
+                    </ng-container>
+                  </svg>
+                </div>
+              </li>
+              <li class="highlight">{{ session.vehicle?.regNumber }}</li>
+              <!-- <li class="paragraph">{{session['scheduleInTime'] | dateAgo}}</li> -->
+              <li class="paragraph">
+                {{
+                  formatDateDiff(
+                    session["scheduleInTime"],
+                    session["scheduleOutTime"]
+                  )
+                }}
+              </li>
+              <li class="paragraph">{{ formatDate(session["inTime"]) }}</li>
+              <li class="paragraph">{{ formatDate(session["outTime"]) }}</li>
+              <!-- <li class="paragraph">{{session['total']?'₹'+session['total']:'-'}}</li> -->
+              <li class="paragraph">
+                {{session.transactions?.[0]?.status=='success'? "₹" + session.transactions?.[0].amount + "/-" :'-'}}
+              </li>
+              <li class="paragraph">
+                {{ getTotalTime(session["inTime"], session["outTime"]) }}
+              </li>
+              <li class="paragraph">
+                {{ session["total"] ? "₹" + session["total"] + "/-" : "-" }}
+              </li>
+              <li class="paragraph">
+                {{session.transactions?.[1]?.status=='success'? "₹" + session.transactions?.[1].amount + "/-" :'-'}}
+              </li>
+              <li class="paragraph">
+                {{
+                  calculateTotalAmount(session) == 0
+                    ? "-"
+                    : "₹" + calculateTotalAmount(session) + "/-"
+                }}
+              </li>
+              <li class="paragraph">
+                {{ session["paymentMode"] ? session["paymentMode"] : "-" }}
+              </li>
+              <li class="paragraph">
+                {{ session["remarks"] ? session["remarks"] : "-" }}
+              </li>
+              <li class="paragraph">{{session['parking']['name']}}</li>
+              <li class="paragraph" style="display: flex">
+                <list-user [user]="session.inBy"></list-user>
+                <list-user
+                  [user]="session.outBy"
+                  *ngIf="session.inById != session.outById"
+                ></list-user>
+              </li>
+            </ul>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="tags">
+        <div class="tag smalltext" *ngIf="tags[0]">Total: {{ tags[0] }}</div>
+      </div>
+      <app-filter-pagination
+        [filter]="filter"
+        (onFilterChange)="applyFilter($event)"
+      ></app-filter-pagination>
+    </div>
+  </div>
+</div>
+
+<app-parking-share
+  *ngIf="shareModelOpen"
+  (actionPrimary)="cancelShare()"
+  [parking_id]="parking_id"
+  (actionCancel)="cancelShare()"
+></app-parking-share>

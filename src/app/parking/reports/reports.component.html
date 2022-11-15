@@ -1,0 +1,159 @@
+<div class="sistem-content reports">
+  <div class="sistem-main">
+    <!-- <div class="header">
+            <div class="left">
+                <div class="heading mainheading">Reports</div>
+                <div class="tags">
+                    <ng-container *ngFor="let tag of tags">
+                        <div class="tag smalltext" *ngIf="tag">{{tag}}</div>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="right"></div>
+        </div> -->
+    <div class="report-welcome">
+      <div class="inner">
+        <p>Welcome to {{ currentParking?.name }}</p>
+        <span>Today {{ getCurrentDate() }} . Viewing as {{ username }} </span>
+      </div>
+      <div class="sub-inner">
+        <div class="sub-inner-date">
+          <span>Report date</span>
+          <p>{{ getCurrentDateTime() }}</p>
+        </div>
+        <div class="sub-inner-icon" (click)="refresh()">
+          <img src="/assets/images/icons/refresh.svg" />
+        </div>
+      </div>
+    </div>
+    <!-- <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <app-parking-chart
+            [vParkingDetails]="vendorParkingDetails"
+          ></app-parking-chart>
+          <app-pass-created
+            [$passesCreated]="$Passes"
+            (actionPassesCreated)="getParkingPasses($event)"
+          ></app-pass-created>
+          <app-pass-revenue
+            [$pRevenue]="$passesRevenue"
+            (actionParkingPasses)="getPassesRevenue($event)"
+          ></app-pass-revenue>
+          <app-booking
+            [$pBooking]="$parkingBooking"
+            [pHours]="parkingHours"
+            (actionBooking)="getVehicleBooking($event)"
+          ></app-booking>
+        </div>
+        <div class="col-8">
+          <app-revenue-by-hours
+            [$revenueHour]="$revenueByHour"
+            [pDays]="parkingDays"
+            [pHours]="parkingHours"
+            (actionRevenue)="getFilterByRevenue($event)"
+            (actionWeeklyAmount)="getParkingMonthAmount($event)"
+            (actionDayAmount)="getParkingDayAmount($event)"
+          ></app-revenue-by-hours>
+
+          <div class="row">
+            <div class="col-6">
+              <app-total-amount-closed
+                [$parkRevenue]="$parkingRevenue"
+                (actionParkingRevenue)="getParkingRevenue($event)"
+              ></app-total-amount-closed>
+              <app-top-vehicle-category
+                [$pCategory]="$parkingCategory"
+                (actionCategory)="getVehicleCategory($event)"
+              ></app-top-vehicle-category>
+            </div>
+            <div class="col-6">
+              <app-activity-by-time-of-the-day></app-activity-by-time-of-the-day>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> -->
+    <div class="report-grid-conainer">
+      <div class="parking-chart overflow-hidden">
+        <app-parking-chart
+          [vParkingDetails]="vendorParkingDetails"
+        ></app-parking-chart>
+      </div>
+
+      <div class="total-amount-closed-value overflow-hidden">
+        <app-total-amount-closed-value
+          [$revenueHour]="$revenueByHour"
+          [pDays]="parkingDays"
+          [pHours]="parkingHours"
+          [pMonthcollection]="parkingMonthlycollection"
+          [pdayscollection]="parkingDayCollection"
+          (actionWeeklyAmount)="
+            getParkingOverview($event.selectedValue, $event.selctedType)
+          "
+          (actionDayAmount)="
+            getParkingOverview($event.selectedValue, $event.selctedType)
+          "
+        >
+        </app-total-amount-closed-value>
+      </div>
+
+      <div class="pass-created overflow-hidden">
+        <app-pass-created
+          [$passesCreated]="$Passes"
+          (actionPassesCreated)="getParkingPasses($event)"
+        ></app-pass-created>
+      </div>
+
+      <div class="revenue-by-hour overflow-hidden">
+        <app-revenue-by-hours
+          [$revenueHour]="$revenueByHour"
+          [pDays]="parkingDays"
+          [pHours]="parkingHours"
+          (actionRevenue)="getFilterByRevenue($event)"
+        ></app-revenue-by-hours>
+      </div>
+
+      <div class="pass-revenue overflow-hidden">
+        <app-pass-revenue
+          [$pRevenue]="$passesRevenue"
+          (actionParkingPasses)="getPassesRevenue($event)"
+        ></app-pass-revenue>
+      </div>
+
+      <div class="total-amount-closed overflow-hidden">
+        <app-total-amount-closed
+          [$parkRevenue]="$parkingRevenue"
+          (actionParkingRevenue)="getParkingRevenue($event)"
+        ></app-total-amount-closed>
+      </div>
+
+      <div class="activity-by-time-of-the-day overflow-hidden">
+        <app-activity-by-time-of-the-day></app-activity-by-time-of-the-day>
+      </div>
+
+      <div class="booking overflow-hidden">
+        <app-booking
+          [$pBooking]="$parkingBooking"
+          [pHours]="parkingHours"
+          (actionBooking)="getVehicleBooking($event)"
+        ></app-booking>
+      </div>
+
+      <div class="total-amount-closed-by-payment overflow-hidden">
+        <app-total-amount-closed-payment
+          [$pBooking]="$parkingBooking"
+          [pHours]="parkingHours"
+          (actionBooking)="getVehicleBooking($event)"
+        ></app-total-amount-closed-payment>
+      </div>
+
+      <div class="top-vehicle-category overflow-hidden">
+        <app-top-vehicle-category
+          [$pCategory]="$parkingCategory"
+          (actionCategory)="getVehicleCategory($event)"
+        ></app-top-vehicle-category>
+      </div>
+    </div>
+  </div>
+</div>

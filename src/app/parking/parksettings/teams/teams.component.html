@@ -1,0 +1,140 @@
+<div class="right-inner">
+    <div class="page-heading">Roles & Users</div>
+    <div class="page-content">People & Roles in {{parkingName}} and manage them across Parking Sistem Apps.</div>
+    <div class="heading">Teams</div>
+    <div class="description">Manage team members</div>
+    <div class="data-box">
+        <div class="data-box-row open">
+            <div class="header">
+                <div class="header-inner">
+                    <div class="logo">
+                        <img src="/assets/images/icons/productldpi.svg" />
+                    </div>
+                    <div class="right-part">
+                        <div class="heading">Teams</div>
+                        <div class="sub-heading tags">
+                            <ng-container *ngFor="let tag of tags">
+                                <div class="tag smalltext" *ngIf="tag">{{tag}}</div>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <div class="right">
+                        <div class="groupactions" style="display: none">
+                            <div class="groupaction">
+                                <div class="img">
+                                    <img src="/assets/images/icons/editldpi.svg" />
+                                </div>
+                            </div>
+                            <div class="groupaction">
+                                <div class="img">
+                                    <img src="/assets/images/icons/clone_1ldpi.svg" />
+                                </div>
+                            </div>
+                            <div class="groupaction">
+                                <div class="img">
+                                    <img src="/assets/images/icons/deleteldpi.svg" style="width: 20px" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add" (click)="openAddNewModel()">
+                            <img src="/assets/images/icons/icon_plus_white.png" alt="">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="data-content ">
+                <div class="line-header"></div>
+                <div class="data-list">
+                    <ul class="headings">
+                        <li></li>
+                        <li class="paragraph" (click)="updateOrderBy('firstName')">
+                            FIRST NAME
+                            <div class="order-type" *ngIf="'firstName'==orderBy">
+                                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+                            </div>
+                        </li>
+                        <li class="paragraph" (click)="updateOrderBy('lastName')">
+                            LAST NAME
+                            <div class="order-type" *ngIf="'lastName'==orderBy">
+                                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+                            </div>
+                        </li>
+                        <li class="paragraph" (click)="updateOrderBy('email')">
+                            EMAIL
+                            <div class="order-type" *ngIf="'email'==orderBy">
+                                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+                            </div>
+                        </li>
+                        <li class="paragraph" (click)="updateOrderBy('phone')">
+                            PHONE
+                            <div class="order-type" *ngIf="'phone'==orderBy">
+                                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+                            </div>
+                        </li>
+                        <li class="paragraph" (click)="updateOrderBy('gender')">
+                            GENDER
+                            <div class="order-type" *ngIf="'gender'==orderBy">
+                                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+                            </div>
+                        </li>
+                        <li class="paragraph" (click)="updateOrderBy('type')">
+                            ROLE
+                            <div class="order-type" *ngIf="'type'==orderBy">
+                                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+                            </div>
+                        </li>
+                        <li class="paragraph" (click)="updateOrderBy('status')">
+                            STATUS
+                            <div class="order-type" *ngIf="'status'==orderBy">
+                                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+                            </div>
+                        </li>
+                        <li></li>
+                    </ul>
+                    <ng-container *ngFor="let session of userList | orderBy : orderBy: reverse; let index = index">
+                        <div class="rowouter">
+                            <ul class="content">
+                                <li>
+                                    <list-user [user]="session"></list-user>
+                                </li>
+                                <li class="highlight">{{session.firstName}}</li>
+                                <li class="highlight">{{session.lastName}}</li>
+                                <li class="paragraph">{{session.email}}</li>
+                                <li class="paragraph">{{session.phone}}</li>
+                                <li class="paragraph">{{session.gender}}</li>
+                                <li class="paragraph">{{session.type}}</li>
+                                <li class="paragraph">{{session.status===true?'Active':'Inactive'}}</li>
+                                <!-- <li class="paragraph">
+                        <img src="/assets/images/icons/checkmark.png" class="img-checkmark"  />
+                      </li>
+                    -->
+                                <li>
+                                    <div class="action">
+                                        <list-action [menuConfig]="getMenuConfig(session)">
+                                        </list-action>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </ng-container>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<app-add-operator [editId]="editId" [operator]="operator" *ngIf="addOperatorModelOpen" (actionPrimary)="cancelAddOperator(true)" [parking_id]="parking_id" (actionCancel)="cancelAddOperator()"></app-add-operator>

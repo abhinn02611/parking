@@ -1,0 +1,17 @@
+<div class="form-input error" [ngClass]="{open: inputOpen}">
+  
+  <input type="text" readonly  class="form-control" placeholder="{{placeholder}}" value="{{formatTime(selected)}}" (click)="openPicker()" />
+  <div class="label">{{label}}</div>
+  <div class="dp-container" *ngIf="dpOpen">
+    <!-- <dp-day-calendar [mode]="'time'" mode="'time"  [config]="config"></dp-day-calendar>   -->
+    <div>
+      <dp-time-select [(ngModel)]="selected" [config]="config"></dp-time-select>
+    </div>
+   
+    <div class="clear"></div>
+    <div>
+      <div class="dp-ok" (click)="onOk()">Ok</div>
+    </div>
+    
+  </div>
+</div>

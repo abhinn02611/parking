@@ -1,0 +1,58 @@
+<div class="sistem-main">
+  <div class="header">
+    <div class="header">
+      <list-header [heading]="heading" (actionAddNew)="openAddNewModel()" (actionInfoToggle)="toggleInfo()"
+        [tags]="tags"></list-header>
+    </div>
+  </div>
+
+  <div class="tasks-header">
+    <div class="left">
+      <div class="task-list">
+        <div class="task-group">
+
+          <div class="tasks">
+            <div *ngFor="let taskDate of getKeys(sortedTasks); let index = index">
+              <div class="date" *ngIf="isDateDifferent(taskDate)">
+                {{todayTomorrow(taskDate)}}</div>
+              <div *ngFor="let task of sortedTasks[taskDate]; let index = index" (click)="openTask(task.sales_task_id)">
+                
+                <div class="task" [ngClass]="{completed: task.sales_task_status == 'Completed'}">
+                  <div class="left">
+                    <div class="circlebox green"
+                      *ngIf="task.sales_task_type == 'visit' || task.sales_task_type == 'task' || task.sales_task_type == 'Visit' || task.sales_task_type == ''">
+                      <img src="/assets/images/icons/visit_1ldpi.svg" />
+                    </div>
+                    <div class="circlebox yellow"
+                      *ngIf="task.sales_task_type == 'call' || task.sales_task_type == 'Call'">
+                      <img src="/assets/images/icons/call_1ldpi.svg" />
+                    </div>
+                    <div class="circlebox blue"
+                      *ngIf="task.sales_task_type == 'demo' || task.sales_task_type == 'Demo'">
+                      <img src="/assets/images/icons/demoldpi.svg" />
+                    </div>
+                  </div>
+                  <div class="right">
+                    <div class="title">{{task.sales_task_subject}}</div>
+                    <div class="desc">{{task.store_name}}</div>
+                    <div class="date">{{formatDate(task.sales_task_due_date)}} by {{task.sales_task_owner}}</div>
+                    <div class="circlecheck" (click)="markCompleted($event, task.sales_task_id, index)"></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div class="calander-con" style="height:100%; overflow: initial">
+        <full-calendar #calendar defaultView="dayGridMonth" [options]="calendarOptions"></full-calendar>
+      </div>
+    </div>
+  </div>
+</div>
+<app-add-task *ngIf="addNewModelOpen" [editId]="editId" (actionSecondary)="cancelAddNew(true, true)"
+  (actionPrimary)="cancelAddNew(true)" (actionCancel)="cancelAddNew()"></app-add-task>

@@ -1,0 +1,38 @@
+<form-model [title]="editId === '' ? 'Add Operator' : 'Edit Operator'" [labelCancel]="'Cancel'" [cancelPosition]="'bottom'" (actionCancel)="onCancel()" [labelPrimary]="editId === '' ? 'Save' : 'Update'" (actionPrimary)="onPrimary()">
+    <div class="form-addproduct">
+        <div class="form-row">
+            <div class="form-col-6">
+                <form-input [label]="'First Name'" [(inputModel)]="formData.firstName"></form-input>
+            </div>
+            <div class="form-col-6">
+                <div class="pl-10">
+                    <form-input [label]="'Last Name'" [(inputModel)]="formData.lastName"></form-input>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-col-12">
+                <form-input [label]="'Email'" [isReadonly]="editId?true:false" [(inputModel)]="formData.email" [errorMessage]="emailError"></form-input>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-col-6">
+                <form-input [label]="'Phone'" [isReadonly]="editId?true:false" [(inputModel)]="formData.phone"></form-input>
+            </div>
+            <div class="form-col-6">
+                <div class="pl-10">
+                    <form-dropdown [label]="'Gender'" [value]="formData.genderLabel" (actionSelect)="actionGenderSelect($event)" [options]="[
+              { label: 'Male', value: 'male' },
+              { label: 'Female', value: 'female' }
+            ]">
+                    </form-dropdown>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-col-12">
+                <form-input [label]="'Password'" [(inputModel)]="formData.password"></form-input>
+            </div>
+        </div>
+    </div>
+</form-model>

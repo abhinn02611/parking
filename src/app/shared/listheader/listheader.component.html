@@ -1,0 +1,97 @@
+<div class="list-header">
+  <div class="backbutton" (click)="actionBack.emit()" *ngIf="showBackButton">
+    <img src="/assets/images/icons/left-arrow.svg" alt="" />
+  </div>
+  <div class="left">
+    <div class="heading mainheading">{{ heading }}</div>
+    <div class="tags">
+      <ng-container *ngFor="let tag of tags">
+        <div class="tag smalltext" *ngIf="tag">{{ tag }}</div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="right">
+    <div class="groupactions">
+      <div
+        class="groupaction sharebutton"
+        (click)="emitAction(ac.SHARE_BUTTON)"
+        *ngIf="shouldDisplayGroupAction(ac.SHARE_BUTTON)"
+      >
+        <div class="img">
+          <img src="/assets/images/icons/shareldpi.svg" />
+        </div>
+      </div>
+      <div
+        class="groupaction"
+        (click)="emitAction(ac.EDIT)"
+        *ngIf="shouldDisplayGroupAction(ac.EDIT)"
+      >
+        <div class="img">
+          <img src="/assets/images/icons/editldpi.svg" />
+        </div>
+      </div>
+      <div
+        class="groupaction"
+        (click)="emitAction(ac.COPY)"
+        *ngIf="shouldDisplayGroupAction(ac.COPY)"
+      >
+        <div class="img">
+          <img src="/assets/images/icons/clone_1ldpi.svg" />
+        </div>
+      </div>
+      <div
+        class="groupaction"
+        (click)="emitAction(ac.DELETE)"
+        *ngIf="shouldDisplayGroupAction(ac.DELETE)"
+      >
+        <div class="img">
+          <img src="/assets/images/icons/deleteldpi.svg" style="width: 20px" />
+        </div>
+      </div>
+      <div
+        class="groupaction"
+        [ngClass]="{ open: dropdownOpen }"
+        (click)="toggleDropdown($event)"
+        *ngIf="shouldDisplayGroupAction(ac.SHARE)"
+      >
+        <div class="overlay" (click)="toggleDropdown($event)"></div>
+        <div class="img">
+          <img
+            src="/assets/images/icons/followup2ldpi.svg"
+            style="width: 20px"
+          />
+        </div>
+        <div class="options-container">
+          <div class="options">
+            <ul>
+              <li
+                (click)="emitAction(ac.PDF)"
+                *ngIf="shouldDisplayGroupAction(ac.PDF)"
+              >
+                Export to PDF
+              </li>
+              <li
+                (click)="emitAction(ac.EMAIL)"
+                *ngIf="shouldDisplayGroupAction(ac.EMAIL)"
+              >
+                Send Email
+              </li>
+              <li
+                (click)="emitAction(ac.PRINT)"
+                *ngIf="shouldDisplayGroupAction(ac.PRINT)"
+              >
+                Print
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="info" (click)="toggleInfo()" *ngIf="showToggleInfoButton">
+      <img src="/assets/images/icons/infoalertldpi.svg" alt="" />
+    </div>
+    <div class="add" (click)="addNew()" *ngIf="showAddNewButton">
+      <img src="/assets/images/icons/icon_plus_white.png" alt="" />
+    </div>
+  </div>
+</div>

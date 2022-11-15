@@ -1,0 +1,71 @@
+<div class="section-header">
+  <div class="heading subheading">Contact Details</div>
+  <div class="action highlight" (click)="actionEdit.emit()">Edit</div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Company: </div>
+    <div class="value paragraph">{{order.store_name}}</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Contact Person: </div>
+    <div class="value paragraph">{{(order.st_contact_fname)?order.st_contact_fname + '' + order.st_contact_last_name:'NA'}}</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Phone: </div>
+    <div class="value paragraph">{{(order.store_phone)?order.store_phone:'NA'}}</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Phone (Desk): </div>
+    <div class="value paragraph">{{(order.store_fax.Desk)?order.store_fax.Desk:'NA'}}</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Phone (Other): </div>
+    <div class="value paragraph">{{(order.store_phone)?order.store_phone:'NA'}}</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Email: </div>
+    <div class="value paragraph">{{(order.store_email)?order.store_email:'NA'}}</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Address (Billing): </div>
+    <div class="value paragraph">{{getStoreAddress()}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Address (Shipping): </div>
+    <div class="value paragraph">{{getShipAddress()}}</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Created By: </div>
+    <div class="value paragraph">{{(order.sales_orders_create_by)?order.sales_orders_create_by:'NA'}} {{(order.sales_orders_date)?order.sales_orders_date:'NA'}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Last Modified By: </div>
+    <div class="value paragraph">{{(order.sales_orders_modify_by)?order.sales_orders_modify_by +' '+order.sales_orders_modify_date:'NA'}}</div>
+  </div>
+</div>

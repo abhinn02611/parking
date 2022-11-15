@@ -1,0 +1,60 @@
+@import "src/styles/_variables.scss";
+@import "~ng-zorro-antd/date-picker/style/index.min.css";
+
+.filter-pagination {
+  width: auto;
+  overflow: hidden;
+  display: flex;
+  justify-content: end;
+  // float: right;
+  .pagination-item {
+    float: left;
+    margin-left: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.text {
+      height: 34px;
+      padding: 0 4px;
+    }
+    &.circle {
+      width: 34px;
+      height: 34px;
+      text-align: center;
+      background: #f8f9fa;
+      border-radius: 17px;
+      img {
+        width: 15px;
+      }
+      input {
+        width: auto;
+        background: transparent;
+        border: none;
+        width: 34px;
+        text-align: center;
+        outline: none;
+        color: #b9c1cc;
+      }
+      &.last {
+        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -ms-transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+      }
+      &.action {
+        &:hover {
+          background: $_hover;
+          cursor: pointer;
+        }
+        &.disable {
+          background: transparent;
+          &:hover {
+            background: transparent;
+            cursor: default;
+          }
+        }
+      }
+    }
+  }
+}

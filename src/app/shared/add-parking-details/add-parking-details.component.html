@@ -1,0 +1,255 @@
+<form [formGroup]="myForm" (ngSubmit)="submit()">
+  <form-model
+    [title]="editId === '' ? 'Add New Parking' : 'Edit Parking'"
+    [labelCancel]="'Cancel'"
+    [cancelPosition]="'bottom'"
+    (actionCancel)="onCancel()"
+    [labelPrimary]="editId === '' ? 'Save' : 'Update'"
+    (actionPrimary)="onPrimary()"
+  >
+    <div class="parking-det">
+      <div class="park-attr">
+        <div style="margin: auto" class="form-row row">
+          <div class="form-col-6 border-bottom border-right">
+            <form-input
+              [label]="'Parking Name'"
+              [(inputModel)]="formData.name"
+            ></form-input>
+          </div>
+          <div class="form-col-6 border-bottom">
+            <app-select-drop-down
+              style="margin-top: 20px"
+              [label]="'Vehicle Type'"
+              [value]="
+                formData?.vehicleTypes && formData?.vehicleTypes?.length
+                  ? formData?.vehicleTypes
+                  : undefined
+              "
+              (actionSelect)="actionSelectDD($event)"
+              (actionRemove)="actionRemoveDD($event)"
+              [options]="typesList"
+            >
+            </app-select-drop-down>
+          </div>
+        </div>
+        <div style="margin: auto" class="form-row row">
+          <div class="form-col-6 parking-name border-bottom border-right">
+            <form-input
+              type="time"
+              [label]="'Operation from hour'"
+              [(inputModel)]="formData.openHour"
+            ></form-input>
+          </div>
+          <div class="form-col-6 border-bottom">
+            <form-input
+              type="time"
+              [label]="'Operation to hour'"
+              [(inputModel)]="formData.closeHour"
+            ></form-input>
+          </div>
+        </div>
+
+        <div style="margin: auto" class="form-row row">
+          <div class="form-col-6 border-bottom border-right">
+            <form-input
+              [label]="'Latitude'"
+              [type]="'number'"
+              [(inputModel)]="formData.lat"
+            ></form-input>
+          </div>
+          <div class="form-col-6 border-bottom">
+            <form-input
+              [label]="'Longitude'"
+              [type]="'number'"
+              [(inputModel)]="formData.lng"
+            ></form-input>
+          </div>
+        </div>
+
+        <div class="know-find">
+          <p>
+            Know how to find Lat/Lng of the parking.
+            <a>https://tinyurl.com/sistemapp</a>
+          </p>
+        </div>
+
+        <div class="border-bottom padding-6">
+          <form-textarea
+            [label]="'Address'"
+            [(inputModel)]="formData.address"
+          ></form-textarea>
+        </div>
+
+        <div style="margin: auto" class="form-row row border-bottom">
+          <div class="form-col-4 border-right padding-6">
+            <form-input
+              [label]="'City'"
+              [(inputModel)]="formData.city"
+            ></form-input>
+          </div>
+          <div class="form-col-4 border-right padding-6">
+            <form-input
+              [label]="'State'"
+              [(inputModel)]="formData.state"
+            ></form-input>
+          </div>
+          <div class="form-col-4 padding-6">
+            <form-input
+              [label]="'Country'"
+              [(inputModel)]="formData.country"
+            ></form-input>
+          </div>
+        </div>
+
+        <div class="border-bottom padding-6">
+          <form-textarea
+            [label]="'Description'"
+            [max]="700"
+            [(inputModel)]="formData.description"
+          ></form-textarea>
+        </div>
+
+        <div class="fac-park">
+          <p>Facilities</p>
+
+          <div style="margin: auto" class="form-row row mt-10">
+            <div
+              class="form-col-6 padding-left-0"
+              *ngFor="let item of facilitiesList; index as i"
+            >
+              <div class="form-group" (click)="onSelectFacilites(item, i)">
+                <input
+                  type="checkbox"
+                  [checked]="item.isSelected"
+                  [id]="'Online' + i"
+                />
+                <label for="Online">
+                  <img
+                    [src]="getFacilitiesImage(item.title)"
+                    [alt]="item.title"
+                  />
+                  {{ item.title | titlecase }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-20">
+          <p *ngIf="formData?.vehicleTypes?.length > 0">Add Vehicle Capacity</p>
+
+          <div style="margin: auto" class="form-row row">
+            <div
+              class="form-col-4 padding-6 border-bottom"
+              [ngClass]="{
+                'border-right': i !== formData.vehicleTypes.length - 1
+              }"
+              *ngFor="let item of formData.vehicleTypes; index as i"
+            >
+              <form-input
+                [type]="'number'"
+                [label]="item.label || item.name"
+                [(inputModel)]="item.capacity"
+              ></form-input>
+            </div>
+          </div>
+        </div>
+
+        <div [ngClass]="{ 'mt-20': formData?.vehicleTypes?.length > 0 }">
+          <!-- <p class="price-main">Images & Videos</p>
+          <div class="form-group image-upload mt-20 mb-20">
+            <label for="file-input">
+              <img
+                height="70"
+                width="70"
+                src="/assets/images/icons/cameraldpi.svg"
+                style="pointer-events: none"
+              />
+            </label>
+
+            <input
+              id="file-input"
+              type="file"
+              formControlName="file"
+              type="file"
+              class="form-control"
+              multiple=""
+              (change)="onFileChange($event)"
+            />
+
+            <div
+              *ngIf="f.file.touched && f.file.invalid"
+              class="alert alert-danger"
+            >
+              <div *ngIf="f.file.errors && f.file.errors.required">
+                File is required.
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="upload-images"
+            *ngFor="let url of base64Images; let i = index"
+          >
+            <img
+              [src]="url"
+              height="70px"
+              width="70px"
+              style="margin: 5px 5px 5px 0px; border-radius: 4px"
+            />
+            <br />
+            <img
+              class="close plus-cross"
+              (click)="onRemoveImage(url, i)"
+              src="/assets/images/icons/icon_plus.png"
+            />
+          </div> -->
+
+          <div class="form-input open">
+            <div class="label">Images & Videos</div>
+            <div class="uploader-container">
+              <div class="upload-controller" *ngFor="let item of config">
+                <div
+                  *ngIf="item.status === 0"
+                  class="single-upload"
+                  appDragDropFileUpload
+                  (fileDropped)="uploadFile($event, item.index)"
+                >
+                  <img src="/assets/images/icons/cameraldpi.svg" />
+                  <div class="file-selector">
+                    <!-- <div class="filedrag" [ngClass]="{droppeble: droppeble}" >
+
+              </div> -->
+                    <input
+                      type="file"
+                      class="fileselect"
+                      name="fileselect"
+                      formControlName="file"
+                      (change)="onFileChange($event, item.url)"
+                    />
+                  </div>
+                </div>
+                <div *ngIf="item.status === 1" class="file-upload-loader">
+                  <!-- <img src="/assets/images/loader_mini_red.png" /> -->
+                </div>
+                <div *ngIf="item.status === 2" class="file-upload-preview">
+                  <img class="preview" src="{{ item.url }}" />
+                  <div class="close" (click)="onRemoveImage(item, item.url)">
+                    <img src="/assets/images/icons/closeldpi_red.svg" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clear"></div>
+
+        <!-- <button class="btn btn-primary" type="submit">Submit</button> -->
+        <div class="image-des">
+          Upload or drop you images.Images shouldn't be more then 40kb
+          large,ideal images size is 400/400 px.
+        </div>
+      </div>
+    </div>
+  </form-model>
+</form>

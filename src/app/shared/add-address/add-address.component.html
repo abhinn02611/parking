@@ -1,0 +1,36 @@
+<form-model [title]="'Add Address'" [labelCancel]="'Cancel'" [cancelPosition]="'bottom'" (actionCancel)="onCancel()"
+  [labelPrimary]="'Save'" [class]="'mini'" (actionPrimary)="onPrimary()">
+  <div class="form-addproduct">
+    <div class="form-row">
+      <div class="form-col-12">
+        <form-input [label]="'Pincode'" [(inputModel)]="address.pin" [numberOnly]="true"></form-input>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-12">
+        <form-input [label]="'Street & Locality'" [(inputModel)]="address.address"></form-input>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-12">
+        <form-input [label]="'City'" [(inputModel)]="address.city"></form-input>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-12">
+        <form-input [label]="'State'" [(inputModel)]="address.state"></form-input>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-12">
+        <form-input [label]="'Country'" [(inputModel)]="address.country"></form-input>
+      </div>
+    </div>
+    <div class="subheading mt-10 mb-5">Geo Location</div>
+    <div class="form-row">
+      <div class="form-col-12">
+        <latlong-picker [address]="finalAddress" (actionChange)="updateLatLong($event)" [latitude]="address.lat" [longitude]="address.long"></latlong-picker>
+      </div>
+    </div>
+  </div>
+</form-model>

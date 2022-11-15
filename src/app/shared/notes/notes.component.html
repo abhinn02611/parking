@@ -1,0 +1,30 @@
+<div class="section-header">
+  <div class="heading subheading">Notes ({{data.length}})</div>
+  <div class="action highlight" (click)="viewAll()">View All</div>
+</div>
+
+<div class="notes">
+  <div class="notes-inner">
+    <div class="note-con" *ngFor="let item of data | slice:0:4; let index = index;">
+      <div class="note" (click)="openNote(item)"  [ngClass]="{noborder: index == 2 || index == 3  || data.length < 3}">
+        <div class="content">
+          <div class="name highlight two-lines"> {{item.comment_desc}}</div>
+          <div class="info smalltext">on {{item.comment_date}} by <span>{{item.comment_by}}</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<form-model *ngIf="modalOpen" [labelCancel]="'Cancel'" [cancelPosition]="'bottom'" (actionCancel)="onCancel()" [labelPrimary]="editMode?'Update':'Save'"
+  (actiolp,nPrimary)="saveNote()" [class]="'mini'" [loaderPrimary]="loaderPrimary" [confirm]="confirm" [confirm]="false"
+  (actionSecondary)="saveNoteWithNew()" [labelSecondary]="editMode?'':'Save & Add Another'" [height]="'100'"
+  [confirmParam]="{title: 'You have updated the existing category as well!', content: 'Updating the existing category will make impact on all the related products.', 
+note: 'You can not undo the change.', label: 'Delete Category'}">
+  <div class="form-addcategory">
+    <div class="subheading">{{editMode?'Edit':'Add'}} Notes</div>
+    <div class="mt-10"></div>
+    <div class="textarea">
+      <textarea placeholder="Start writing..." [(ngModel)]="noteContent"></textarea>
+    </div>
+  </div>
+</form-model>

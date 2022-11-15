@@ -1,0 +1,42 @@
+@import "src/styles/_variables.scss";
+.form-addproduct {
+  padding-bottom: 10px;
+  .form-row {
+    width: 100%;
+    display: table;
+    border-bottom: 1px solid #eee;
+    .form-col-3 {
+      width: 25%;
+      float: left;
+    }
+    .form-col-6 {
+      width: 50%;
+      float: left;
+    }
+    .form-col-9 {
+      width: 75%;
+      float: left;
+    }
+    .form-col-12 {
+      width: 100%;
+      float: left;
+    }
+    [class^="form-col-"] {
+      position: relative;
+      &:after {
+        content: "";
+        width: 1px;
+        height: 100%;
+        background: #eee;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      &:last-child {
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+}

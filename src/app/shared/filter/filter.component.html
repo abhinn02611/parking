@@ -1,0 +1,100 @@
+<div
+  class="list-filter"
+  *ngIf="filter"
+  [ngClass]="{ nospace: filter.filterLabe == false }"
+>
+  <div class="filter-items">
+    <div class="filter-item label" *ngIf="filter.filterLabe != false">
+      Filters
+    </div>
+    <div class="filter-item search" [ngClass]="{ active: filter.query != '' }">
+      <input
+        type="text"
+        placeholder="Search the list"
+        [(ngModel)]="filter.query"
+      />
+    </div>
+    <div
+      class="filter-item dropdown"
+      *ngFor="let dd of filter.dropdowns; let i = index"
+      [ngClass]="{ open: dd.open, active: dd.value }"
+    >
+      <div class="dd-opener" (click)="openDD(i)">
+        <div class="label">{{ dd.label ? dd.label : dd.title }}</div>
+        <div class="caret">
+          <img src="/assets/images/icons/next arrowldpi.svg" alt="" />
+        </div>
+      </div>
+      <div class="overlay" (click)="closeDD(i)"></div>
+      <div class="options-container">
+        <div
+          class="options dropdown-content"
+          [ngStyle]="{ width: dd.width ? dd.width : '100px' }"
+        >
+          <div class="dropdown-scroll">
+            <ul>
+              <li
+                *ngFor="let option of dd.options; let j = index"
+                (click)="selectOption(i, option)"
+                [ngClass]="{ selected: option.label == value }"
+              >
+                <div
+                  class="icon"
+                  [ngStyle]="{
+                    visibility: value == option.label ? 'visible' : 'hidden'
+                  }"
+                >
+                  <img src="/assets/images/icons/icon_check.png" />
+                </div>
+                <div class="value">{{ option.label }}</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="filter-item datepicker"
+      *ngIf="filter.date"
+      [ngClass]="{ active: range.length > 0 }"
+    >
+      <nz-range-picker
+        [(ngModel)]="range"
+        nzFormat="dd-MM-yyyy"
+      ></nz-range-picker>
+    </div>
+    <div class="filter-item button" (click)="onClickApply()">Apply</div>
+    <div class="filter-item text-button" (click)="onClearFilter()">
+      {{ filter.filterLabe === false ? "Clear" : "Clear All Filters" }}
+    </div>
+  </div>
+
+  <div class="filter-pagination">
+    <div
+      class="pagination-item circle action"
+      [ngClass]="{ disable: filter.page <= 1 }"
+      (click)="onClickBack()"
+    >
+      <img src="/assets/images/icons/left-arrow.svg" alt="" />
+    </div>
+    <div class="pagination-item circle">
+      <input
+        type="text"
+        [(ngModel)]="filter.page"
+        (keyup.enter)="onPaginationEnter()"
+      />
+    </div>
+
+    <div class="pagination-item text">
+      of {{ getTotalPage(filter.total, filter.limit) }}
+    </div>
+    <div
+      class="pagination-item circle action last"
+      [ngClass]="{ disable: filter.page >= pageCount }"
+      (click)="onClickNext()"
+    >
+      <img src="/assets/images/icons/left-arrow.svg" alt="" />
+    </div>
+  </div>
+</div>

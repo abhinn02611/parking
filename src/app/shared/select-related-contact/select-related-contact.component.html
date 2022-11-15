@@ -1,0 +1,73 @@
+<form-model [title]="title" [labelCancel]="'Cancel'" [cancelPosition]="'bottom'"
+  (actionCancel)="actionCancel.emit()" [labelPrimary]="'Apply'" (actionPrimary)="onPrimary()"  [loaderPrimary]="loaderPrimary"
+  [labelSecondary]="''" [scroll]="false">
+  <div class="form-add-related-contact">
+    <div class="search-box-fixed">
+      <div class="searchbox">
+        <input type="text" class="search-text" [(ngModel)]="searchKeyword" (keyup)="showResult()" >
+        <div class="search-icon">
+          <img src="/assets/images/icons/icon-search.png" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="rp-container">
+      <div class="related-contacts">
+        <ul class="headings">
+          <li>
+            
+          </li>
+          <li class="paragraph"></li>
+          <li class="paragraph" (click)="updateOrderBy('st_contact_fname')">
+            FIRST NAME
+            <div class="order-type" *ngIf="'store_name'==orderBy">
+              <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+              <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+            </div>
+          </li>
+          <li class="paragraph" (click)="updateOrderBy('st_contact_last_name')">
+            LAST NAME
+            <div class="order-type" *ngIf="'store_type'==orderBy">
+              <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+              <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+            </div>
+          </li>
+          <li class="paragraph" (click)="updateOrderBy('st_contact_mobile')">
+            PHONE
+            <div class="order-type" *ngIf="'store_address'==orderBy">
+              <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+              <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+            </div>
+          </li>
+          <li class="paragraph" (click)="updateOrderBy('st_contact_email')">
+            EMAIL
+            <div class="order-type" *ngIf="'store_address'==orderBy">
+              <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+              <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+            </div>
+          </li>
+          
+        
+        </ul>
+        <ng-container *ngFor="let contact of contactListView | orderBy : orderBy: reverse; let index = index">
+          <ul class="content" [ngClass]="{'selected': isSelected(contact['st_contact_id'])}" style="cursor: pointer;" (click)="selectItem(contact)">
+            <li>
+              <div class="checkbox" [ngClass]="{'checked': isSelected(contact['st_contact_id'])}"
+                ></div>
+            </li>
+            <li class="contactthumb">
+              <div class="contactimage" *ngIf="isArray(contact.images) && contact.images.length > 0">
+                <img
+                  src="{{contact.images[0].small_url}}"
+                  alt="" />
+              </div>
+            </li>
+            <li class="highlight">{{contact['st_contact_fname']}}</li>
+            <li class="highlight">{{contact['st_contact_last_name']}}</li>
+            <li class="paragraph">{{contact['st_contact_mobile']}}</li>
+            <li class="paragraph">{{contact['st_contact_email']}}</li>
+          </ul>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</form-model>

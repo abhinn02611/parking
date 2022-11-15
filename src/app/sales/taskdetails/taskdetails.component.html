@@ -1,0 +1,32 @@
+<div class="sistem-content">
+  <sistem-pageloader *ngIf="loading"></sistem-pageloader>
+  <div class="sistem-main" *ngIf="!loading">
+    <sistem-breadcrumb [links]="linksBreadcrumb"></sistem-breadcrumb>
+    <sistem-detailsheader [name]="task.sales_task_subject" [department]="formatDate(task.sales_task_due_date)"
+      (actionBack)="backToList()" [company]="headerText" (actionAddNew)="openAddNewModel()"
+      [showCompleteButton]="task.sales_task_status != 'Completed'" (actionComplete)="markComplete()"
+      [actions]="[actions.EDIT, actions.DELETE]" (actionGroup)="onAction($event)">
+    </sistem-detailsheader>
+
+    <div class="details-container">
+      <div class="details-left" [ngStyle]="leftStyle">
+        <div class="leftbox" #leftcontent [ngClass]="{'fixed': leftSidebarFixed}">
+          <sistem-taskdetails-left [task]="task" (actionEdit)="openAddNewModel(true)" [currency]="currency">
+          </sistem-taskdetails-left>
+        </div>
+      </div>
+      <div class="details-center">
+        <sistem-taskdetails-center [task]="task" [currency]="currency"></sistem-taskdetails-center>
+      </div>
+      <div class="details-right" [ngClass]="{'fixed': sidebarFixed}">
+        <sistem-taskdetails-right></sistem-taskdetails-right>
+      </div>
+    </div>
+  </div>
+</div>
+<app-add-task *ngIf="addTaskModelOpen" [editId]="editId" (actionSecondary)="cancelAddtask(true, true)"
+  (actionPrimary)="moveTotask($event)" (actionCancel)="cancelAddtask()" [refId]="''" [refType]="''" [refDesc]="''">
+</app-add-task>
+<confirm *ngIf="confirmDeleteModelOpen" [dialog]="true" (actionConfirm)="confirmDelete()"
+  (actionCancel)="cancelDelete()" [title]="'Delete Task'" [content]="'Are you sure to delete this task?'"
+  [note]="'You can not undo the change.'" [labelConfirm]="'Delete Task'"></confirm>

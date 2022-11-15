@@ -1,0 +1,95 @@
+@import "src/styles/_variables.scss";
+.section-header{
+    display: table;
+    width: 100%;
+    .heading{
+        color: $_maintext;
+        float: left;
+        width: auto;
+    }
+    .action{
+        color: $_red;
+        float: right;
+        width: auto;
+        padding-top: 1px;
+        cursor: pointer;
+    }
+}
+.media{
+  img{
+    width: 100%;
+    display: block;
+  }
+}
+.content{
+    display: block;
+    width: 100%;
+    padding: 6px 0px;
+    .main{
+        color: $_maintext;
+        margin-right: 72px;
+        .label{
+            color: $_subtext;
+            width: auto;
+            display: inline;
+            &.full-width{
+                width: 100%;
+            }
+        }
+        .value{
+            width: auto;
+            display: inline-block;
+        }
+        &.red{
+            color: $_red;
+        }
+    }
+    .actions{
+        width: 72px;
+        float: right;
+        .action{
+            width: 20px;
+            height: 20px;
+            border-radius: 10px;
+            float: right;
+            margin-left: 5px;
+            text-align: center;
+            &:hover{
+                background: $_hover;
+                cursor: pointer;
+            }
+            img{
+                opacity: .5;
+                width: 8px;
+                display: inline;
+                margin-top: 1px;
+            }
+            &.map{
+                border-radius: 2px;
+                img{
+                    width: 16px;
+                    opacity: .9;
+                    margin-top: 1px;
+                }
+            }
+        }
+    }
+}
+
+
+.guest{
+  padding: 10px 0;
+  border-bottom: 1px solid $_hover;
+  .name{
+
+  }
+  .email{
+    color: $_subtext;
+  }
+}
+
+.hint{
+  color: $_subtext;
+  font-size:10px;
+  margin: 10px 0;
+}

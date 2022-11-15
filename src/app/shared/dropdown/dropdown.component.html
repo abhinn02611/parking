@@ -1,0 +1,15 @@
+<div class="dropdown" [ngClass]="{open: dropdownOpen, bottom:(location==='bottom'), top:(location==='top')}">
+    <div class="overlay" (click)="toggleDropdown()"></div>
+    <div class="preview " #preview>
+        <input class="form-control" placeholder="{{placeholder}}" value="{{selected}}" />
+        <div class="event-listener" (click)="toggleDropdown()"></div>
+    </div>
+    <div class="options-container">
+        <div class="options">
+            <ul>
+                <li *ngFor="let option of options; let i = index" (click)="selectOption(i)">{{option.label}}</li>
+            </ul>
+        </div>
+    </div>
+
+</div>

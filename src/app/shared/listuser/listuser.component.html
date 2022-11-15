@@ -1,0 +1,10 @@
+<div class="list-user" *ngIf="user" [attr.data-tooltip]="name">
+  <img
+    class="image"
+    *ngIf="user.profile"
+    src="https://staging.api.parking.sistem.app/auth/{{ user.profile }}"
+  />
+  <ng-container *ngIf="!user.profile">
+    {{ value }}
+  </ng-container>
+</div>

@@ -1,0 +1,50 @@
+<div class="form-input error">
+  <div class="product-info">
+    <div class="product-name">{{pName}}</div>
+    <div class="product-code">{{pCode}}</div>
+    <div class="action-right" (click)="deleteProduct.emit()">
+      <img src="/assets/images/icons/icon_plus.png" alt="">
+    </div>
+  </div>
+  <div class="clear"></div>
+  <div class="line"></div>
+  <div class="clear"></div>
+  <div class="data-row">
+    <div class="data-box">
+      <div class="label">Quantity</div>
+      <input type="text" appNumberOnly [numberOnly]="numberOnly" placeholder="Quantity" [(ngModel)]="inputQuantity"
+        (change)="updateTotal()" />
+    </div>
+    <div class="data-box">
+      <div class="label">Rate (Dealer)</div>
+      <input type="text" appNumberOnly [numberOnly]="numberOnly" placeholder="Rate" [(ngModel)]="inputRate"
+        (change)="updateTotal()" />
+    </div>
+    <div class="data-box">
+      <div class="label">Discount ({{(discountType == 'Percent')?'%':''}} <div class="i_icon" (click)="openTypeDD()"
+          (change)="updateTotal()">
+          <div class="i_text">›</div>
+
+        </div>)
+        <div class="smalldd" *ngIf="typeOpen">
+          <div class="items">
+            <div class="item" (click)="selectType('Percent')">Percent</div>
+            <div class="item" (click)="selectType('Absolute')">Absolute</div>
+          </div>
+        </div>
+      </div>
+      <input type="text" appNumberOnly [numberOnly]="numberOnly" placeholder="Discount" [(ngModel)]="inputDiscount"
+        (change)="updateTotal()" />
+    </div>
+    <div class="data-box">
+      <div class="label">Tax</div>
+      <input type="text" appNumberOnly [numberOnly]="numberOnly" placeholder="Tax" [(ngModel)]="inputTax"
+        (change)="updateTotal()" />
+    </div>
+    <div class="data-box">
+      <div class="label">Total</div>
+      <input type="text" appNumberOnly [numberOnly]="numberOnly" readonly placeholder="Total"
+        [(ngModel)]="inputTotal" />
+    </div>
+  </div>
+</div>

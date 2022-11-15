@@ -1,0 +1,134 @@
+<div class="right-inner">
+  <div class="page-heading">Parking Pass Rates</div>
+  <div class="page-content">
+    Easiest way to get going on Sistem Apps is to import your existing database
+    to the Sistem Apps. Upload, Download or delete your data.
+  </div>
+  <div class="heading">Standard Parking Pass Rates</div>
+  <div class="description">
+    For all kind of vehicles available at the parking
+  </div>
+  <ng-container *ngFor="let group of priceGroup; let gindex = index">
+    <div class="data-box" *ngIf="group['price'].length! > 0">
+      <div class="data-box-row open">
+        <div class="header">
+          <div class="header-inner">
+            <div class="logo-vehicle">
+              <div class="vehicleimage d-flex" [ngStyle]="{'background-color': group.vehicle.bgcolor}">
+                <!-- <img [src]="group.vehicle.imgSrc" alt="" /> -->
+                <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="-7 -10 80 80"
+                  [ngStyle]="{ fill: group.vehicle.color}">
+                  <ng-container *ngFor="let path of getPaths(group.vehicle.name)">
+                    <path [attr.d]="path" />
+                  </ng-container>
+
+                </svg>
+              </div>
+            </div>
+            <div class="right-part">
+              <div class="heading">{{ group["vehicle"]["name"] }} Rates</div>
+              <div class="sub-heading tags">
+                <div class="tag smalltext">
+                  {{ group["price"].length }} items
+                </div>
+              </div>
+            </div>
+
+            <div class="right">
+              <div class="groupactions" style="display: none">
+                <div class="groupaction">
+                  <div class="img">
+                    <img src="/assets/images/icons/editldpi.svg" />
+                  </div>
+                </div>
+                <div class="groupaction">
+                  <div class="img">
+                    <img src="/assets/images/icons/clone_1ldpi.svg" />
+                  </div>
+                </div>
+                <div class="groupaction">
+                  <div class="img">
+                    <img
+                      src="/assets/images/icons/deleteldpi.svg"
+                      style="width: 20px"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="add" (click)="openAddNewModel(group)">
+                <img src="/assets/images/icons/icon_plus_white.png" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="data-content">
+          <div class="line-header"></div>
+          <div class="data-list">
+            <ul class="headings">
+              <li></li>
+              <li class="paragraph">DESCRIPTION</li>
+              <li class="paragraph">PRICING TYPE</li>
+              <li class="paragraph">AMOUNT</li>
+              <li class="paragraph">BEGIN DATE</li>
+              <li class="paragraph">END DATE</li>
+              <li class="paragraph">STATUS</li>
+              <!-- <li class="paragraph">
+              DEFAULT
+            </li> -->
+              <li></li>
+            </ul>
+            <ng-container
+              *ngFor="let session of group['price']; let index = index"
+            >
+              <ul
+                class="content"
+                style="cursor: pointer"
+                (click)="openSessionDetails(session['id'])"
+              >
+                <li>{{ index + 1 }}</li>
+                <li class="highlight">{{ session["type"]["type"] }} Pass</li>
+                <li class="paragraph">All Type</li>
+                <li class="paragraph">₹{{ session["rate"]["amount"] }}</li>
+                <li class="paragraph">
+                  {{ formatDate(session["rate"]["createdAt"]) }}
+                </li>
+                <li class="paragraph">
+                  {{ formatDate(session["rate"]["endDate"]) }}
+                </li>
+                <li class="paragraph">
+                  {{
+                    session["rate"]["status"] == true ? "Active" : "Inactive"
+                  }}
+                </li>
+                <!-- <li class="paragraph">
+                <div class="img-checkmark">
+                  <img src="/assets/images/icons/checkmark.png" class="img-checkmark" />
+                </div>
+              </li> -->
+                <li>
+                  <div class="action">
+                    <list-action
+                      [menuConfig]="
+                        getMenuConfig(session.rate, session.type, group)
+                      "
+                    >
+                    </list-action>
+                  </div>
+                </li>
+              </ul>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<app-add-parking-rate-pass
+  [editId]="editId"
+  [group]="editGroup"
+  *ngIf="addRateModelOpen"
+  (actionPrimary)="cancelAddRate(true)"
+  [parking_id]="parking_id"
+  (actionCancel)="cancelAddRate()"
+></app-add-parking-rate-pass>

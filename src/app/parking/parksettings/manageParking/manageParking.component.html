@@ -1,0 +1,187 @@
+<div class="right-inner">
+  <div class="page-heading">Manage Parking</div>
+  <div class="page-content">
+    Easiest way to get going on Sistem Apps is to import your existing database
+    to the Sistem Apps. Upload, Download or delete your data.
+  </div>
+  <div class="heading">All Parkings</div>
+  <div class="description">
+    All the parking currently managed by the organisation
+  </div>
+  <div class="data-box">
+    <div class="data-box-row open">
+      <div class="header">
+        <div class="header-inner">
+          <div class="logo">
+            <img src="/assets/images/icons/productldpi.svg" />
+          </div>
+          <div class="right-part">
+            <div class="heading">Parkings</div>
+            <div class="sub-heading tags">
+              <ng-container *ngFor="let tag of tags">
+                <!-- <div class="tag smalltext" *ngIf="tag">{{tag}}</div> -->
+                <div class="tag smalltext" *ngIf="tag">
+                  {{ tag }}
+                </div>
+              </ng-container>
+            </div>
+          </div>
+
+          <div class="right">
+            <div class="groupactions" style="display: none">
+              <div class="groupaction">
+                <div class="img">
+                  <img src="/assets/images/icons/editldpi.svg" />
+                </div>
+              </div>
+              <div class="groupaction">
+                <div class="img">
+                  <img src="/assets/images/icons/clone_1ldpi.svg" />
+                </div>
+              </div>
+              <div class="groupaction">
+                <div class="img">
+                  <img
+                    src="/assets/images/icons/deleteldpi.svg"
+                    style="width: 20px"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="add" (click)="openAddNewModel()">
+              <img src="/assets/images/icons/icon_plus_white.png" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <sistem-pageloader *ngIf="loading"></sistem-pageloader>
+
+      <div class="data-content" *ngIf="!loading">
+        <div class="line-header"></div>
+        <div class="data-list">
+          <ul class="headings">
+            <li class="paragraph" (click)="updateOrderBy('firstName')">
+              NAME
+              <div class="order-type" *ngIf="'firstName' == orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph" (click)="updateOrderBy('lastName')">
+              VENDOR
+              <div class="order-type" *ngIf="'lastName' == orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph" (click)="updateOrderBy('email')">
+              VECHICLES
+              <div class="order-type" *ngIf="'email' == orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+
+            <li class="paragraph" (click)="updateOrderBy('gender')">
+              SINCE
+              <div class="order-type" *ngIf="'gender' == orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph" (click)="updateOrderBy('gender')">
+              STATUS
+              <div class="order-type" *ngIf="'gender' == orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+          </ul>
+          <ng-container
+            *ngFor="
+              let parking of parkingList | orderBy: orderBy:reverse;
+              let index = index
+            "
+          >
+            <div class="rowouter">
+              <ul class="content">
+                <li class="highlight">{{ parking.name | titlecase }}</li>
+                <li class="highlight">
+                  {{
+                    parking.vendor
+                      ? parking?.vendor.user.firstName +
+                        " " +
+                        parking?.vendor.user.lastName
+                      : "-"
+                  }}
+                </li>
+
+                <li
+                  class="paragraph parking"
+                  *ngIf="parking.vehicleTypes.length == 0"
+                >
+                  -
+                </li>
+                <li
+                  class="paragraph parking"
+                  *ngIf="parking.vehicleTypes.length == 1"
+                >
+                  {{ parking.vehicleTypes[0].name | titlecase }}
+                </li>
+                <li
+                  class="paragraph parking"
+                  *ngIf="parking.vehicleTypes.length > 1"
+                >
+                  {{ parking.vehicleTypes[0].name | titlecase }} +
+                  {{ parking.vehicleTypes.length - 1 }} more
+
+                  <div class="options-content">
+                    <div>
+                      <li
+                        *ngFor="
+                          let vehicle of parking.vehicleTypes;
+                          let i = index
+                        "
+                        class="value"
+                        [ngClass]="{
+                          border: i !== parking.vehicleTypes.length - 1
+                        }"
+                      >
+                        {{ vehicle.name }}
+                      </li>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="paragraph">{{ formatDate(parking.createdAt) }}</li>
+                <li class="paragraph">
+                  {{ parking.status === true ? "Active" : "Inactive" }}
+                </li>
+                <li>
+                  <div class="action">
+                    <list-action [menuConfig]="getMenuConfig(parking)">
+                    </list-action>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="setting-footer">
+  Only you can see your settings. Sistem App is committed to protecting your
+  privacy and security.
+</div>
+
+<!-- <app-add-operator [editId]="editId" [operator]="operator" *ngIf="addOperatorModelOpen" (actionPrimary)="cancelAddOperator(true)" [parking_id]="parking_id" (actionCancel)="cancelAddOperator()"></app-add-operator> -->
+<app-add-parking-details
+  [editId]="editId"
+  [editParking]="operator"
+  *ngIf="addOperatorModelOpen"
+  (actionCancel)="cancelParking()"
+  (actionPrimary)="cancelParking(true)"
+  (submitParking)="onSubmitParking()"
+></app-add-parking-details>

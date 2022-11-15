@@ -1,0 +1,312 @@
+@import "src/styles/_variables.scss";
+@import "~ng-zorro-antd/date-picker/style/index.min.css";
+
+/* Import one component's styles */
+
+.list-filter {
+  border-bottom: 1px solid #eee;
+  display: table;
+  width: 100%;
+  height: 68px;
+  padding: 17px 0;
+  background: #fff;
+  &.nospace {
+    padding: 0;
+    height: 48px;
+    display: flex;
+    .filter-items {
+      width: 68%;
+      .filter-item {
+        margin-right: 10px;
+        &.search {
+          input {
+            width: 107px;
+            margin-top: -10px;
+          }
+        }
+        &.text-button {
+          padding: 0 10px;
+          font-size: 12px;
+        }
+        &.button {
+          padding: 0 15px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  .filter-items {
+    .filter-item {
+      width: auto;
+      float: left;
+      margin-right: 15px;
+      height: 34px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &.datepicker {
+        background-color: #f8f9fa;
+        border-radius: 40px;
+        padding-left: 5px;
+        &.active {
+          background-color: #ff3a300b;
+        }
+        ::ng-deep {
+          ::placeholder {
+            /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #54688d;
+            opacity: 1;
+            /* Firefox */
+          }
+          :-ms-input-placeholder {
+            /* Internet Explorer 10-11 */
+            color: #54688d;
+          }
+          ::-ms-input-placeholder {
+            /* Microsoft Edge */
+            color: #54688d;
+          }
+          .ant-picker-range {
+            background: transparent;
+            border: 0;
+          }
+          .ant-picker-focused {
+            background: transparent;
+            border: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none;
+          }
+        }
+      }
+      &.label {
+        color: #54688d;
+        font-weight: 500;
+        font-size: 14px;
+      }
+      &.dropdown {
+        background-color: #f8f9fa;
+        border-radius: 40px;
+        position: relative;
+        &.active {
+          background-color: #ff3a300b;
+        }
+        .dd-opener {
+          cursor: pointer;
+        }
+        &.open {
+          .overlay {
+            display: block;
+          }
+          .options-container {
+            display: block;
+          }
+        }
+        .label {
+          padding: 0 20px;
+          padding-right: 30px;
+          font-size: 14px;
+          color: #54688d;
+        }
+        .caret {
+          width: 14px;
+          height: 14px;
+          position: absolute;
+          right: 7px;
+          top: 11px;
+          transform: rotate(90deg);
+          img {
+            width: 100%;
+          }
+        }
+      }
+      &.search {
+        background-color: #f8f9fa;
+        border-radius: 40px;
+        height: 100%;
+        overflow: hidden;
+        input {
+          background-color: transparent;
+          border: 0;
+          outline: 0;
+          width: 250px;
+          height: 34px;
+          padding-left: 20px;
+        }
+        &.active {
+          input {
+            background-color: #ff3a300b;
+          }
+        }
+      }
+      &.button {
+        font-weight: 500;
+        padding: 0 24px;
+        font-size: 14px;
+        line-height: 14px;
+      }
+      &.text-button {
+        font-weight: 500;
+        padding: 0 24px;
+        font-size: 14px;
+        line-height: 14px;
+        color: $_red;
+        cursor: pointer;
+      }
+    }
+  }
+  .filter-pagination {
+    width: auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: end;
+    // float: right;
+    .pagination-item {
+      float: left;
+      margin-left: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &.text {
+        height: 34px;
+        padding: 0 4px;
+      }
+      &.circle {
+        width: 34px;
+        height: 34px;
+        text-align: center;
+        background: #f8f9fa;
+        border-radius: 17px;
+        img {
+          width: 15px;
+        }
+        input {
+          width: auto;
+          background: transparent;
+          border: none;
+          width: 34px;
+          text-align: center;
+          outline: none;
+          color: #b9c1cc;
+        }
+        &.last {
+          transform: rotate(180deg);
+          -webkit-transform: rotate(180deg);
+          -moz-transform: rotate(180deg);
+          -ms-transform: rotate(180deg);
+          -o-transform: rotate(180deg);
+        }
+        &.action {
+          &:hover {
+            background: $_hover;
+            cursor: pointer;
+          }
+          &.disable {
+            background: transparent;
+            &:hover {
+              background: transparent;
+              cursor: default;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+.options-container {
+  height: 0;
+  display: none;
+  .options {
+    position: absolute;
+    background-color: #f8f9fa;
+    border: 1px solid #eee;
+    width: 100%;
+    z-index: 50;
+    left: 0;
+    top: 34px;
+    .dropdown-scroll {
+      overflow-y: scroll;
+      max-height: 200px;
+    }
+  }
+}
+
+.list-dropdown-option {
+  display: block;
+  padding: 0px;
+  .icon {
+    float: left;
+    width: 20px;
+    height: 20px;
+    img {
+      width: 100%;
+      padding: 4px 5px;
+      opacity: 0.9;
+      display: block;
+    }
+  }
+  .value {
+    margin-left: 10px;
+    color: $_primary;
+    font-size: 12px;
+  }
+  &:hover {
+    background: $_hover;
+    cursor: pointer;
+  }
+  &.selected {
+    background: $_hover;
+    .icon {
+      visibility: visible;
+    }
+  }
+}
+
+.dropdown-content {
+  border-radius: 5px;
+  padding: 0;
+  margin: 0;
+  ul {
+    margin: 0;
+  }
+  li {
+    display: block;
+    padding: 8px 5px;
+    .icon {
+      float: left;
+      width: 20px;
+      height: 20px;
+      visibility: hidden;
+      img {
+        width: 100%;
+        padding: 3px 5px;
+        opacity: 0.7;
+      }
+    }
+    .value {
+      margin-left: 0px;
+      color: $_subtext;
+      font-size: 12px;
+    }
+    &:hover {
+      background: $_hover;
+      cursor: pointer;
+    }
+    &.selected {
+      background: $_hover;
+      .icon {
+        visibility: visible;
+      }
+    }
+  }
+}

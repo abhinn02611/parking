@@ -1,0 +1,165 @@
+<div class="details-right-inner">
+  <div class="park-rate-wrapper">
+    <div class="park-rate-main">
+      <div class="profile">
+        <img
+          class="profile_img"
+          *ngIf="user.profile"
+          src="https://staging.api.parking.sistem.app/auth/{{ user.profile }}"
+        />
+        <div class="profile_initials" *ngIf="!user.profile">
+          {{ getInitial(user) }}
+        </div>
+      </div>
+    </div>
+    <div class="welcome-name">
+      <p>Welcome, {{ parking?.name }}</p>
+      <span
+        >Manage your info, team, privacy, and security to make Sistem Apps work
+        better for <br />
+        you and everyone associated.</span
+      >
+      <!-- <ins>Last activity: 4 days ago Created: Aug 7, 2007</ins> -->
+    </div>
+    <div class="parkPro-main">
+      <div class="inner-container grid-row-1">
+        <div class="inner">
+          <p>Vendor Details</p>
+          <span
+            >Basic info, like your name and photo, that you use on <br />
+            Sistem Apps</span
+          >
+          <div class="domain-main">
+            <div class="domain-inner">
+              <p>Vendor</p>
+              <span
+                >{{ user.firstName ? user?.firstName : "--" }}
+                {{ user.lastName ? user?.lastName : "--" }}</span
+              >
+            </div>
+            <div class="domain-inner">
+              <p>Since</p>
+              <span>{{ formatDate(user?.createdAt) }}</span>
+            </div>
+            <div class="domain-inner">
+              <p>Email</p>
+              <span>{{ user?.email ? user.email : "--" }}</span>
+            </div>
+            <div class="domain-inner">
+              <p>Phone</p>
+              <span>{{ user?.phone ? user?.phone : "--" }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="footer-container">
+          <a href="#" class="inner-update manage-sub">Edit Profile</a>
+        </div>
+      </div>
+      <div class="inner-container grid-row-2">
+        <div class="inner">
+          <p>About Parking</p>
+          <span>
+            {{ parking?.description }}
+          </span>
+          <div class="domain-main">
+            <div class="domain-inner">
+              <p>Parking Name</p>
+              <span>{{ parking?.name ? parking?.name : "--" }}</span>
+            </div>
+            <div class="domain-inner">
+              <p>Address</p>
+              <span>{{ parking?.address ? parking?.address : "--" }}</span>
+            </div>
+            <div class="domain-inner">
+              <p>Phone</p>
+              <span>{{ parking?.phone ? parking?.phone : "--" }}</span>
+            </div>
+            <div class="domain-inner">
+              <p>Location</p>
+              <span> lat {{ lat }} lng {{ lng }} </span>
+            </div>
+            <div class="domain-inner">
+              <p>Operation</p>
+              <span>{{
+                parking?.openHour ? parking?.openHour : "Always Open"
+              }}</span>
+            </div>
+          </div>
+          <div class="park-text">
+            <p>Facilities</p>
+          </div>
+          <div class="park-fac">
+            <div class="">
+              <img src="assets/images/f1.png" alt="" />
+            </div>
+            <div class="">
+              <img src="assets/images/f2.png" alt="" />
+            </div>
+            <div class="">
+              <img src="assets/images/f3.png" alt="" />
+            </div>
+            <div class="">
+              <img src="assets/images/f4.png" alt="" />
+            </div>
+            <div class="">
+              <img src="assets/images/f5.png" alt="" />
+            </div>
+          </div>
+          <div class="park-text mt-10">
+            <p>Photos</p>
+          </div>
+          <div class="park-photos">
+            <div
+              class="photo"
+              *ngFor="let img of parking?.images; let i = index"
+            >
+              <img [src]="url + img" alt="" (click)="open(i)" />
+            </div>
+          </div>
+        </div>
+        <div class="footer-container">
+          <a href="#" class="inner-update manage-sub">Edit Parking</a>
+        </div>
+      </div>
+      <div class="inner-container grid-row-3">
+        <div class="inner">
+          <p>Security</p>
+          <span
+            >Enforced & enabled security settings. For some of the <br />
+            security settings only Babara can turn on.</span
+          >
+          <div class="domain-main sec-main">
+            <div class="domain-inner">
+              <p>2-step verification</p>
+              <span>ON</span>
+            </div>
+            <div class="domain-inner">
+              <p>Connected Devices</p>
+              <span>2 Mobile</span>
+            </div>
+          </div>
+        </div>
+        <div class="footer-container">
+          <a [routerLink]="['/forgot-password']" class="inner-update"
+            >Reset Babara's Password</a
+          >
+        </div>
+      </div>
+    </div>
+    <!--
+    <div class="parkPro-main sec-wrapper">
+      <div class="inner">
+        <div class="acc-storage">
+          <p>Account Storage</p>
+          <span
+            >Babara account storage is shared across Sistem Apps,<br />
+            like Modules and Files</span
+          >
+          <ins>97% used - 4.57 GB of 5 GB</ins>
+          <a href="#" class="inner-update">Upgrade storage</a>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>
+<!-- </div> -->

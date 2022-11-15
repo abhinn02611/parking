@@ -1,0 +1,19 @@
+// generate buttons
+// eg. btn-primary
+@include make-buttons();
+
+// generate color, bg and border classes
+// eg. primary-color, primary-bg, primary-border
+@include color-bg-border();
+
+// generate font weights
+// eg. weight700
+@include weight();
+
+// generate text align classes
+// e.g. text-center
+@include align();
+
+// generate font sizes
+// eg. px14
+@include font-sizes();

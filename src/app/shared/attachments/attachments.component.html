@@ -1,0 +1,95 @@
+<div class="file-selector" style="display: none;">
+  <input type="file" class="fileselect" name="fileselect" multiple="multiple" (change)="uploadFileInput($event)"
+    #input />
+</div>
+
+<div class="section-header">
+  <div class="heading subheading">Attachments ({{data.length}})</div>
+  <div class="action highlight" (click)="viewAllAttachments()">View All</div>
+  <div class="loader" *ngIf="loading">Uploading new attachment...</div>
+</div>
+<div class="attachments">
+  <div class="attachments-inner">
+    <div class="attachment-con" *ngFor="let attachment of data | slice:0:4; let index = index;">
+      <div class="attachment" [ngClass]="{noborder: index == 2 || index == 3 || data.length < 3}">
+        <div class="icon skyblue">
+          <img src={{getImagePath(attachment)}} alt="" />
+        </div>
+        <div class="content">
+          <div class="name highlight" (click)="openAttachment(attachment)">{{attachment.original_name}}</div>
+          <div class="info smalltext">{{attachment.attachment_add_date}} by
+            <span>{{attachment.attachment_add_by}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div *ngIf="data.length == 0" class="no-content">No Attachment Available</div> -->
+</div>
+<div class="attachment-view-container" *ngIf="viewOpen">
+  <div class="overlay-black"></div>
+  <div class="attachment-view-outer">
+    <div class="attachment-view">
+      <div class="attachment-header">
+        <div class="back-button" (click)="closeAttachment()">
+          <img src="/assets/images/icons/left-arrow.svg" alt="" />
+        </div>
+        <div class="file-name">{{activeAttachment.original_name}}</div>
+        <div class="file-details">{{activeAttachment.attachment_add_date}} by {{activeAttachment.attachment_add_by}}
+        </div>
+        <div class="groupactions">
+          <div class="groupaction" (click)="emitAction(ac.EDIT)" *ngIf="shouldDisplayGroupAction(ac.EDIT)">
+            <div class="img">
+              <img src="/assets/images/icons/editldpi.svg" />
+            </div>
+          </div>
+          <div class="groupaction" (click)="emitAction(ac.COPY)" *ngIf="shouldDisplayGroupAction(ac.COPY)">
+            <div class="img">
+              <img src="/assets/images/icons/clone_1ldpi.svg" />
+            </div>
+          </div>
+          <div class="groupaction" (click)="emitAction(ac.DELETE)" *ngIf="shouldDisplayGroupAction(ac.DELETE)">
+            <div class="img">
+              <img src="/assets/images/icons/deleteldpi.svg" style="width: 20px" />
+            </div>
+          </div>
+          <div class="groupaction " [ngClass]="{open: dropdownOpen}" (click)="toggleDropdown($event)"
+            *ngIf="shouldDisplayGroupAction(ac.SHARE)">
+            <div class="overlay" (click)="toggleDropdown($event)"></div>
+            <div class="img">
+              <img src="/assets/images/icons/followup2ldpi.svg" style="width: 20px" />
+            </div>
+            <div class="options-container">
+              <div class="options">
+                <ul>
+                  <li (click)="emitAction(ac.PDF)" *ngIf="shouldDisplayGroupAction(ac.PDF)">Export to PDF</li>
+                  <li (click)="emitAction(ac.EMAIL)" *ngIf="shouldDisplayGroupAction(ac.EMAIL)">Send Email</li>
+                  <li (click)="emitAction(ac.PRINT)" *ngIf="shouldDisplayGroupAction(ac.PRINT)">Print</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="attachment-content">
+        <div class="media-content">
+          <div class="image-media" *ngIf="filetype == 'image'">
+            <img src={{filePath}} />
+          </div>
+          <div class="file-download" *ngIf="filetype == 'file'">
+            <div class="download-icon">
+              <img src="/assets/images/icons/downloadldpi.svg" />
+            </div>
+            <a href={{filePath}} target="_blank" class="download-button">Download Attachment</a>
+          </div>
+        </div>
+        <div class="next" (click)="nextAttachment()" *ngIf="currentIndex < maxIndex">
+          <img src="/assets/images/icons/right-arrow.svg" alt="" />
+        </div>
+        <div class="back" (click)="backAttachment()" *ngIf="currentIndex > 0">
+          <img src="/assets/images/icons/left-arrow.svg" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="sistem-content">
+  <div class="sistem-main">
+    <div class="header">
+      <list-header [heading]="heading"></list-header>
+    </div>
+    <div class="leads">
+      <ul class="headings">
+        <li></li>
+        <li>
+          <div class="checkbox"></div>
+        </li>
+        <li class="paragraph">SCORE</li>
+        <li class="paragraph">LEAD NAME</li>
+        <li class="paragraph">COMPANY</li>
+        <li class="paragraph">EMAIL</li>
+        <li class="paragraph">PHONE</li>
+        <li class="paragraph">STATUS</li>
+        <li class="paragraph">LAST MODIFIED</li>
+        <li></li>
+        <li></li>
+      </ul>
+
+      <ul class="content"
+        *ngFor="let number of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]">
+        <li class="paragraph">{{number}}</li>
+        <li>
+          <div class="checkbox checked"></div>
+        </li>
+        <li>
+          <div class="score  paragraph"
+            [ngClass]="{green:(number%5==1), red:  (number%5==2), yellow: (number%5==3), blue: (number%5==4), grey: (number%5==0)}">
+            100</div>
+        </li>
+        <li class="highlight">Vijay Dishuja</li>
+        <li class="paragraph">360Networks Inc.</li>
+        <li class="paragraph">vijay@gmail.com</li>
+        <li class="paragraph">+91 99587349483</li>
+        <li class="paragraph">Qualified - Not Contacted</li>
+        <li class="paragraph">25 April 2017</li>
+        <li>
+          <div class="avtar">
+            <div class="text">AS</div>
+            <div class="image">
+              <img src="" alt="" />
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="action">
+            <list-action></list-action>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

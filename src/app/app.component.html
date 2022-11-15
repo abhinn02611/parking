@@ -1,0 +1,13 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div [ngClass]="{'app-container': showLayout, 'menu-open': menuSwitchStatus}">
+  <div [ngClass]="{'sistem-container': showLayout, 'menu-open': menuSwitchStatus, 'menu-hide': showSidebar == false}">
+    <div class="sistem-sidebar" *ngIf="showSidebar && showLayout">
+      <sistem-sidebar (collapse)="onCollapse($event)"></sistem-sidebar>
+    </div>
+    <div class="sistem-header" *ngIf="showLayout">
+      <sistem-header *ngIf="!isParking"></sistem-header>
+      <sistem-headerparking *ngIf="isParking"></sistem-headerparking>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+</div>

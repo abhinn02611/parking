@@ -1,0 +1,125 @@
+<div class="right-inner">
+    <div class="page-heading">Manage Vendors</div>
+    <div class="page-content">Easiest way to get going on Sistem Apps is to import your existing database to the Sistem Apps. Upload, Download or delete your data.</div>
+    <div class="data-box">
+        <div class="data-box-row open">
+            <div class="header">
+                <div class="header-inner">
+                    <div class="logo">
+                        <img src="/assets/images/icons/productldpi.svg" />
+                    </div>
+                    <div class="right-part">
+                        <div class="heading">Vendors</div>
+                        <span>Never Imported</span>
+
+                    </div>
+
+                    <div class="right">
+                        <div class="groupactions" style="display: none">
+                            <div class="groupaction">
+                                <div class="img">
+                                    <img src="/assets/images/icons/editldpi.svg" />
+                                </div>
+                            </div>
+                            <div class="groupaction">
+                                <div class="img">
+                                    <img src="/assets/images/icons/clone_1ldpi.svg" />
+                                </div>
+                            </div>
+                            <div class="groupaction">
+                                <div class="img">
+                                    <img src="/assets/images/icons/deleteldpi.svg" style="width: 20px" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add" (click)="onCreateVendor()">
+                            <img src="/assets/images/icons/icon_plus_white.png" alt="">
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="data-content ">
+                <div class="line-header"></div>
+                <sistem-pageloader *ngIf="loading"></sistem-pageloader>
+                <div class="data-list" *ngIf="!loading">
+                    <ul class="headings">
+                        <li class="paragraph">
+                            ENTITY NAME
+                            <div class="order-type" *ngIf="'firstName'==orderBy">
+                                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+                            </div>
+                        </li>
+                        <li class="paragraph">
+                            EMAIL
+                            <div class="order-type" *ngIf="'lastName'==orderBy">
+                                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+                            </div>
+                        </li>
+                        <li class="paragraph">
+                            PARKINGS
+                            <div class="order-type" *ngIf="'email'==orderBy">
+                                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+                            </div>
+                        </li>
+
+                        <li class="paragraph">
+                            SINCE
+                            <div class="order-type" *ngIf="'gender'==orderBy">
+                                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+                            </div>
+                        </li>
+                        <li class="paragraph">
+                            STATUS
+                            <div class="order-type" *ngIf="'gender'==orderBy">
+                                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+                            </div>
+                        </li>
+                        <li></li>
+
+                    </ul>
+                    <ng-container *ngFor="let parking of parkingList | orderBy : orderBy: reverse; let index = index">
+                        <div class="rowouter">
+                            <ul class="content">
+
+                                <li class="highlight">{{parking.name |titlecase}}</li>
+                                <li class="highlight">{{parking.vendor?parking.vendor:'--'}}</li>
+                                <li class="paragraph">
+                                    <ng-container *ngFor="let pType of parking.vehicleTypes">
+                                        {{pType.name|titlecase}},
+                                    </ng-container>
+                                </li>
+                                <li class="paragraph">{{ formatDate(parking.createdAt) }}</li>
+                                <li class="paragraph">{{parking.status?'Active':'Inactive'}}</li>
+                                <li>
+                                    <div class="action">
+                                        <list-action [menuConfig]="getMenuConfig(session)">
+                                        </list-action>
+                                    </div>
+                                </li>
+                                <!-- <li class="paragraph">
+                        <img src="/assets/images/icons/checkmark.png" class="img-checkmark"  />
+                      </li>
+                    -->
+
+                                <!-- <li>
+                                    <list-user [user]="parking"></list-user>
+                                </li> -->
+                            </ul>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <app-add-operator [editId]="editId" [operator]="operator" *ngIf="addOperatorModelOpen" (actionPrimary)="cancelAddOperator(true)" [parking_id]="parking_id" (actionCancel)="cancelAddOperator()"></app-add-operator> -->
+<app-add-vendor *ngIf="isShowVendor"></app-add-vendor>
+<app-add-parking-rate-pass [editId]="editId" [group]="editGroup" *ngIf="addRateModelOpen" (actionPrimary)="cancelAddRate(true)" [parking_id]="parking_id" (actionCancel)="cancelAddRate()"></app-add-parking-rate-pass>

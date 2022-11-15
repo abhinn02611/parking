@@ -1,0 +1,39 @@
+<div class="box">
+  <label>Activity by time of the day</label>
+
+  <div class="">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [dataLabels]="chartOptions.dataLabels"
+      [title]="chartOptions.title"
+      [colors]="chartOptions.colors"
+    ></apx-chart>
+  </div>
+  <div class="parking-dropdown">
+    <form-dropdown
+      [value]="'Current Day'"
+      (actionSelect)="actionSelectDD($event)"
+      [options]="filterDropdown[0].options"
+    >
+    </form-dropdown>
+  </div>
+  <!-- <div class="footer">
+        <form-dropdown style="width: 50%;" [label]="'Current Month'">
+            <div class="options-container">
+                <div class="options dropdown-content">
+                    <div class="dropdown-scroll">
+                        <ul>
+                            <li class="heading">
+                                <div class="value">Current Day</div>
+                            </li>
+                            <li class="heading">
+                                <div class="value">Current Year</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </form-dropdown>
+    </div> -->
+</div>

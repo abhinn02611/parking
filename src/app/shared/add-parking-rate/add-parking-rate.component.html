@@ -1,0 +1,80 @@
+<form-model
+  [title]="createFormModalTitle()"
+  [labelCancel]="'Cancel'"
+  [cancelPosition]="'bottom'"
+  (actionCancel)="onCancel()"
+  [labelPrimary]="editId === '' ? 'Save' : 'Update'"
+  (actionPrimary)="onPrimary()"
+>
+  <div class="form-addproduct">
+    <div class="form-row">
+      <div class="form-col-6">
+        <form-dropdown
+          [label]="'Pricing Type'"
+          [value]="'All Day'"
+          (actionSelect)="('')"
+          [options]="[{ label: 'All Day', value: 'All Day' }]"
+        >
+        </form-dropdown>
+      </div>
+      <div class="form-col-6">
+        <div class="ml-10">
+          <form-dropdown
+            [label]="'Status'"
+            [value]="formData.statusName"
+            (actionSelect)="actionStatusSelect($event)"
+            [options]="[
+              { label: 'Active', value: 'active' },
+              { label: 'Inactive', value: 'inactive' }
+            ]"
+          >
+          </form-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="subheading pt-15 pb-15">
+      {{ editId == "" ? "Add" : "Edit" }} Rate{{ editId == "" ? "s" : "" }}
+    </div>
+    <ul class="draggable-list" id="draggable-list">
+      <li
+        *ngFor="let rate of rates; index as i"
+        [attr.data-index]="i"
+        #dragLstItem
+      >
+        <div class="draggable" draggable="true" [attr.id]="rate.id" #draggable>
+          <form-rates
+            [inputModel]="rate"
+            [hideDelete]="false"
+            [rates]="rates"
+            (inputModelChange)="updateRate(i, $event)"
+            (deleteRate)="deleteRate(i)"
+          ></form-rates>
+        </div>
+      </li>
+    </ul>
+    <div class="form-row">
+      <div class="chooseNewRate">
+        <div class="labelchoose">Add Another Rate</div>
+        <div class="action-right" (click)="addMoreRates()">
+          <img src="/assets/images/icons/icon_plus.png" alt="" />
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-col-12">
+        <form-textarea
+          [label]="'Remark'"
+          [(inputModel)]="remarks"
+        ></form-textarea>
+      </div>
+    </div>
+  </div>
+</form-model>
+<!-- <app-add-category *ngIf="showAddCategory" (actionCancel)="cancelAddCategory()"></app-add-category> -->
+<app-add-types
+  *ngIf="showAddType"
+  (actionCancel)="cancelAddType()"
+  [categoryId]="formData.category"
+  [categoryName]="formData.category_name"
+></app-add-types>

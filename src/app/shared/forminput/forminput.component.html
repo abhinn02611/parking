@@ -1,0 +1,29 @@
+<div
+  class="form-input"
+  [ngClass]="{ open: inputOpen, error: errorMessage != '' }"
+>
+  <input
+    [type]="type"
+    [readonly]="isReadonly"
+    [(ngModel)]="value"
+    (focus)="onFocus()"
+    appNumberOnly
+    [numberOnly]="numberOnly"
+    (blur)="onBlur()"
+    #input
+    [(ngModel)]="inputModel"
+    (ngModelChange)="inputModelChange.emit(inputModel)"
+    [ngStyle]="{ color: isReadonly ? '#B9C1CC' : '#171E27' }"
+    [autocomplete]="false"
+  />
+  <div class="label" (click)="onFocus()">{{ label }}</div>
+  <div
+    class="error-info"
+    nz-popover
+    [nzPopoverContent]="errorMessage"
+    *ngIf="errorMessage != ''"
+  >
+    <img src="/assets/images/icons/info.png" />
+  </div>
+  <!-- <div class="error-message" *ngIf="errorMessage">{{errorMessage}}</div> -->
+</div>

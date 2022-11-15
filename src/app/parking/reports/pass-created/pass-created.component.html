@@ -1,0 +1,27 @@
+<div class="box">
+  <label>Pass Created</label>
+
+  <div class="" *ngIf="$passesCreated | async as data">
+    <apx-chart
+      [series]="data.graphData"
+      [chart]="chartOptions.chart"
+      [dataLabels]="chartOptions.dataLabels"
+      [plotOptions]="chartOptions.plotOptions"
+      [yaxis]="chartOptions.yaxis"
+      [legend]="chartOptions.legend"
+      [fill]="chartOptions.fill"
+      [stroke]="chartOptions.stroke"
+      [tooltip]="chartOptions.tooltip"
+      [xaxis]="{ type: 'category', categories: data.categories }"
+    ></apx-chart>
+  </div>
+  <div class="parking-dropdown">
+    <form-dropdown
+      [value]="'Day'"
+      (actionSelect)="actionSelectDD($event)"
+      [options]="filterDropdown[0].options"
+      [optionWidth]="200"
+    >
+    </form-dropdown>
+  </div>
+</div>

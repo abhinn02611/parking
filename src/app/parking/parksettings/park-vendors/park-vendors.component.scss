@@ -1,0 +1,239 @@
+@import "../parksettings.component.scss";
+.data-list {
+  position: relative;
+  display: table;
+  width: 100%;
+  padding-top: 10px;
+  ul {
+    display: block;
+    height: 40px;
+    margin: 1px 0;
+    &.headings {
+      background: $_white;
+      position: relative;
+      top: 0;
+      left: 0;
+      right: 0;
+      li {
+        color: $_subtext !important;
+        position: relative;
+        cursor: default;
+        .order-type {
+          position: absolute;
+          width: 40px;
+          height: 40px;
+          padding: 12px;
+          right: 0;
+          top: 0;
+          opacity: 0.6;
+          img {
+            width: 18px;
+            height: 18px;
+          }
+        }
+      }
+    }
+    &.content {
+      li {
+        color: $_subtext;
+      }
+    }
+    li {
+      height: 40px;
+      float: left;
+      padding: 10px 5px;
+      vertical-align: middle;
+      line-height: normal;
+      line-height: 1.5;
+      display: block;
+      white-space: nowrap;
+      overflow: visible;
+      text-overflow: ellipsis;
+      &:nth-child(1) {
+        width: 20%;
+        text-align: left;
+      }
+      &:nth-child(2) {
+        width: 25%;
+        overflow: initial;
+      }
+      &:nth-child(3) {
+        width: 15%;
+      }
+      &:nth-child(4) {
+        width: 15%;
+        color: $_maintext;
+      }
+      &:nth-child(5) {
+        width: 15%;
+      }
+      &:nth-child(6) {
+        width: 5%;
+      }
+      &:nth-child(7) {
+        width: 6%;
+      }
+      &:nth-child(8) {
+        width: 6%;
+      }
+      &:nth-child(9) {
+        width: 6%;
+      }
+    }
+    .not-selected {
+      &.hover {
+        background: $_hover_background;
+      }
+    }
+    &.selected {
+      li {
+        &:nth-child(2),
+        &:nth-child(3),
+        &:nth-child(4),
+        &:nth-child(5),
+        &:nth-child(6),
+        &:nth-child(7),
+        &:nth-child(8),
+        &:nth-child(9) {
+          background: $_selection_background;
+        }
+        &:nth-child(2) {
+          border-top-left-radius: 20px;
+          border-bottom-left-radius: 20px;
+        }
+        &:nth-child(9) {
+          border-top-right-radius: 20px;
+          border-bottom-right-radius: 20px;
+        }
+      }
+    }
+    .checkbox {
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      margin: 1px 0px 0 8px;
+      border: 1px solid $_lines;
+      position: relative;
+      cursor: pointer;
+      &:hover {
+        background: $_background;
+      }
+      &.checked {
+        &::before {
+          content: "L";
+          position: absolute;
+          top: -3px;
+          left: 4px;
+          transform: rotate(40deg) scaleX(-1);
+          font-weight: 800;
+          color: $_red;
+        }
+      }
+    }
+    .avtar {
+      width: 36px;
+      height: 36px;
+      border-radius: 18px;
+      background: $_background;
+      margin: -6px -5px;
+      overflow: hidden;
+      position: relative;
+      .text {
+        font-size: 14px;
+        margin: 0 auto;
+        height: 100%;
+        vertical-align: middle;
+        text-align: center;
+        display: table;
+        width: 100%;
+        line-height: 36px;
+      }
+      .image {
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 100%;
+        width: 36px;
+        height: 36px;
+        border-radius: 18px;
+        overflow: hidden;
+        top: 0;
+        left: 0;
+        img {
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+  .action {
+    width: 40px;
+    height: 40px;
+    margin: -10px -5px;
+    float: right;
+    margin-right: 0px;
+  }
+  .img-checkmark {
+    width: 20px;
+  }
+}
+
+.angle {
+  width: 20px;
+  height: 20px;
+  opacity: 0.5;
+  margin-left: 3px;
+  display: flex;
+  align-items: center;
+  img {
+    width: 100%;
+  }
+  .open {
+    display: block;
+  }
+}
+
+.options-content {
+  display: none;
+  position: absolute;
+  background: #ffffff;
+  border: 1px solid #eee;
+  z-index: 50;
+  box-shadow: 1px 1px 11px 0px #b5b1b5;
+  border-radius: 5px;
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  li {
+    width: 100% !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .value {
+    color: $_primary;
+    font-size: 12px;
+    padding: 10px !important;
+    height: auto !important;
+  }
+
+  .border {
+    border-bottom: 1px solid $_hover;
+  }
+}
+
+.paragraph.parking {
+  &:hover .options-content {
+    display: block;
+  }
+}
+.setting-footer {
+  text-align: center;
+  color: #566881;
+  font-size: 12px !important;
+  padding: 50px 0;
+}

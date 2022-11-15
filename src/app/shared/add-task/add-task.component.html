@@ -1,0 +1,119 @@
+<form-model [title]="editId===''?'Add Task':'Edit Task'" [labelCancel]="'Cancel'" [cancelPosition]="'top'"
+  (actionCancel)="onCancel()" [labelPrimary]="editId === ''?'Save':'Update'" (actionPrimary)="onPrimary()"
+  [labelSecondary]="editId===''?'Save & Add Another':''" (actionSecondary)="onSecondry()">
+  <div class="form-addproduct">
+    <div class="taskTypes">
+      <div class="taskType type1" [ngClass]="{selected: formData.taskType=='visit'}" (click)="setType('visit')">
+        <div class="taskIcon">
+          <img src="/assets/images/icons/visit_1ldpi.svg" />
+        </div>
+        <div class="taskTypeTitle">Visit</div>
+      </div>
+      <div class="taskType type2" [ngClass]="{selected: formData.taskType=='call'}" (click)="setType('call')">
+        <div class="taskIcon">
+          <img src="/assets/images/icons/call_1ldpi.svg" />
+        </div>
+        <div class="taskTypeTitle">Call</div>
+      </div>
+      <div class="taskType type3" [ngClass]="{selected: formData.taskType=='demo'}" (click)="setType('demo')">
+        <div class="taskIcon">
+          <img src="/assets/images/icons/demoldpi.svg" />
+        </div>
+        <div class="taskTypeTitle">Demo</div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-12">
+        <form-input [label]="'Subject'" [(inputModel)]="formData.taskSubject"></form-input>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-12">
+        <form-dropdown [label]="'Related To'" [value]="formData.relatedTo"
+          (actionSelect)="actionRelatedToSelect($event)"
+          [options]="[{ label: 'Company', value: 'company' }, { label: 'Contact', value: 'contact' }]">
+        </form-dropdown>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-6">
+        <form-datepicker [label]="'Due Date'" [(inputModel)]="formData.taskDueDate"></form-datepicker>
+      </div>
+      <div class="form-col-6">
+        <div class="ml-10">
+          <form-dropdown [label]="'Time'" [value]="formData.taskDueTime"
+            (actionSelect)="actionSelectDD($event, 'taskDueTime')"
+            [options]="timeIntervals">
+          </form-dropdown>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-12">
+        <form-dropdown [label]="'Repeat'" [value]="formData.repeat" (actionSelect)="actionSelectDD('repeat',$event)"
+          [options]="repeat">
+        </form-dropdown>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-6">
+        <form-dropdown [label]="'Status'" [value]="formData.taskStatus"
+          (actionSelect)="actionSelectDD('taskStatus',$event)" [options]="status"></form-dropdown>
+      </div>
+      <div class="form-col-6">
+        <div class="ml-10">
+          <form-dropdown [label]="'Priority'" [value]="formData.taskPriority"
+            (actionSelect)="actionSelectDD('repeat',$event)" [options]="priority"></form-dropdown>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-col-12">
+        <form-model-dropdown [label]="'Task Owner'" [value]="formData.taskOwner"
+          (actionClick)="openOwnerContactDD($event)">
+        </form-model-dropdown>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-12">
+        <form-textarea [label]="'Description'" [max]="0" [(inputModel)]="formData.taskDesc"></form-textarea>
+      </div>
+    </div>
+
+
+    <div class="subheading mt-10">Invite Guests</div>
+    <div class="form-row">
+      <div class="form-col-12">
+        <div *ngFor="let inv of invitees; index as i">
+          <div class="invite-info">
+            <div class="invite-name">{{inv.logins_name}}</div>
+            <div class="invite-email">{{inv.logins_email}}</div>
+            <div class="action-right" (click)="deleteInvite(inv)">
+              <img src="/assets/images/icons/icon_plus.png" alt="">
+            </div>
+          </div>
+          <!-- <form-product [inputModel]="product" (inputModelChange)="updateProduct(i,$event)" (deleteProduct)="deleteProduct(i)"></form-product> -->
+        </div>
+        <div class="chooseProduct">
+          <div class="labelchoose">Choose Guest</div>
+          <div class="action-right" (click)="openRelatedInviteDD()">
+            <img src="/assets/images/icons/icon_plus.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</form-model>
+<app-select-related-company *ngIf="showRelatedCompany" (actionCancel)="cancelRelatedCompany()"
+  (actionPrimary)="selectRelatedCompany($event)" [multi]="true" [title]="'Add Company'" [selectedCompanies]="relatedToCompanies"></app-select-related-company>
+
+<app-select-related-contact *ngIf="showRelatedContact" (actionCancel)="cancelRelatedContact()"
+  (actionPrimary)="selectRelatedContact($event)" [multi]="true" [title]="'Add Contact'" [selectedContacts]="relatedToContacts"></app-select-related-contact>
+
+<app-select-owner *ngIf="showOwnerContact" (actionCancel)="cancelOwnerContact()"
+  (actionPrimary)="selectOwnerContact($event)" [title]="'Add Owner'"></app-select-owner>
+
+<app-select-owner *ngIf="showInviteContact" (actionCancel)="cancelInviteContact()"
+  (actionPrimary)="selectInviteContact($event)" [multi]="true" [self]="false" [title]="'Invite Guests'" [selectedContacts]="invitees"></app-select-owner>

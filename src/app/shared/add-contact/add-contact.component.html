@@ -1,0 +1,162 @@
+<form-model [title]="editId===''?'Add Contact':'Edit Contact'" [labelCancel]="'Cancel'" [cancelPosition]="'top'"
+  (actionCancel)="onCancel()" [labelPrimary]="editId === ''?'Save':'Update'" (actionPrimary)="onPrimary()"
+  [labelSecondary]="editId===''?'Save & Add Another':''" (actionSecondary)="onSecondry()">
+  <div class="form-addproduct">
+    <div class="form-row">
+      <div class="form-col-3">
+        <form-dropdown [label]="'Salutation'" [value]="formData.contactSalutation" (actionSelect)="actionChangeSalutation($event)"
+          [options]="[{label:'Mr.', value: 'Mr.'}, {label:'Mrs.', value: 'Mrs.'}]" ></form-dropdown>
+      </div>
+      <div class="form-col-9">
+        <div class="ml-10">
+          <form-input [label]="'First Name'" [(inputModel)]="formData.contactFName"></form-input>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-12">
+        <form-input [label]="'Last Name'" [(inputModel)]="formData.contactLName"></form-input>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-6">
+        <form-input [label]="'Job Title'" [(inputModel)]="formData.contjobTitle"></form-input>
+      </div>
+      <div class="form-col-6">
+        <div class="ml-10">
+          <form-input [label]="'Department'" [(inputModel)]="formData.contjobDepart"></form-input>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-col-12">
+        <form-model-dropdown [label]="'Add Company'" [value]="formData.contactAccountName"
+          (actionClick)="openRelatedCompanyDD($event)">
+        </form-model-dropdown>
+      </div>
+    </div>
+
+    <div class="subheading mt-10">Phone</div>
+    <div class="form-row" *ngFor="let p of phoneTypes.phones;  let isLast = last; index as i">
+      <div class="form-col-3">
+        <form-dropdown [label]="'Phone'" [value]="p.type" (actionSelect)="actionChangePhoneType($event, i)"
+          [options]="phoneTypes.available">
+        </form-dropdown>
+      </div>
+      <div class="form-col-9">
+        <div class="ml-10">
+          <div class="right-block">
+            <div class="action-right" (click)="addMorePhone()" *ngIf="isLast && phoneTypes.phones.length < 3">
+              <img src="/assets/images/icons/icon_plus.png" alt="">
+            </div>
+            <div class="action-right" (click)="removePhone(i)" *ngIf="!isLast">
+              <img src="/assets/images/icons/icon_minus.png" alt="">
+            </div>
+          </div>
+          <div class="left-block">
+            <form-input [label]="'Add Phone'" [(inputModel)]="p.number" [numberOnly]="true"></form-input>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-col-6">
+        <form-datepicker [label]="'DOB'" [(inputModel)]="formData.contactDob"></form-datepicker>
+      </div>
+      <div class="form-col-6">
+        <div class="ml-10">
+          <form-input [label]="'Anniversary'" [(inputModel)]="formData.contactAnniversary"></form-input>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="subheading mt-10">Address</div>
+    <div class="form-row" *ngFor="let p of addressTypes.addresses;  let isLast = last; index as i">
+      <div class="form-col-3">
+        <form-dropdown [label]="'Address'" [value]="p.type" (actionSelect)="actionChangeAddressType($event, i)"
+          [options]="addressTypes.available">
+        </form-dropdown>
+      </div>
+      <div class="form-col-9">
+        <div class="ml-10">
+          <div class="right-block">
+            <div class="action-right" (click)="addMoreAddress()" *ngIf="isLast && addressTypes.addresses.length < 1">
+              <img src="/assets/images/icons/icon_plus.png" alt="">
+            </div>
+            <div class="action-right" (click)="removeAddress(i)" *ngIf="!isLast">
+              <img src="/assets/images/icons/icon_minus.png" alt="">
+            </div>
+          </div>
+          <div class="left-block">
+            <form-model-dropdown [label]="'Address'" [value]="p.full" (actionClick)="openAddAddressModal(i)">
+            </form-model-dropdown>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row" *ngFor="let p of emailTypes.emails;  let isLast = last; index as i">
+     
+      <div class="form-col-3">
+        <form-dropdown [label]="'Email'" [value]="p.type" (actionSelect)="actionChangeEmailType($event, i)"
+          [options]="emailTypes.available">
+        </form-dropdown>
+      </div>
+      <div class="form-col-9">
+        <div class="ml-10">
+          <div class="right-block">
+            <div class="action-right" (click)="addMoreEmail()" *ngIf="isLast && emailTypes.emails.length < 2">
+              <img src="/assets/images/icons/icon_plus.png" alt="">
+            </div>
+            <div class="action-right" (click)="removeEmail(i)" *ngIf="!isLast">
+              <img src="/assets/images/icons/icon_minus.png" alt="">
+            </div>
+          </div>
+          <div class="left-block">
+            <form-input [label]="'Add Email'" [(inputModel)]="p.email"></form-input>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subheading mt-10">Links</div>
+    <div class="form-row" *ngFor="let p of linksTypes.links;  let isLast = last; index as i">
+      <div class="form-col-3">
+        <form-dropdown [label]="'Link'" [value]="p.type" (actionSelect)="actionChangeLinkType($event, i)"
+          [options]="linksTypes.available">
+        </form-dropdown>
+      </div>
+      <div class="form-col-9">
+        <div class="ml-10">
+          <div class="right-block">
+            <div class="action-right" (click)="addMoreLink()" *ngIf="isLast && linksTypes.links.length < 4">
+              <img src="/assets/images/icons/icon_plus.png" alt="" />
+            </div>
+            <div class="action-right" (click)="removeLink(i)" *ngIf="!isLast">
+              <img src="/assets/images/icons/icon_minus.png" alt="">
+            </div>
+          </div>
+          <div class="left-block">
+            <form-input [label]="'Add Link'" [(inputModel)]="p.link" ></form-input>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subheading mt-10">Notes</div>
+    <div class="form-row">
+      <div class="form-col-12">
+        <form-textarea [label]="'Notes'" [max]="700" [(inputModel)]="formData.contactNotes"></form-textarea>
+      </div>
+    </div>
+
+
+
+  </div>
+</form-model>
+<app-select-related-company *ngIf="showRelatedCompany" (actionCancel)="cancelRelatedCompany()"
+  (actionPrimary)="selectRelatedCompany($event)" [title]="'Add Company'" [selectedCompany]="formData.contactAccountName"></app-select-related-company>
+<app-add-address *ngIf="showAddressModal" (actionCancel)="cancelSetAddress()" (actionPrimary)="setAddress($event)"
+  [address]="addressUpdate"></app-add-address>

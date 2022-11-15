@@ -1,0 +1,77 @@
+@import "src/styles/_variables.scss";
+.menu-box {
+  margin: 20px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  display: block;
+  .heading {
+    padding: 13px;
+    color: $_subtext;
+    font-size: 14px;
+    border-bottom: 1px solid #eee;
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+    li {
+      margin: 0;
+      padding: 0;
+      font-weight: 400;
+      clear: both;
+      display: block;
+      width: 100%;
+      font-size: 14px;
+      border-bottom: 1px solid #eee;
+      cursor: pointer;
+      position: relative;
+      a{
+        display: table;
+        padding: 10px;
+        cursor: pointer;
+        text-decoration: none;
+        img{
+          width: 24px;
+          float: left;
+          padding: 1px;
+          stroke-width: 2;
+          opacity: 0.8;
+        }
+        .menu-text{
+          color: $_maintext;
+          float: left;
+          margin-left: 10px;
+          padding-top: 2px;
+        }
+      }
+      &.active{
+        font-weight: 600;
+        background: $_hover;
+        a{
+          img{
+            filter: invert(30%) sepia(440%) saturate(410%) hue-rotate(532deg) brightness(111%) contrast(163%);
+          }
+        }
+        &::before{
+          content: '';
+          position: absolute;
+          width:3px;
+          height:100%;
+          background: $_blue_menu;
+          border-top-left-radius: 2px;
+          border-bottom-left-radius: 2px;
+          right:0;
+          top:0;
+
+        }
+      }
+      &:hover{
+        background: $_hover;
+      }
+      &:last-child{
+        border: 0;
+      }
+    }
+    
+  }
+}

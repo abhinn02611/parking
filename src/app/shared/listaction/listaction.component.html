@@ -1,0 +1,56 @@
+<div class="listaction" [ngClass]="{open: menuOpen}">
+  <div class="overlay" (click)="toggleMenu($event)"></div>
+  <div class="menu-button" (click)="toggleMenu($event)">
+    <img src="/assets/images/icons/dot-dot-dot.png" alt="">
+  </div>
+  <div class="option-container">
+    <ng-content></ng-content>
+    <ul>
+      <div *ngFor="let item of menuConfigLocal">
+        <li (click)="nextAction($event,item.action)" *ngIf="!item.confirm">
+          <div class="item">{{item.label}}</div>
+          <div class="icon" *ngIf="item.icon">
+            <img src="{{'/assets/images/icons/'+item.icon}}" />
+          </div>
+        </li>
+        <div *ngIf="item.confirm">
+          <confirm [title]="item.confirmParam.title" [content]="item.confirmParam.content"
+            [note]="item.confirmParam.note" [contentPosition]="'center'" [labelConfirm]="item.confirmParam.label"
+            (actionConfirm)="nextAction($event,item.action)">
+            <div>
+              <li>
+                <div class="item">{{item.label}}</div>
+                <div class="icon" *ngIf="item.icon">
+                  <img src="{{'/assets/images/icons/'+item.icon}}" />
+                </div>
+              </li>
+            </div>
+          </confirm>
+        </div>
+
+      </div>
+
+      <!-- <li>
+        <div class="item">Delete...</div>
+        <div class="icon">
+          <img src="/assets/images/icons/deleteldpi.svg" />
+        </div>
+      </li>
+      <li>
+        <div class="item">Share</div>
+        <div class="icon">
+          <img src="/assets/images/icons/inviteldpi.svg" />
+        </div>
+      </li>
+      <li>
+        <div class="item">Move</div>
+        <div class="icon">
+          <img src="/assets/images/icons/downloadldpi.svg" />
+        </div>
+      </li> -->
+
+
+    </ul>
+
+  </div>
+</div>

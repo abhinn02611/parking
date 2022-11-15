@@ -1,0 +1,35 @@
+<div class="form-input open">
+  <div class="label" (click)="onFocus()">{{ label }}</div>
+  <div class="uploader-container">
+    <div class="upload-controller" *ngFor="let item of config">
+      <div
+        *ngIf="item.status === 0"
+        class="single-upload"
+        appDragDropFileUpload
+        (fileDropped)="uploadFile($event, item.index)"
+      >
+        <img src="/assets/images/icons/cameraldpi.svg" />
+        <div class="file-selector">
+          <!-- <div class="filedrag" [ngClass]="{droppeble: droppeble}" >
+
+              </div> -->
+          <input
+            type="file"
+            class="fileselect"
+            name="fileselect"
+            (change)="uploadFile($event, item.index)"
+          />
+        </div>
+      </div>
+      <div *ngIf="item.status === 1" class="file-upload-loader">
+        <img src="/assets/images/loader_mini_red.png" />
+      </div>
+      <div *ngIf="item.status === 2" class="file-upload-preview">
+        <img class="preview" src="{{ item.res.medium_url }}" />
+        <div class="close" (click)="deleteFile(item.index)">
+          <img src="/assets/images/icons/closeldpi_red.svg" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

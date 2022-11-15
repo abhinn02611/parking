@@ -1,0 +1,186 @@
+<div class="sistem-content">
+  <div class="sistem-main">
+    <!-- <sistem-breadcrumb [links]="linksBreadcrumb"></sistem-breadcrumb> -->
+    <div class="header">
+      <list-header
+        [heading]="heading"
+        (actionAddNew)="openAddNewModel()"
+        [showAddNewButton]="false"
+        [tags]="tags"
+        [actions]="activeActions"
+        (actionGroup)="onAction($event)"
+        [showToggleInfoButton]="false"
+      >
+      </list-header>
+    </div>
+    <div class="filter" (scroll)="onScroll()" [ngClass]="headerFixed ? 'fixed': 'nofixed'">
+      <!-- <app-filter [filter]="filter" (onFilterChange)="applyFilter($event)"></app-filter> -->
+      <app-filter
+        [filter]="filter"
+        (onFilterChange)="handleClearAllFilter($event)"
+      ></app-filter>
+    </div>
+    <div class="sistem-split open" [ngClass]="{ open: infoOpen }">
+      <div class="sistem-split-left">
+        <sistem-pageloader *ngIf="loading"></sistem-pageloader>
+        <div class="contacts" *ngIf="!loading">
+          <ul class="headings">
+            <li></li>
+            <li>
+              <div
+                class="checkbox"
+                [ngClass]="{ checked: selectall }"
+                (click)="selectallItem()"
+              ></div>
+            </li>
+            <li class="paragraph">TYPE</li>
+            <li class="paragraph">VEHICLE NO.</li>
+            <li class="paragraph" (click)="updateOrderBy('type')">
+              PASS TYPE
+              <div class="order-type" *ngIf="'type' == orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph" (click)="updateOrderBy('startDate')">
+              CREATED ON
+              <div class="order-type" *ngIf="'startDate' == orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph" (click)="updateOrderBy('endDate')">
+              EXPIRES ON
+              <div class="order-type" *ngIf="'endDate' == orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph">VALID FOR</li>
+            <li class="paragraph">REMAINING</li>
+            <!-- <li class="paragraph">
+                            CREATED BY
+                        </li> -->
+            <li class="paragraph" (click)="updateOrderBy('status')">
+              STATUS
+              <div class="order-type" *ngIf="'status' == orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph">AMOUNT</li>
+            <li></li>
+            <li></li>
+          </ul>
+          <ng-container
+            *ngFor="
+              let session of sessionListView.slice(0, 25);
+              let index = index
+            "
+          >
+            <ul
+              class="content"
+              [ngClass]="{ selected: isSelected(session['is']) }"
+              style="cursor: pointer"
+            >
+              <li>{{ (filter.page - 1) * filter.limit + index + 1 }}</li>
+              <li (click)="selectItem($event, session)">
+                <div
+                  class="checkbox"
+                  [ngClass]="{ checked: isSelected(session['id']) }"
+                ></div>
+              </li>
+              <li class="vehiclethumb">
+                <div
+                  class="vehicleimage"
+                  [ngStyle]="{
+                    'background-color': session['vehicle']['bgcolor']
+                  }"
+                >
+                  <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="-7 -10 80 80"
+                    [ngStyle]="{ fill: session['vehicle']['color']}">
+                    <ng-container *ngFor="let path of getPaths(session['vehicle'])">
+                      <path [attr.d]="path" />
+                    </ng-container>
+                  </svg>
+                </div>
+              </li>
+              <li class="highlight" (click)="viewPass(session['id'])">
+                {{ session["vehicle"]?.regNumber }}
+              </li>
+              <li class="paragraph">{{ session["type"] }}</li>
+              <li class="paragraph">{{ formatDate(session["startDate"]) }}</li>
+              <li class="paragraph">{{ formatDate(session["endDate"]) }}</li>
+              <li class="paragraph">{{ session["parking"]["name"] }}</li>
+              <li class="paragraph">
+                {{ formatRemaining(session["endDate"]) }} days
+              </li>
+              <!-- <li class="paragraph">{{session['createdBy'].firstName}} {{session['createdBy'].lastName}}</li> -->
+              <li class="paragraph">
+                {{
+                  formatRemaining(session["endDate"]) !== "0"
+                    ? "Active"
+                    : "Expired"
+                }}
+              </li>
+
+              <li>₹{{ session["amount"] }}/-</li>
+              <li class="paragraph">
+                <list-user [user]="session.createdBy"></list-user>
+              </li>
+              <li>
+                <div class="action">
+                  <list-action
+                    [menuConfig]="[
+                      {
+                        label: 'View',
+                        icon: 'reportldpi.svg',
+                        action: viewPass.bind(this, session['id'])
+                      },
+                      {
+                        label: 'Suspend',
+                        icon: 'detailsldpi.svg',
+                        action: suspendPass.bind(this, session['id']),
+                        confirm: true,
+                        confirmParam: {
+                          title: 'Suspend Pass',
+                          content: 'Are you sure to suspend this pass?',
+                          note: 'You can not undo the change.',
+                          label: 'Suspend Pass'
+                        }
+                      }
+                    ]"
+                  >
+                  </list-action>
+                </div>
+              </li>
+            </ul>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="tags">
+        <div class="tag smalltext" *ngIf="tags[0]">Total: {{ tags[0] }}</div>
+      </div>
+      <app-filter-pagination
+        [filter]="filter"
+        (onFilterChange)="applyFilter($event)"
+      ></app-filter-pagination>
+    </div>
+  </div>
+</div>
+
+<app-view-pass
+  (actionCancel)="cancelViewPass()"
+  *ngIf="showPass"
+  [pass_id]="showPassId"
+  [parking_id]="parking_id"
+  (actionPrimary)="suspendPass($event)"
+></app-view-pass>
+<app-passes-share
+  *ngIf="shareModelOpen"
+  (actionPrimary)="cancelShare()"
+  [parking_id]="parking_id"
+  (actionCancel)="cancelShare()"
+></app-passes-share>

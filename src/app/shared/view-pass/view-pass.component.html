@@ -1,0 +1,120 @@
+<!-- [labelSecondary]="'Cancel Pass'"  -->
+<form-model
+  [title]="'Pass Details'"
+  [labelCancel]="'Close'"
+  [cancelPosition]="'bottom'"
+  (actionCancel)="onCancel()"
+  (actionSecondary)="onPrimary()"
+  [linkSharePass]="session"
+>
+  <div class="form-addproduct">
+    <div class="vehicle_no">Vehicle Number</div>
+    <div class="vehicle_no_val">
+      <div class="left">
+        <div
+          class="vehicleimage"
+          [ngStyle]="{
+                    'background-color': session?.vehicle?.bgcolor
+                  }"
+        >
+        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="-7 -10 80 80"
+          [ngStyle]="{ fill: session?.vehicle?.color}">
+          <ng-container *ngFor="let path of getPaths(session?.vehicle?.vehicleType)">
+            <path [attr.d]="path" />
+          </ng-container>
+        </svg>
+        </div>
+      </div>
+      <div class="right">
+        {{ session?.vehicle?.regNumber }}
+      </div>
+    </div>
+
+    <div class="passinfo">
+      <div class="passicon">
+        <img
+          *ngIf="formatRemaining(session?.endDate) !== '0'"
+          src="/assets/images/pass.svg"
+          alt=""
+        />
+        <img
+          *ngIf="formatRemaining(session?.endDate) == '0'"
+          src="/assets/images/expirePass.svg"
+          alt=""
+        />
+      </div>
+      <div class="active">
+        {{ formatRemaining(session?.endDate) !== "0" ? "Active" : "Expired" }}
+        Pass
+      </div>
+      <div
+        class="active_message"
+        *ngIf="formatRemaining(session?.endDate) !== '0'"
+      >
+        {{ formatRemaining(session?.endDate) }}
+      </div>
+    </div>
+
+    <div class="owner-heading">Owner Details</div>
+
+    <div class="pass-data">
+      <div class="sec-1">
+        <div class="title">Name</div>
+        <div class="value">
+          {{ session?.vehicle?.name ? session?.vehicle?.name : "--" }}
+        </div>
+      </div>
+      <div class="sec-1">
+        <div class="title">Mobile No</div>
+        <div class="value">
+          {{ session?.vehicle?.phone ? session?.vehicle?.phone : "--" }}
+        </div>
+      </div>
+      <div class="sec-1">
+        <div class="title">Payment</div>
+        <div class="value">
+          ₹{{ session?.amount }}/- • {{ session?.paymentMode }}
+        </div>
+      </div>
+      <div class="sec-1">
+        <div class="Owner">Agent</div>
+        <div class="value">
+          {{ session?.createdBy?.firstName }} {{ session?.createdBy?.lastName }}
+        </div>
+      </div>
+    </div>
+    <div class="owner-heading">Sessions (Total 0)</div>
+    <div class="pass-data pass-time mb-50">
+      <div class="sec-2">
+        <div class="title">IN TIME</div>
+        <div class="value">-</div>
+      </div>
+      <div class="sec-2">
+        <div class="title">OUT TIME</div>
+        <div class="value">-</div>
+      </div>
+      <div class="sec-3">
+        <div class="title">TOTAL</div>
+        <div class="value">-</div>
+      </div>
+    </div>
+
+    <div class="footer-info">
+      This is non-refudable pass. Only owner of the vehicle can use this. o
+      other category of vehicle will be permited to park on behalf of the pass.
+      <span class="red">Client Privacy Policy</span> and
+      <span class="red">Sistem Apps Sharing Policy</span>.
+    </div>
+  </div>
+</form-model>
+
+<confirm
+  *ngIf="confirmSuspendModelOpen"
+  [dialog]="true"
+  (actionConfirm)="confirmSuspend()"
+  (actionCancel)="cancelSuspend()"
+  [title]="'Suspend Pass'"
+  [content]="'Are you sure to suspend this pass?'"
+  [note]="'You can not undo the change.'"
+  [labelConfirm]="'Suspend Pass'"
+></confirm>

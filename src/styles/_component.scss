@@ -1,0 +1,92 @@
+::-webkit-input-placeholder {
+  /* Edge */
+  color: $_lines;
+}
+
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: $_lines;
+}
+
+::placeholder {
+  color: $_lines;
+}
+.button {
+  background: $_red;
+  color: $_white;
+  padding: 15px 40px;
+  width: auto;
+  font-weight: 500;
+  font-size: 16px;
+  border-radius: 30px;
+  display: inline;
+  cursor: pointer;
+  -webkit-transition: all 0.2s; /* Safari */
+  transition: all 0.2s;
+  position: relative;
+  &:hover {
+    background: $_button_hover;
+  }
+  &.button_40{
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  &.action {
+    &:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: $_red;
+      border-radius: 30px;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      left: calc(50% - 12px);
+      top: calc(50% - 12px);
+      
+      animation: rotation 1s infinite linear;
+      -webkit-animation: rotation 1s infinite linear;
+      -o-animation: rotation 1s infinite linear;
+      background: url("/assets/images/loader_mini.png") no-repeat;
+      background-size: contain;
+    }
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+    -webkit-transform: rotate(359deg);
+    -o-transform: rotate(359deg);
+  }
+}
+
+.label {
+  font-size: 12px;
+  color: $_subtext;
+}
+.input-control {
+  display: block;
+  padding: 10px 0px;
+  background: transparent;
+  border: 0;
+  width: 100%;
+  border-bottom: 1px solid $_lines;
+  outline: none;
+}
+.button-text{
+  padding: 10px 10px;
+  color: $_red;
+  cursor: pointer;
+}

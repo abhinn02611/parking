@@ -1,0 +1,85 @@
+@use 'sass:math';
+@mixin make-grid-columns($columns: $grid-columns, $gutter: $grid-gutter-width) {
+  %grid-column {
+    position: relative;
+    width: 100%;
+    padding-right: math.div($gutter, 2);
+    padding-left: math.div($gutter, 2);
+  }
+
+  @for $i from 1 through $columns {
+    .col-#{$i} {
+      @extend %grid-column;
+    }
+  }
+  .col,
+  .col-auto {
+    @extend %grid-column;
+  }
+
+  .col {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+  }
+  .col-auto {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 100%; // Reset earlier grid tiers
+  }
+
+  @for $i from 1 through $columns {
+    .col-#{$i} {
+      @include make-col($i, $columns);
+    }
+  }
+
+  .order-first { order: -1; }
+
+  .order-last { order: $columns + 1; }
+
+  @for $i from 0 through $columns {
+    .order-#{$i} { order: $i; }
+  }
+
+  // `$columns - 1` because offsetting by the width of an entire row isn't possible
+  @for $i from 0 through ($columns - 1) {
+    @if not ($i == 0) { // Avoid emitting useless .offset-0
+      .offset-#{$i} {
+        @include make-col-offset($i, $columns);
+      }
+    }
+  }
+}
+
+@mixin make-container($gutter: $grid-gutter-width) {
+  width: 100%;
+  padding-right: math.div($gutter, 2);
+  padding-left: math.div($gutter, 2);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@mixin make-row($gutter: $grid-gutter-width) {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: math.div($gutter, 2) * -1;
+  margin-left: math.div($gutter, 2) * -1;
+}
+
+@mixin make-col-ready($gutter: $grid-gutter-width) {
+  position: relative;
+  width: 100%;
+  padding-right: math.div($gutter, 2);
+  padding-left: math.div($gutter, 2);
+}
+
+@mixin make-col($size, $columns: $grid-columns) {
+  flex: 0 0 percentage(math.div($size, $columns));
+  max-width: percentage( math.div($size, $columns));
+}
+
+@mixin make-col-offset($size, $columns: $grid-columns) {
+  $num:  math.div($size, $columns);
+  margin-left: if($num == 0, 0, percentage($num));
+}

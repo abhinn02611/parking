@@ -1,0 +1,86 @@
+@import "src/styles/_variables.scss";
+.dropdown {
+  .preview {
+    position: relative;
+    .form-control {
+      display: block;
+      padding: 10px 0px;
+      background: transparent;
+      border: 0;
+      width: 100%;
+      border-bottom: 1px solid #b9c1cc;
+      outline: none;
+      font-weight: 600;
+      font-size: 18px;
+      padding-top: 5px;
+    }
+    .event-listener {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+    
+  }
+  .overlay{
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    display: none;
+  }
+  .options-container {
+    height: 0;
+    position: relative;
+    display: none;
+    .options {
+      position: absolute;
+      max-height: 200px;
+      overflow: scroll;
+      background: $_white;
+      border: 1px solid #eee;
+      z-index: 20;
+      ul{
+          li{
+              padding: 8px 10px;
+              color: $_subtext;
+              border-bottom: 1px solid #eee;
+              font-size: 14px;
+              cursor: pointer;
+              &:hover{
+                  background: $_hover;
+              }
+          }
+      }
+    }
+  }
+  &.open{
+    .options-container{
+        display: block;
+    }
+    .overlay{
+        display: block;
+    }
+  }
+  &.top {
+    .options-container {
+      .options {
+        left: 0;
+        right: 0;
+        bottom: 40px;
+      }
+    }
+  }
+  &.bottom {
+    .options-container {
+      .options {
+        top: 0;
+        left: 0;
+        right: 0;
+      }
+    }
+  }
+}

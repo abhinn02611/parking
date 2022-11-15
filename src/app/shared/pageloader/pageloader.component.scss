@@ -1,0 +1,14 @@
+.pageloader {
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    img {
+        width: 200px;
+        margin-top: calc( 0% + 150px);
+        margin-left: 40%;
+        display: block;
+        position: absolute;
+    }
+}

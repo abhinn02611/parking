@@ -1,0 +1,248 @@
+@import "src/styles/_variables.scss";
+.details-left {
+  width: 250px;
+  float: left;
+}
+
+.details-right {
+  margin-left: 230px;
+  .details-right-inner {
+    width: 840px;
+    margin: 0 auto;
+  }
+}
+
+.park-rate-wrapper {
+  text-align: center;
+  padding-bottom: 70px;
+}
+
+.park-rate-main {
+  padding-top: 20px;
+  .profile {
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    color: #566881;
+    margin: 0;
+    border-radius: 50%;
+    background: #edf1f5;
+
+    .profile_img {
+      height: 100%;
+      width: 100%;
+      border-radius: 50%;
+    }
+
+    .profile_initials {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+    }
+  }
+}
+
+.welcome-name {
+  p {
+    font-size: 30px;
+    color: #171e27;
+    font-weight: 600;
+    margin-top: 15px !important;
+    margin: 0;
+  }
+  span {
+    color: #171e27;
+    font-size: 16px;
+  }
+}
+
+.parkPro-main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  grid-auto-rows: 330px;
+  text-align: left;
+  margin-top: 70px;
+
+  .grid-row-1 {
+    border: 1px solid #eee;
+    border-radius: 8px;
+  }
+
+  .grid-row-2 {
+    grid-row: span 2;
+
+    .inner {
+      border: 1px solid #eee;
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .footer-container {
+      border: 1px solid #eee;
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    }
+  }
+
+  .grid-row-3 {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    height: 270px;
+    a {
+      color: $_link !important;
+    }
+  }
+
+  .inner-container {
+    .inner {
+      padding: 25px;
+
+      p {
+        color: #171e27;
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0;
+        margin-bottom: 10px !important;
+      }
+      span {
+        color: #566881;
+        font-size: 14px;
+      }
+      ins {
+        display: block;
+        text-decoration: none;
+        margin-top: 15px;
+      }
+    }
+    .footer-container {
+      border-top: 1px solid #eee;
+      padding: 20px 25px;
+      a.inner-update {
+        color: $_hover;
+        font-weight: 600;
+        display: block;
+      }
+    }
+  }
+
+  .domain-main {
+    margin-top: 10px;
+    .domain-inner {
+      display: flex;
+      p {
+        color: #566881;
+        font-size: 14px;
+        font-weight: normal;
+        width: 25%;
+        display: flex;
+        align-items: center;
+      }
+      span {
+        color: #171e27;
+        font-size: 14px;
+        width: 75%;
+        margin-left: auto;
+        font-weight: 500;
+      }
+      .bus-plan-btn {
+        background: #4cd964;
+        font-size: 14px;
+        text-decoration: none;
+        color: #fff;
+        border-radius: 50px;
+        padding: 7px 15px;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+.domain-main.logo-inner p {
+  color: #171e27 !important;
+  font-size: 33px !important;
+  font-weight: 600 !important;
+  width: 40% !important;
+}
+
+.domain-main.logo-inner .domain-inner {
+  align-items: center !important;
+}
+
+.acc-storage {
+  text-align: left;
+  margin-top: 35px;
+  p {
+    color: #171e27;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  span {
+    font-size: 14px;
+    color: #566881;
+  }
+  a {
+    color: #ff3b30;
+    font-weight: 600;
+    margin-top: 30px;
+    display: block;
+  }
+}
+
+.park-rate-wrapper .welcome-name ins {
+  text-decoration: none;
+  color: #566881;
+  display: block;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.parkPro-main {
+  .inner {
+    .park-text {
+      p {
+        color: #566881;
+        font-weight: 400;
+        font-size: 14px;
+      }
+    }
+    .park-fac {
+      display: flex;
+      width: 40%;
+      justify-content: space-between;
+    }
+    img {
+      width: 22px;
+    }
+    .park-photos {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      img {
+        margin-top: 5px;
+        border-radius: 4px;
+        width: 61px;
+        height: 61px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.sec-wrapper {
+  margin-top: 20px !important;
+}
+
+.sec-main .domain-inner p {
+  width: 35% !important;
+}
+
+.acc-storage ins {
+  color: #171e27;
+  font-weight: 600;
+}

@@ -1,0 +1,64 @@
+<form-model [title]="'Choose Related Products'" [labelCancel]="'Cancel'" [cancelPosition]="'bottom'"
+  (actionCancel)="actionCancel.emit()" [labelPrimary]="'Save'" (actionPrimary)="onPrimary()"  [loaderPrimary]="loaderPrimary"
+  [labelSecondary]="''" [scroll]="false">
+  <div class="form-add-related-product">
+    <div class="search-box-fixed">
+      <div class="searchbox">
+        <input type="text" class="search-text" [(ngModel)]="searchKeyword" (keyup)="showResult()" value={{productId}}>
+        <div class="search-icon">
+          <img src="/assets/images/icons/icon-search.png" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="rp-container">
+      <div class="related-products">
+        <ul class="headings">
+          <li>
+            <div class="checkbox" [ngClass]="{'checked': selectall}" (click)=selectallItem()></div>
+          </li>
+          <li class="paragraph"></li>
+          <li class="paragraph" (click)="updateOrderBy('product_name')">
+            PRODUCT NAME
+            <div class="order-type" *ngIf="'product_name'==orderBy">
+              <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+              <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+            </div>
+          </li>
+          <li class="paragraph" (click)="updateOrderBy('product_code')">
+            PRODUCT CODE
+            <div class="order-type" *ngIf="'product_code'==orderBy">
+              <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+              <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+            </div>
+          </li>
+          
+          <li class="paragraph" (click)="updateOrderBy('category_name')">
+            CATEGORY
+            <div class="order-type" *ngIf="'category_name'==orderBy">
+              <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+              <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+            </div>
+          </li>
+        </ul>
+        <ng-container *ngFor="let product of productListView | orderBy : orderBy: reverse; let index = index">
+          <ul class="content" [ngClass]="{'selected': isSelected(product['product_id'])}" style="cursor: pointer;" (click)="selectItem(product)">
+            <li>
+              <div class="checkbox" [ngClass]="{'checked': isSelected(product['product_id'])}"
+                ></div>
+            </li>
+            <li class="productthumb">
+              <div class="productimage" *ngIf="isArray(product.images) && product.images.length > 0">
+                <img
+                  src="{{product.images[0].small_url}}"
+                  alt="" />
+              </div>
+            </li>
+            <li class="highlight">{{product['product_name']}}</li>
+            <li class="paragraph">{{product['product_code']}}</li>
+            <li class="paragraph">{{product['category_name']}}</li>
+          </ul>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</form-model>

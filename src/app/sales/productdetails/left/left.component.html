@@ -1,0 +1,43 @@
+<div class="section-header">
+  <div class="heading subheading">Details</div>
+  <div class="action highlight" (click)="actionEdit.emit()">Edit</div>
+</div>
+<div class="media mb-20 mt-10" *ngIf="images.length > 0">
+  <img src="{{images[0].medium_url}}" />
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Status: </div>
+    <div class="value paragraph">Active</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Category: </div>
+    <div class="value paragraph">{{product.category_name}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Type: </div>
+    <div class="value paragraph">{{product.category_typename}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">SKU: </div>
+    <div class="value paragraph">{{product.product_code}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">HSN Code: </div>
+    <div class="value paragraph">{{(product.product_hsn_code)?product.product_hsn_code:'NA'}}</div>
+  </div>
+</div>
+<div class="content" *ngFor="let item of prices">
+  <div class="main">
+    <div class="label smalltext ">{{priceTypesKV[item.type]}}: </div>
+    <div class="value paragraph">{{currency}} {{item.price}}</div>
+  </div>
+</div>

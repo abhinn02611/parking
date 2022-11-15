@@ -1,0 +1,16 @@
+<div
+  class="list-filter"
+  *ngIf="filter"
+  [ngClass]="{ nospace: filter.filterLabe == false }"
+>
+  <div class="filter-items">
+    <div class="filter-item search" [ngClass]="{ active: filter.query != '' }">
+      <input
+        type="text"
+        placeholder="Search the parking"
+        [(ngModel)]="filter.query"
+      />
+    </div>
+    <div class="filter-item button" (click)="onClickApply()">Apply</div>
+  </div>
+</div>

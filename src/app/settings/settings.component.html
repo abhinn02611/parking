@@ -1,0 +1,26 @@
+<div class="sistem-container" [ngClass]="{'menu-open': menuSwitchStatus}">
+
+  <div class="sistem-sidebar">
+    <sistem-sidebar></sistem-sidebar>
+  </div>
+  <div class="sistem-header">
+    <sistem-header></sistem-header>
+  </div>
+  <div class="sistem-content">
+    <sistem-pageloader *ngIf="loading"></sistem-pageloader>
+    <div class="sistem-main" *ngIf="!loading">
+   
+      <div class="details-container">
+        <div class="details-left" [ngStyle]="leftStyle">
+          <div class="leftbox" #leftcontent [ngClass]="{'fixed': leftSidebarFixed}">
+            <app-settings-left [contact]="contact" (actionEdit)="openAddNewModel(true)" [currency]="currency" ></app-settings-left>
+          </div>
+        </div>
+        <div class="details-right" [ngClass]="{'fixed': sidebarFixed}">
+          
+          <app-settings-right [component]="activeComponent"></app-settings-right>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

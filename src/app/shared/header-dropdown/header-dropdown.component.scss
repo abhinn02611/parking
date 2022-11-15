@@ -1,0 +1,199 @@
+@import "src/styles/_variables.scss";
+
+.header-dropdown {
+  align-items: center;
+  background-color: #f8f9fa;
+  border-radius: 43px;
+  cursor: pointer;
+  height: 40px;
+  display: flex;
+  padding: 15px 10px;
+
+  .label-value:hover {
+    background: transparent;
+  }
+
+  .form-dropdown-container {
+    position: relative;
+    .form-dropdown {
+      position: relative;
+      width: 100%;
+      .inner-cnt {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        align-self: center;
+        justify-content: center;
+      }
+      .angle {
+        width: 28px;
+        height: 28px;
+        margin-left: 5px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        background: #edf1f5;
+        padding: 5px;
+        border-radius: 50%;
+        img {
+          width: 100%;
+        }
+        .open {
+          display: none;
+        }
+      }
+      &.open {
+        .angle {
+          top: 0;
+        }
+      }
+      .input {
+        border: 0;
+        background: transparent;
+        color: $_maintext;
+        font-size: 14px;
+        outline: none;
+        white-space: nowrap;
+        width: 80px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .label {
+        position: absolute;
+        top: 17px;
+        left: 5px;
+        color: $_maintext;
+        font-size: 16px;
+        margin-left: 0px;
+        transition: font-size 0.2s linear, color 0.2s linear, top 0.2s linear;
+      }
+      &.open {
+        .label {
+          font-size: 11px;
+          color: $_subtext;
+          // top: 2px;
+          width: 150px;
+          left: 5px;
+          position: absolute;
+          top: 0px;
+        }
+      }
+      .preview {
+        position: relative;
+        .form-control {
+          display: block;
+          padding: 10px 0px;
+          background: transparent;
+          border: 0;
+          width: 100%;
+          border-bottom: 1px solid #b9c1cc;
+          outline: none;
+          font-weight: 600;
+          font-size: 18px;
+          padding-top: 5px;
+        }
+        .event-listener {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+        }
+      }
+    }
+    .overlay {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      z-index: 10;
+      display: none;
+    }
+    .options-container {
+      height: 0;
+      position: relative;
+      display: none;
+      .options {
+        position: absolute;
+        background: $_white;
+        border: 1px solid #eee;
+        width: 200px;
+        z-index: 50;
+        -webkit-box-shadow: 1px 1px 11px 0px rgba(181, 177, 181, 1);
+        -moz-box-shadow: 1px 1px 11px 0px rgba(181, 177, 181, 1);
+        box-shadow: 1px 1px 11px 0px rgba(181, 177, 181, 1);
+        .dropdown-scroll {
+          overflow-y: auto;
+          max-height: 200px;
+        }
+      }
+    }
+    .list-dropdown-option {
+      display: block;
+      padding: 8px 5px;
+      .icon {
+        float: left;
+        width: 20px;
+        height: 20px;
+        img {
+          width: 100%;
+          padding: 4px 5px;
+          opacity: 0.9;
+          display: block;
+        }
+      }
+      .value {
+        margin-left: 24px;
+        color: $_primary;
+        font-size: 12px;
+      }
+      &:hover {
+        background: $_hover;
+        cursor: pointer;
+      }
+      &.selected {
+        background: $_hover;
+        .icon {
+          visibility: visible;
+        }
+      }
+    }
+    &.ddopen {
+      .form-dropdown {
+        .angle {
+          .open {
+            display: block;
+          }
+          .close {
+            display: none;
+          }
+        }
+      }
+      .options-container {
+        display: block;
+      }
+      .overlay {
+        display: block;
+      }
+    }
+    &.top {
+      .options-container {
+        .options {
+          left: 0;
+          right: 0;
+          bottom: 40px;
+        }
+      }
+    }
+    &.bottom {
+      .options-container {
+        .options {
+          top: 0;
+          left: 0;
+          right: 0;
+        }
+      }
+    }
+  }
+}

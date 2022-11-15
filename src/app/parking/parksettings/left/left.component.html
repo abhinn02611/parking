@@ -1,0 +1,84 @@
+<div class="menu-box">
+  <div class="heading">Account Settings</div>
+  <ul>
+    <!-- <li *ngIf="role=='admin'" [ngClass]="{active: isActive(path.PARKING_SETTING_DASHBOARD)}" (click)="moveToDashboard()">
+            <a>
+                <img src="/assets/images/icons/profileldpi.svg" />
+                <div class="menu-text">Dashboard</div>
+            </a>
+        </li> -->
+
+    <li
+      *ngIf="role !== 'admin'"
+      [ngClass]="{ active: isActive(path.PARKING_VENDOR) }"
+      (click)="moveTo(path.PARKING_VENDOR)"
+    >
+      <a>
+        <img src="/assets/images/icons/leadsldpi.svg" />
+        <div class="menu-text">Profile</div>
+      </a>
+    </li>
+
+    <li
+      *ngIf="role !== 'admin'"
+      [ngClass]="{ active: isActive(path.PARKING_SETTING_RATE) }"
+      (click)="moveTo(path.PARKING_SETTING_RATE)"
+    >
+      <a>
+        <img src="/assets/images/icons/profileldpi.svg" />
+        <div class="menu-text">Parking Rate</div>
+      </a>
+    </li>
+    <li
+      *ngIf="role !== 'admin'"
+      [ngClass]="{ active: isActive(path.PARKING_SETTING_PASS) }"
+      (click)="moveTo(path.PARKING_SETTING_PASS)"
+    >
+      <a>
+        <img src="/assets/images/icons/detailsldpi.svg" />
+        <div class="menu-text">Passes</div>
+      </a>
+    </li>
+    <li
+      *ngIf="role !== 'admin'"
+      [ngClass]="{ active: isActive(path.PARKING_SETTING_TEAM) }"
+      (click)="moveTo(path.PARKING_SETTING_TEAM)"
+    >
+      <a>
+        <img src="/assets/images/icons/leadsldpi.svg" />
+        <div class="menu-text">Team</div>
+      </a>
+    </li>
+    <li
+      *ngIf="role == 'admin'"
+      [ngClass]="{ active: isActive(path.PARKING_RATE) }"
+      (click)="moveTo(path.PARKING_RATE)"
+    >
+      <a>
+        <img src="/assets/images/icons/leadsldpi.svg" />
+        <div class="menu-text">Profile</div>
+      </a>
+    </li>
+
+    <li
+      *ngIf="role !== 'vendor'"
+      [ngClass]="{ active: isActive(path.PARKING_MANAGE) }"
+      (click)="moveTo(path.PARKING_MANAGE)"
+    >
+      <a>
+        <img src="/assets/images/icons/leadsldpi.svg" />
+        <div class="menu-text">Parkings</div>
+      </a>
+    </li>
+    <li
+      *ngIf="role == 'admin'"
+      [ngClass]="{ active: isActive(path.PARKING_SETTING_VENDORS) }"
+      (click)="moveTo(path.PARKING_SETTING_VENDORS)"
+    >
+      <a>
+        <img src="/assets/images/icons/profileldpi.svg" />
+        <div class="menu-text">Vendors</div>
+      </a>
+    </li>
+  </ul>
+</div>

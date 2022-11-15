@@ -1,0 +1,165 @@
+@use 'sass:math';
+@mixin make-buttons() {
+
+  [class^="btn-"],
+  [class*=" btn-"]{
+    border: none;
+    background-color: $white;
+    color: $_neutral;
+    border-radius: $radius;
+    line-height: 1.428571429;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    @include transition($transition);
+    position: relative;
+    overflow: hidden;
+    @include user-select('none');
+    cursor: pointer;
+    outline: none;
+    font-size: 14px;
+    padding: 10px 14px;
+
+    &::after{
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      @include transition(all 1s linear 0s);
+      visibility: hidden;
+    }
+
+    &:active{
+      box-shadow: none !important;
+  
+      &::after{
+        width: 0;
+        height: 0;
+        opacity: 1;
+        transition: 0s;
+        visibility: visible;
+      }
+    }
+
+    &.btn-lg {
+      font-size: 18px;
+      padding: 14px 18px;
+      border-radius: 8px;
+    }
+
+    &.btn-xs {
+      font-size: 12px;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+
+    &.btn-xxs {
+      font-size: 10px;
+      padding: 6px 10px;
+      border-radius: 3px;
+    }
+  }
+
+  .btn-empty {
+    background: transparent;
+    color: $_neutral;
+  }
+
+  @each $type, $map in $colors {
+    $_top: map-get($map, 900);
+    $color: rgba(map-get($_top, 'value'), map-get($_top, 'opacity'));
+    
+    .btn-#{$type} {
+      background-color: $color;
+      color: $white;
+
+      &:hover {
+        background-color: darken($color, 5%);
+      }
+
+      &.disabled, &[disabled="true"] {
+        background-color: lighten($color, 20%);
+        cursor: default;
+      }
+
+      @if($type == 'neutral' or $type == 'neutral-blue') {
+        &::after{
+          background: rgba($white, 0.3);
+        }
+      }
+    }
+  }
+}
+
+@mixin color-bg-border() {
+  @each $name, $shades in  $colors {
+    $_shade: map-get($shades, 900);
+    .#{$name}-color {
+      color: rgba(map-get($_shade, 'value'), map-get($_shade, 'opacity'))
+    }
+
+    .#{$name}-bg {
+      background-color: rgba(map-get($_shade, 'value'), map-get($_shade, 'opacity'))
+    }
+
+    .#{$name}-border {
+      border-color: rgba(map-get($_shade, 'value'), map-get($_shade, 'opacity'))
+    }
+
+    @each $shade, $value in $shades {
+      .#{$name}#{$shade}-color {
+        color: rgba(map-get($value, 'value'), map-get($value, 'opacity'));
+      }
+
+      .#{$name}#{$shade}-bg {
+        background-color: rgba(map-get($value, 'value'), map-get($value, 'opacity'));;
+      }
+
+      .#{$name}#{$shade}-border {
+        border-color: rgba(map-get($value, 'value'), map-get($value, 'opacity'));;
+      }
+    }
+  }
+}
+
+@mixin font($family, $path, $weight, $style){
+  font-family: $family;
+  src:url($path + ".svg");
+  src:url($path + ".eot?#iefix") format("embedded-opentype"),
+      url($path + ".woff") format("woff"),
+      url($path + ".ttf") format("truetype"),
+      url($path + ".svg#dripicons-v2") format("svg");
+  font-weight: $weight;
+  font-style: $style;
+}
+
+@mixin weight(){
+  @each $weight in $weights{
+    .weight#{$weight} {
+      font-weight: $weight !important;
+    }
+  }
+}
+
+@mixin align() {
+  @each $align in $aligns {
+    .text-#{$align} {
+      text-align: #{$align};
+    }
+  }
+}
+
+@mixin font-sizes(){
+  @each $size in $font-sizes {
+    .px#{$size} {
+      font-size: #{$size}px;
+      line-height: #{$size + math.div($size, 2)}px
+    }
+  }
+}

@@ -1,0 +1,103 @@
+<header>
+  <div class="app-menu" (click)="toggleModule()">
+    <img src="/assets/images/icons/nine-dot-red.png" />
+  </div>
+  <div class="logo">
+    <div class="sistem-name">kormoan</div>
+    <img src="/assets/images/sistem-black-small.png" />
+  </div>
+  <div class="header-search" [ngClass]="{open: searchOpen}">
+    <img class="search-icon" src="/assets/images/icons/icon-search.png" />
+    <input placeholder="Search Sistem" [(ngModel)]="searchKeyword" (keyup)="showResult()" />
+    <div class="search-results">
+      <ul>
+        <li>
+            <div class="icon">
+              <img src="/assets/images/icons/icon_s.png" alt="" />
+            </div>
+            <div class="search-item">
+              Sudesh <div class="dim">- Sistem Search</div>
+            </div>
+        </li>
+        <li>
+            <div class="icon">
+              <img src="/assets/images/icons/icon_contact.png" alt="" />
+            </div>
+            <div class="search-item multiline">
+              <div class="primary">Sudesh <div class="dim">Srikant</div></div>
+              <div class="secondry">Contact - Aadinath Retails</div>
+            </div>
+        </li>
+        <li>
+            <div class="icon"></div>
+            <div class="search-item">
+              Sudesh <div class="dim">- Sistem Search</div>
+            </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="right-menu">
+      <ul>
+        <li>
+          <a href="https://www.sistem.app/" target="_blank">
+            <img src="/assets/images/icons/question.png" />
+          </a>
+        </li>
+        <!-- <li>
+          <a [routerLink]="['./sales/details']">
+            <img src="/assets/images/icons/bell.png" />
+          </a>
+        </li> -->
+      </ul>
+    </div>
+    <div class="user-thumb" [ngClass]="{selected: userOpen}">
+      <div class="user-thumb-border" (click)="toggleUser()">
+        <img src="/assets/images/user.jpg"  *ngIf="profilePic==''" />
+        <img src="{{profilePic}}" *ngIf="profilePic!=''" />
+      </div>
+    </div>
+    <div class="user-popup" *ngIf="userOpen">
+      <div class="overlay" (click)="toggleUser()"></div>
+      <div class="popup-box">
+        <div class="top">
+          <div class="user"  *ngIf="profilePic==''">
+            <img src="/assets/images/user.jpg"  />
+          </div>
+          <div class="user" *ngIf="profilePic!=''">
+              <img src="{{profilePic}}"  />
+          </div>
+          <div class="info">
+            <div class="name">{{name}}</div>
+            <div class="designation">{{role}}</div>
+            <div class="button-container">
+              <div class="button" (click)="openSystemAccount()">Sistem Account</div>
+            </div>
+          </div>
+        </div>
+        <div class="bottom">
+          <div class="warning">
+            This account is managed by {{companyName}}
+          </div>
+          <div class="btn-logout" (click)="logout()">Logout</div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+  <div class="module-popup" *ngIf="moduleOpen">
+    <div class="overlay" (click)="toggleModule()"></div>
+    <div class="popup-box">
+      <div class="icons-container" *ngFor="let m of modules">
+        <div class="icon" [ngClass]="{'selected':m.selected==true}" (click)="gotoModule(m)">
+          <img src="{{m.icon}}" />
+          <div class="title">{{m.title}}</div>
+          <div class="selector" [ngStyle]="{'background': m.color}"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,41 @@
+<div class="menu-box">
+    <div class="heading">Account Settings</div>
+    <ul>
+        <li [ngClass]="{active: isActive(path.SETTINGS_DASHBOARD)}" (click)="moveTo(path.SETTINGS_DASHBOARD)">
+            <a>
+                <img src="/assets/images/icons/profileldpi.svg" />
+                <div class="menu-text">Dashboard</div>
+            </a>
+        </li>
+        <li [ngClass]="{active: isActive(path.SETTINGS_PROFILE)}" (click)="moveTo(path.SETTINGS_PROFILE)">
+            <a>
+                <img src="/assets/images/icons/detailsldpi.svg" />
+                <div class="menu-text">Profile</div>
+            </a>
+        </li>
+        <li [ngClass]="{active: isActive(path.SETTINGS_TEAM)}" (click)="moveTo(path.SETTINGS_TEAM)">
+            <a>
+                <img src="/assets/images/icons/leadsldpi.svg" />
+                <div class="menu-text">Team</div>
+            </a>
+        </li>
+        <!-- <li [ngClass]="{active: isActive(path.SETTINGS_BILLING)}" (click)="moveTo(path.SETTINGS_BILLING)">
+      <a>
+        <img src="/assets/images/icons/leadsldpi.svg" />
+        <div class="menu-text">Billing</div>
+      </a>
+    </li>
+    <li [ngClass]="{active: isActive(path.SETTINGS_APPS)}" (click)="moveTo(path.SETTINGS_APPS)">
+      <a>
+        <img src="/assets/images/icons/smsldpi.svg" />
+        <div class="menu-text">Connected Apps</div>
+      </a>
+    </li> -->
+        <li [ngClass]="{active: isActive(path.SETTINGS_DATA)}" (click)="moveTo(path.SETTINGS_DATA)">
+            <a>
+                <img src="/assets/images/icons/filterldpi.svg" />
+                <div class="menu-text">Data Management</div>
+            </a>
+        </li>
+    </ul>
+</div>

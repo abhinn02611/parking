@@ -1,0 +1,17 @@
+<ng-content></ng-content>
+<div class="confirm {{class}}" *ngIf="showConfirm || dialog">
+    <div class="overray" (click)="closeConfirm($event)"></div>
+    <div class="confirm-container" >
+        <div class="confirm-body" [style.width]="getWidth()" [style.height]="getHeight()" >
+            <div class="confirm-content" [ngClass]="{'centered': contentPosition == 'center'}">
+                <div class="highlight darktext largetext mb-10">{{title}}</div>
+                <div class="mediumtext mb-7">{{content}}</div>
+                <div class="smalltext bold mb-7">{{note}}</div>
+            </div>
+            <div class="confirm-footer button-center">
+                <div *ngIf="labelConfirm" class="button-confirm pull-right"  (click)="onConfirm()">{{labelConfirm}}</div>
+                <div *ngIf="labelCancel" class="button-cancel pull-left" (click)="onCancel()">{{labelCancel}}</div>
+            </div>
+        </div>
+    </div>
+</div>

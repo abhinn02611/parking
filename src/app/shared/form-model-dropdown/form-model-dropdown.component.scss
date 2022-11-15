@@ -1,0 +1,125 @@
+@import "src/styles/_variables.scss";
+.form-dropdown-container{
+  position: relative;
+  .form-dropdown{
+    position: relative;
+    height: 52px;
+    padding: 24px 7px 7px 0px;
+    width: 100%;
+    display: block;
+    .angle{
+      position: absolute;
+      right: 10px;
+      width: 18px;
+      height: 18px;
+      opacity: 0.5;
+      top: 17px;
+      img{
+        width: 100%;
+      }
+      .open{
+        display: none;
+      }
+    }
+    &.open{
+      .angle{
+        top: 24px;
+      }
+    }
+  
+  
+    .input{
+      border: 0;
+      background: transparent;
+      color: $_maintext;
+      font-size: 16px;
+      outline: none;
+    }
+    .label{
+      position: absolute;
+      top: 17px;
+      left: 5px;
+      color: $_maintext;
+      font-size: 16px;
+      margin-left: 0px;
+      transition: font-size .2s linear, color .2s linear, top .2s linear;
+    }
+    &.open{
+      .label{
+        font-size: 12px;
+        color: $_subtext;
+        top: 5px;
+        left: 0px;
+      }
+    }
+  
+    .preview {
+      position: relative;
+      .form-control {
+        display: block;
+        padding: 10px 0px;
+        background: transparent;
+        border: 0;
+        width: 100%;
+        border-bottom: 1px solid #b9c1cc;
+        outline: none;
+        font-weight: 600;
+        font-size: 18px;
+        padding-top: 5px;
+      }
+      .event-listener {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      
+    }
+    
+  }
+
+
+
+
+  &.ddopen{
+    .form-dropdown{
+      .angle{
+        .open{
+          display: block;
+        }
+        .close{
+          display: none;
+        }
+      } 
+    }
+    
+    .options-container{
+        display: block;
+    }
+    .overlay{
+        display: block;
+    }
+  }
+  &.top {
+    .options-container {
+      .options {
+        left: 0;
+        right: 0;
+        bottom: 40px;
+      }
+    }
+  }
+  &.bottom {
+    .options-container {
+      .options {
+        top: 0;
+        left: 0;
+        right: 0;
+      }
+    }
+  }
+  
+}
+
+

@@ -1,0 +1,39 @@
+<div class="model {{class}}" >
+    <div class="overray"></div>
+    <div class="model-container" >
+        <div class="model-body" [style.width]="getWidth()" [ngStyle]="{'height.px': getHeight()}">
+            <div class="model-header" *ngIf="title">
+                <div class="title" [innerHTML]="title"></div>
+                <div *ngIf="labelCancel && cancelPosition == 'top'" class="button-text pull-right" (click)="onCancel()">{{labelCancel}}</div>
+            </div>
+            <div class="model-content" [ngClass]="{'pt-30': !title}">
+                <div class="model-scroll"  [ngClass]="{noscroll: scroll == false}">
+                    <ng-content></ng-content>
+                </div>
+            </div>
+            <div class="model-footer">
+                <div *ngIf="labelCancel && cancelPosition == 'bottom'" class="button-text pull-left can-btn" (click)="onCancel()">{{labelCancel}}</div>
+                <div *ngIf="total != ''" class="total-text pull-left">{{total}}</div>
+                
+                <confirm *ngIf="confirm && labelPrimary" [title]="confirmParam.title"
+                [content]="confirmParam.content"
+                [note]="confirmParam.note"
+                [contentPosition]="'center'"
+                [labelConfirm]="confirmParam.label"
+                (actionConfirm)="onPrimary()"
+                ><div class="button pull-right" [ngClass]="{action: loaderPrimary}">{{labelPrimary}}</div></confirm>
+                
+                <div *ngIf="confirm == false && labelPrimary" class="button pull-right" [ngClass]="{action: loaderPrimary}" (click)="onPrimary()">{{labelPrimary}}</div>
+                <a *ngIf="linkSharePass" target="_blank" class="button pull-right" href="mailto:?subject=Your Parking Sistem Pass Detail
+                &body=Hi there%0D%0A%0D%0AHere is your recent pass details…%0D%0A%0D%0AValid for:
+                 Godowlia Multilevel Parking%0D%0AVehicle number: {{linkSharePass['vehicle']['regNumber']}}%0D%0APass Status:
+                  {{linkSharePass['status']?'Active':'Inactive'}}%0D%0A%0D%0APass type: {{linkSharePass['type']}}-Pass%0D%0ACreated on:
+                   {{formatDateShare(linkSharePass['startDate'])}}%0D%0AExpires on:
+                    {{formatDateShare(linkSharePass['endDate'])}}%0D%0AValid for:
+                    Assi Ghat Parking 1%0D%0A%0D%0AOwner Details%0D%0AName: {{linkSharePass['vehicle']['name']}}%0D%0AMobile No.:
+                     {{linkSharePass['vehicle']['phone']}}%0D%0APayment received: ₹{{linkSharePass['rate']}}/- • {{linkSharePass['paymentMode']}}%0D%0A%0D%0AThis is non-refundable pass. Only owner of the vehicle can use this. No other category of vehicle will be permitted to park on behalf of the pass." >Share Pass</a>
+                <div *ngIf="labelSecondary" class="button-text pull-right" (click)="onSecondry()">{{labelSecondary}}</div>
+            </div>
+        </div>
+    </div>
+</div>

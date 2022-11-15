@@ -1,0 +1,65 @@
+<div class="scroller">
+  <div class="section-header">
+    <div class="heading subheading">Add Your Activity</div>
+  </div>
+  <div class="modules">
+    <div class="module " (click)="editImage.emit()">
+      <div class="icon green">
+        <img src="/assets/images/icons/galleryldpi.svg" alt="" />
+      </div>
+      <div class="label highlight">Images & Videos</div>
+    </div>
+    <div class="module">
+      <div class="icon orange">
+        <img src="/assets/images/icons/productldpi.svg" alt="" />
+      </div>
+      <div class="label highlight" (click)="addRelatedProduct.emit()">Related Product</div>
+    </div>
+    <!-- <div class="module">
+      <div class="icon darkblue">
+        <img src="/assets/images/icons/attachementsldpi.svg" alt="" />
+      </div>
+      <div class="label highlight">Attachments</div>
+    </div> -->
+  </div>
+</div>
+
+<div class="section-header">
+  <div class="heading subheading">Descriptions</div>
+</div>
+<div class="tasks description mb-20 pb-20">{{product.product_specification}}</div>
+
+<div class="section-header">
+  <div class="heading subheading">Images & Videos ({{images.length}})</div>
+</div>
+<div class="tasks images mb-20 pb-20">
+  <div class="image" *ngFor="let item of images">
+    <img src="{{item.medium_url}}" />
+  </div>
+</div>
+
+
+
+<div class="section-header">
+  <div class="heading subheading">Related Products ({{product.related_product.length}})</div>
+  <div class="action highlight" (click)="viewAllRelatedProducts()">View All</div>
+</div>
+<div class="products">
+  <div class="products-inner">
+    <div class="product-con" *ngFor="let item of product.related_product | slice:0:4; let index = index;">
+      <div class="product" [ngClass]="{noborder: index == 2 || index == 3}">
+        
+        <div class="icon skyblue" *ngIf="isArray(item.images) && item.images.length > 0">
+          <img src={{item.images[0].medium_url}} alt="" />
+        </div>
+        <div class="icon skyblue" *ngIf="!(isArray(item.images) && item.images.length > 0)">
+  
+        </div>
+        <div class="content">
+          <div class="name highlight link product-name" (click)=navigateProduct(item.product_id)>{{item.product_name}}</div>
+          <div class="info paragraph">{{item.product_code}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

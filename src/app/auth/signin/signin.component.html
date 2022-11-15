@@ -1,0 +1,53 @@
+<div class="page-wrapper">
+    <header>
+        <div class="logo">
+            <img class="logo1" src="/assets/images/parking_icon.png" />
+            <img class="logo2" src="/assets/images/parking_logo.svg" />
+        </div>
+        <nav>
+            <ul>
+                <li>
+                    <a href="">Help</a>
+                </li>
+                <li>
+                    <a href="">Contact Sales</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <div class="center-box-outer">
+        <div class="center-box">
+            <div class="heading">Sign-in to your System</div>
+            <div class="text">App designed to digitalise your entire parkings and give you the power of automation.</div>
+            <div class="form-row mt-20">
+                <label class="label">Email</label>
+                <input type="text" class="input-control" placeholder="Email" [(ngModel)]="loginId" />
+            </div>
+            <!-- <div class="form-row mt-10">
+            <label class="label">Usertype</label>
+            <input type="text" class="input-control" placeholder="Usertype" [(ngModel)]="userType" />
+          </div> -->
+            <div class="form-row mt-10">
+                <label class="label">Password</label>
+                <input type="password" class="input-control" placeholder="Password" [(ngModel)]="password" />
+            </div>
+            <div class="red-text mt-5 mh-20">{{errorLogin}}</div>
+            <div class="mt-30 dt">
+                <div class="button pull-right" (click)="login()">Login</div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div style="margin-top:300px; margin-left: 30px;">
+
+        <div class="button action">Log In</div>
+    </div>
+</div>
+<footer>
+    &copy; 2021 parking.sistem.app, All rights reserved. | <a href="#">Privacy</a> | <a href="#">Terms & Conditions</a>
+</footer>
+<sistem-pageloader *ngIf="loading"></sistem-pageloader>

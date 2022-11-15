@@ -1,0 +1,29 @@
+@import "src/styles/_variables.scss";
+.list-user {
+    width: 36px;
+    height: 36px;
+    float: left;
+    border-radius: 18px;
+    background: #edf1f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #566881;
+    font-size: 14px;
+    margin-right: 2px;
+    margin-top: -8px;
+}
+
+.image {
+    width: 36px;
+    height: 36px;
+    float: left;
+    border-radius: 18px;
+    background: #edf1f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #566881;
+    font-size: 14px;
+    margin-right: 2px;
+}

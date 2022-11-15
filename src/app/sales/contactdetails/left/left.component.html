@@ -1,0 +1,78 @@
+<div class="section-header">
+  <div class="heading subheading">Details</div>
+  <div class="action highlight" (click)="actionEdit.emit()">Edit</div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Phone: </div>
+    <div class="value paragraph">{{(contact.st_contact_mobile)?contact.st_contact_mobile:'NA'}}</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Phone (Desk): </div>
+    <div class="value paragraph">{{(contact.st_contact_mobile2.Desk)?contact.st_contact_mobile2.Desk:'NA'}}</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Phone (Other): </div>
+    <div class="value paragraph">{{(contact.st_contact_mobile2.Other)?contact.st_contact_mobile:'NA'}}</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Email (Work): </div>
+    <div class="value paragraph">{{(contact.st_contact_email)?contact.st_contact_email:'NA'}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Email (Other): </div>
+    <div class="value paragraph">{{(contact.st_contact_email2)?contact.st_contact_email2:'NA'}}</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">DOB: </div>
+    <div class="value paragraph">{{(contact.st_contact_dob)?contact.st_contact_dob:'NA'}}</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Social Link (Facebook): </div>
+    <div class="value paragraph" [innerHTML]="(contact.st_contact_social_links && contact.st_contact_social_links.Facebook)?link(contact.st_contact_social_links.Facebook):'NA'"></div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Social Link (LinkedIn): </div>
+    <div class="value paragraph" [innerHTML]="(contact.st_contact_social_links && contact.st_contact_social_links.LinkedIn)?link(contact.st_contact_social_links.LinkedIn):'NA'"></div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Social Link (Twitter): </div>
+    <div class="value paragraph" [innerHTML]="(contact.st_contact_social_links && contact.st_contact_social_links.Twitter)?link(contact.st_contact_social_links.Twitter):'NA'"></div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Social Link (Other): </div>
+    <div class="value paragraph" [innerHTML]="(contact.st_contact_social_links && contact.st_contact_social_links.Other)?link(contact.st_contact_social_links.Other):'NA'"></div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Address: </div>
+    <div class="value paragraph">{{getAddress()}}</div>
+  </div>
+</div>

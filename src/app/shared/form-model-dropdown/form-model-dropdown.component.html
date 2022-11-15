@@ -1,0 +1,12 @@
+<div class="form-dropdown-container">
+  <div class="form-dropdown open" [ngClass]="{open: inputOpen}" (click)="selectOption()">
+    <div >
+      <div class="input" #input>{{value}}</div>
+      <div class="label" #preview>{{label}}</div>
+      <div class="angle">
+        <img class="close" src="/assets/images/icons/next arrowldpi.svg" alt="" />
+        <img class="open" src="/assets/images/icons/downldpi.svg" alt="" />
+      </div>
+    </div>
+  </div>
+</div>

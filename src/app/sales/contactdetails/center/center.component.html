@@ -1,0 +1,81 @@
+<div class="scroller">
+  <div class="section-header">
+    <div class="heading subheading">Add Your Activity</div>
+  </div>
+  <div class="modules">
+    <div class="module" (click)="attachmentClick($event)">
+      <div class="icon darkblue">
+        <img src="/assets/images/icons/attachementsldpi.svg" alt="" />
+      </div>
+      <div class="label highlight">Attachments</div>
+    </div>
+    <div class="module" (click)="notesClick($event)">
+      <div class="icon darkblue">
+        <img src="/assets/images/icons/attachementsldpi.svg" alt="" />
+      </div>
+      <div class="label highlight">Notes</div>
+    </div>
+    <div class="module" (click)="addTask()">
+      <div class="icon orange">
+        <img src="/assets/images/icons/tasksldpi.svg" alt="" />
+      </div>
+      <div class="label highlight">Tasks</div>
+    </div>
+    <div class="module" (click)="addOrder()">
+      <div class="icon blue">
+        <img src="/assets/images/icons/sales orderldpi.svg" alt="" />
+      </div>
+      <div class="label highlight">Order</div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="section-header">
+  <div class="heading subheading">Tasks ({{tasks.length}})</div>
+  <div class="action highlight" (click)="showAllTasks()">View All</div>
+</div>
+<div class="tasks">
+  <div class="tasks-inner">
+    <div class="task-con" *ngFor="let task of tasks | slice:0:4; let index = index;">
+      {{index}}
+      <div class="task" [ngClass]="{noborder: index == 2 || index == 3 || tasks.length < 3, completed: task.sales_task_status == 'Completed'}" >
+        <div class="left">
+          <div class="circlebox green"
+            *ngIf="task.sales_task_type == 'visit' || task.sales_task_type == 'task' || task.sales_task_type == 'Visit' || task.sales_task_type == ''">
+            <img src="/assets/images/icons/visit_1ldpi.svg" />
+          </div>
+          <div class="circlebox yellow"
+            *ngIf="task.sales_task_type == 'call' || task.sales_task_type == 'Call'">
+            <img src="/assets/images/icons/call_1ldpi.svg" />
+          </div>
+          <div class="circlebox blue" *ngIf="task.sales_task_type == 'demo' || task.sales_task_type == 'Demo'">
+            <img src="/assets/images/icons/demoldpi.svg" />
+          </div>
+        </div>
+        <div class="content">
+          <div class="name highlight">{{task.sales_task_subject}}</div>
+          <div class="info online smalltext">{{task.sales_task_due_date}} <span class="v_line">|</span> {{task.sales_task_status}}</div>
+          <div class="circlecheck" (click)="markCompleted($event, task.sales_task_id, index)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+<div class="line mt-20 mb-20"></div>
+<app-attachments [add]="addAttachment.asObservable()" [type]="'contact'" [id]="contact.st_contact_id"></app-attachments>
+<app-notes [add]="addNotes.asObservable()" [type]="'contact'" [id]="contact.st_contact_id"></app-notes>
+
+
+<app-add-task *ngIf="addTaskModelOpen" (actionSecondary)="cancelAddtask(true, true)"
+  (actionPrimary)="cancelAddtask(true, false)" (actionCancel)="cancelAddtask(false, false)" [refId]="contact.st_contact_id"
+  [refType]="'Contact'" [refDesc]="''" [refContact]="contact"></app-add-task>
+
+<app-add-order *ngIf="addOrderModelOpen" (actionSecondary)="cancelAddorder(true, true)"
+  (actionPrimary)="this.taskAdded.emit()" (actionCancel)="cancelAddorder()" [contact]="contact"></app-add-order>

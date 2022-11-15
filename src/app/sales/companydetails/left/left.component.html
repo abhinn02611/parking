@@ -1,0 +1,111 @@
+<div class="section-header">
+  <div class="heading subheading">Details</div>
+  <div class="action highlight" (click)="actionEdit.emit()">Edit</div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Status: </div>
+    <div class="value paragraph">{{company.store_status}}</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Phone: </div>
+    <div class="value paragraph">{{(company.store_phone)?company.store_phone:'NA'}}</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Phone (Desk): </div>
+    <div class="value paragraph">{{(company.store_fax && company.store_fax.Desk)?company.store_fax.Desk:'NA'}}</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Phone (Other): </div>
+    <div class="value paragraph">{{(company.store_phone)?company.store_phone:'NA'}}</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Email: </div>
+    <div class="value paragraph">{{(company.store_email)?company.store_email:'NA'}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Website: </div>
+    <div class="value paragraph">{{(company.store_website)?company.store_website:'NA'}}</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Owner: </div>
+    <div class="value paragraph">{{(company.store_owner)?company.store_owner:'NA'}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Related To: </div>
+    <div class="value paragraph">{{company.store_parent_ac?company.store_parent_ac:'NA'}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Type: </div>
+    <div class="value paragraph">{{company.store_type}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Industry: </div>
+    <div class="value paragraph">{{(company.store_industry)?company.store_industry:'NA'}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Ownership: </div>
+    <div class="value paragraph">{{(company.store_ownership)?company.store_ownership:'NA'}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Annual Revenue: </div>
+    <div class="value paragraph">{{(company.store_annual_revenue)?currency+' '+company.store_annual_revenue:'NA'}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Rating: </div>
+    <div class="value paragraph">{{(company.store_rating)?company.store_rating:'NA'}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Employees: </div>
+    <div class="value paragraph">{{(company.store_total_employee)?company.store_total_employee:'NA'}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">SIS Code: </div>
+    <div class="value paragraph">{{(company.store_sic_code)?company.store_sic_code:'NA'}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Address (Billing): </div>
+    <div class="value paragraph">{{getStoreAddress()}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Address (Shipping): </div>
+    <div class="value paragraph">{{getShipAddress()}}</div>
+  </div>
+</div>

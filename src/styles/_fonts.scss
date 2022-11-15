@@ -1,0 +1,27 @@
+@font-face {
+  @include font(Icon, '/assets/fonts/icons/icon-v2', normal, normal);
+}
+
+
+
+
+@font-face {
+  @include font(Glober, '/assets/fonts/Glober Light/glober_light-webfont', 300, lighter);
+}
+
+@font-face {
+  @include font(Glober, '/assets/fonts/Glober Regular/glober_regular-webfont', 400, normal);
+}
+
+@font-face {
+  @include font(Glober, '/assets/fonts/Glober SemiBold/glober_semibold-webfont', 500, bold);
+}
+
+@font-face {
+  @include font(Glober, '/assets/fonts/Glober Bold/glober_bold-webfont', 600, bold);
+}
+
+@font-face {
+  @include font(Glober, '/assets/fonts/Glober xBold/glober_xbold-webfont', 700, bolder);
+}
+

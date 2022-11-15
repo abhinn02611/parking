@@ -1,0 +1,27 @@
+<div class="filter-pagination">
+  <div
+    class="pagination-item circle action"
+    [ngClass]="{ disable: filter.page <= 1 }"
+    (click)="onClickBack()"
+  >
+    <img src="/assets/images/icons/left-arrow.svg" alt="" />
+  </div>
+  <div class="pagination-item circle">
+    <input
+      type="text"
+      [(ngModel)]="filter.page"
+      (keyup.enter)="onPaginationEnter()"
+    />
+  </div>
+
+  <div class="pagination-item text">
+    of {{ getTotalPage(filter.total, filter.limit) }}
+  </div>
+  <div
+    class="pagination-item circle action last"
+    [ngClass]="{ disable: filter.page >= pageCount }"
+    (click)="onClickNext()"
+  >
+    <img src="/assets/images/icons/left-arrow.svg" alt="" />
+  </div>
+</div>

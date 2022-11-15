@@ -1,0 +1,213 @@
+<div class="vendor-cnt">
+  <form-model
+    class="modal-1"
+    [title]="editId ? 'Edit Vendor' : 'Add Vendor'"
+    [labelCancel]="'Close'"
+    [cancelPosition]="'bottom'"
+    (actionCancel)="onCancelVendor()"
+    [labelPrimary]="'Confirm'"
+    (actionSecondary)="onSubmit()"
+  >
+    <div class="add-vend-main">
+      <p>
+        Invite vendor who operates your parking lots and give them the power of
+        automation on there finger tips.
+      </p>
+      <div class="vend-smart">
+        <div class="inner">
+          <span>{{ user.company ? user.company : "-" }}</span>
+          <ins
+            >Invite as {{ user?.firstName | titlecase }}
+            {{ user?.lastName }} ({{ role | titlecase }})</ins
+          >
+        </div>
+        <div class="inner1">
+          <p>{{ companyInitial }}</p>
+        </div>
+      </div>
+      <div style="margin: auto; margin-top: 20px" class="form-row row">
+        <div
+          class="form-col-12 border-bottom padding-6 title"
+          style="cursor: pointer"
+          (click)="onChooseParking()"
+        >
+          <label>Choose Parkings</label>
+          <div class="parking-label">
+            <label *ngIf="selectedParkings.length <= 2">
+              <ng-container *ngFor="let parking of selectedParkings">
+                {{ parking.name }},
+              </ng-container>
+            </label>
+            <label *ngIf="selectedParkings.length > 2">
+              <ng-container
+                *ngFor="let parking of selectedParkings | slice: 0:2"
+              >
+                {{ parking.name }},
+              </ng-container>
+              <ng-container>
+                and {{ selectedParkings.length - 2 }} other selected
+              </ng-container>
+            </label>
+          </div>
+        </div>
+
+        <!-- <div class="form-col-12" (click)="onChooseParking()">
+          <form-dropdown [label]="'Parkings'"></form-dropdown>
+        </div> -->
+
+        <div style="margin: auto; margin-top: 20px" class="form-row row">
+          <div class="form-col-12 border-bottom padding-6">
+            <form-input
+              [(inputModel)]="vendor.company"
+              [label]="'Company Name'"
+            ></form-input>
+          </div>
+
+          <div class="form-col-6 border-bottom border-right">
+            <form-input
+              [(inputModel)]="vendor.firstName"
+              [label]="'Manager First Name'"
+            ></form-input>
+          </div>
+
+          <div class="form-col-6 border-bottom">
+            <form-input
+              [(inputModel)]="vendor.lastName"
+              [label]="'Last Name'"
+            ></form-input>
+          </div>
+
+          <div class="form-col-6 border-bottom border-right">
+            <form-input
+              [(inputModel)]="vendor.phone"
+              [isReadonly]="editId ? true : false"
+              [label]="'Mobile No.'"
+            ></form-input>
+          </div>
+          <div class="form-col-6 border-bottom padding">
+            <form-dropdown
+              [label]="'Gender'"
+              (actionSelect)="actionSelectDD($event)"
+              [value]="vendor.gender"
+              [options]="filterDropdown"
+            >
+            </form-dropdown>
+          </div>
+          <div class="form-col-6 border-bottom">
+            <form-input
+              [(inputModel)]="vendor.email"
+              [isReadonly]="editId ? true : false"
+              [label]="'Email'"
+            ></form-input>
+          </div>
+          <div class="form-col-6 border-bottom">
+            <form-input
+              [type]="'password'"
+              [(inputModel)]="vendor.password"
+              [label]="'Password'"
+            ></form-input>
+          </div>
+        </div>
+      </div>
+
+      <div class="vend-per">
+        <p>
+          <span>Permission</span> People you invite can manage complete parking.
+        </p>
+      </div>
+      <div class="ft">
+        <p>
+          Inviting people ot related to organisation is restricted in few
+          companies. Please refer to the <span>Client Privacy Policy</span> and
+          <Span>Sistem Apps Sharing Policy.</Span>
+        </p>
+      </div>
+    </div>
+  </form-model>
+
+  <form-model
+    class="modal-2"
+    *ngIf="showChooseParking"
+    [title]="'Choose Parking'"
+    [labelCancel]="'Close'"
+    [cancelPosition]="'bottom'"
+    (actionCancel)="onCancelParking()"
+    [labelPrimary]="'Save'"
+    (actionSecondary)="onSaveParking()"
+  >
+    <div class="add-vend-main">
+      <p>
+        {{ parkingList?.length }} Items •
+        {{ selectedParkings?.length }} Selected
+      </p>
+      <app-searchbar
+        [filter]="filter"
+        (onFilterChange)="applyFilter($event)"
+      ></app-searchbar>
+      <sistem-pageloader *ngIf="loading"></sistem-pageloader>
+
+      <div class="data-content">
+        <div class="line-header"></div>
+
+        <div class="data-list" *ngIf="!loading">
+          <ul class="headings">
+            <li></li>
+            <li class="paragraph">
+              PARKING NAME
+              <div class="order-type" *ngIf="'firstName' == orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+            <li class="paragraph">
+              VENDOR
+              <div class="order-type" *ngIf="'lastName' == orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+
+            <li class="paragraph">
+              STATUS
+              <div class="order-type" *ngIf="'gender' == orderBy">
+                <img *ngIf="!reverse" src="/assets/images/icons/downldpi.svg" />
+                <img *ngIf="reverse" src="/assets/images/icons/upldpi.svg" />
+              </div>
+            </li>
+          </ul>
+          <ng-container
+            *ngFor="
+              let parking of parkingList | orderBy: orderBy:reverse;
+              let index = index
+            "
+          >
+            <div class="rowouter">
+              <ul class="content" [ngClass]="{ disable: parking.vendor }">
+                <li (click)="selectItem($event, parking)">
+                  <div
+                    class="checkbox"
+                    [disabled]="true"
+                    [ngClass]="{ checked: isSelected(parking.id) }"
+                  ></div>
+                </li>
+                <li class="highlight">{{ parking.name | titlecase }}</li>
+                <li class="highlight">
+                  {{
+                    parking.vendor
+                      ? parking.vendor.user.firstName +
+                        " " +
+                        parking.vendor.user.lastName
+                      : "-"
+                  }}
+                </li>
+                <li class="paragraph">
+                  {{ parking.status ? "Active" : "Inactive" }}
+                </li>
+              </ul>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </form-model>
+</div>

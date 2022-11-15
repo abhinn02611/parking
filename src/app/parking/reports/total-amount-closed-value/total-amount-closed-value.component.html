@@ -1,0 +1,216 @@
+<div class="total-amount-grid-container">
+  <div class="box">
+    <label>Your Monthly Overview</label>
+    <div class="overview-content">
+      <div class="amount">
+        <h2>₹{{ pHours?.amountWeekly?.currentWeek }}</h2>
+        <div
+          class="amount-changed"
+          [ngStyle]="{
+            color:
+              pHours?.amountWeekly?.currentWeek < pHours?.amountWeekly?.lastWeek
+                ? '#FFCC00'
+                : '#4CD964'
+          }"
+        >
+          <div>₹{{ pHours?.amountWeekly?.lastWeek }}</div>
+          <div>
+            <span>
+              (
+              <img
+                *ngIf="
+                  pHours?.amountWeekly?.currentWeek >
+                  pHours?.amountWeekly?.lastWeek
+                "
+                src="../../../../assets/images/increasePercentage.svg"
+              />
+              <img
+                *ngIf="
+                  pHours?.amountWeekly?.currentWeek <
+                  pHours?.amountWeekly?.lastWeek
+                "
+                src="../../../../assets/images/decreasePercentage.svg"
+              />
+            </span>
+            <span>
+              {{
+                calculatePercentageChange(
+                  pHours?.amountWeekly?.currentWeek,
+                  pHours?.amountWeekly?.lastWeek
+                )
+              }}% )
+            </span>
+          </div>
+        </div>
+      </div>
+      <ul class="vehicle-container">
+        <li>
+          <div>Total In Vehicle</div>
+          <div>{{ pHours?.parkingdata?.totalInVehicles }}</div>
+        </li>
+        <li>
+          <div>Currently In</div>
+          <div>{{ pHours?.parkingdata?.currentInVehicle }}</div>
+        </li>
+        <li>
+          <div>Out Vehicle</div>
+          <div>{{ pHours?.parkingdata?.outVehicle }}</div>
+        </li>
+        <li>
+          <div>Out Vehicle with Pass</div>
+          <div>{{ pHours?.parkingdata?.passOut }}</div>
+        </li>
+        <li>
+          <div>New Pass Created</div>
+          <div>{{ pHours?.parkingdata?.createdPass }}</div>
+        </li>
+        <li>
+          <div>Total Bookings</div>
+          <div>{{ pHours?.parkingdata?.booking }}</div>
+        </li>
+      </ul>
+      <ul class="vehicle-container">
+        <li>
+          <div>Cash Payment</div>
+          <div>₹{{ pHours?.parkingdata?.cashPayment }}</div>
+        </li>
+        <li>
+          <div>Online Payment</div>
+          <div>₹{{ pHours?.parkingdata?.onlinePayment }}</div>
+        </li>
+        <li>
+          <div>Online Refund</div>
+          <div>₹{{ pHours?.parkingdata?.refundBookingPayment }}</div>
+        </li>
+        <li>
+          <div>Online Booking Payment</div>
+          <div>₹{{ pHours?.parkingdata?.onlineBookingPayment }}</div>
+        </li>
+      </ul>
+      <ul class="total-collection">
+        <li>
+          <div>Total Collection</div>
+          <div>₹{{ pHours?.totalamount }}</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="parking-dropdown">
+      <form-dropdown
+        [label]="''"
+        [value]="'Current month'"
+        (actionSelect)="actionSelected($event, 'Monthly')"
+        [options]="filterDropdown[0].options"
+        [optionWidth]="200"
+      >
+      </form-dropdown>
+    </div>
+  </div>
+
+  <div class="box">
+    <label>How are you doing today?</label>
+    <div class="overview-content">
+      <div class="amount">
+        <h2>₹{{ pDays?.amountWeekly?.currentWeek }}</h2>
+        <div
+          class="amount-changed"
+          [ngStyle]="{
+            color:
+              pDays?.amountWeekly?.currentWeek < pDays?.amountWeekly?.lastWeek
+                ? '#FFCC00'
+                : '#4CD964'
+          }"
+        >
+          <div>₹{{ pDays?.amountWeekly?.lastWeek }}</div>
+          <div>
+            <span>
+              (
+              <img
+                *ngIf="
+                  pDays?.amountWeekly?.currentWeek >
+                  pDays?.amountWeekly?.lastWeek
+                "
+                src="../../../../assets/images/increasePercentage.svg"
+              />
+              <img
+                *ngIf="
+                  pDays?.amountWeekly?.currentWeek <
+                  pDays?.amountWeekly?.lastWeek
+                "
+                src="../../../../assets/images/decreasePercentage.svg"
+              />
+            </span>
+            <span>
+              {{
+                calculatePercentageChange(
+                  pDays?.amountWeekly?.currentWeek,
+                  pDays?.amountWeekly?.lastWeek
+                )
+              }}% )
+            </span>
+          </div>
+        </div>
+      </div>
+      <ul class="vehicle-container">
+        <li>
+          <div>Total In Vehicle</div>
+          <div>{{ pDays?.parkingdata?.totalInVehicles }}</div>
+        </li>
+        <li>
+          <div>Currently In</div>
+          <div>{{ pDays?.parkingdata?.currentInVehicle }}</div>
+        </li>
+        <li>
+          <div>Out Vehicle</div>
+          <div>{{ pDays?.parkingdata?.outVehicle }}</div>
+        </li>
+        <li>
+          <div>Out Vehicle with Pass</div>
+          <div>{{ pDays?.parkingdata?.passOut }}</div>
+        </li>
+        <li>
+          <div>New Pass Created</div>
+          <div>{{ pDays?.parkingdata?.createdPass }}</div>
+        </li>
+        <li>
+          <div>Total Bookings</div>
+          <div>{{ pDays?.parkingdata?.booking }}</div>
+        </li>
+      </ul>
+      <ul class="vehicle-container">
+        <li>
+          <div>Cash Payment</div>
+          <div>₹{{ pDays?.parkingdata?.cashPayment }}</div>
+        </li>
+        <li>
+          <div>Online Payment</div>
+          <div>₹{{ pDays?.parkingdata?.onlinePayment }}</div>
+        </li>
+        <li>
+          <div>Online Refund</div>
+          <div>₹{{ pDays?.parkingdata?.refundBookingPayment }}</div>
+        </li>
+        <li>
+          <div>Online Booking Payment</div>
+          <div>₹{{ pDays?.parkingdata?.onlineBookingPayment }}</div>
+        </li>
+      </ul>
+      <ul class="total-collection">
+        <li>
+          <div>Total Collection</div>
+          <div>₹{{ pDays?.totalamount }}</div>
+        </li>
+      </ul>
+    </div>
+    <div class="parking-dropdown">
+      <form-dropdown
+        [label]="''"
+        [value]="'Today'"
+        (actionSelect)="actionSelected($event, 'Daily')"
+        [options]="filterDropdown[1].options"
+        [optionWidth]="200"
+      >
+      </form-dropdown>
+    </div>
+  </div>
+</div>

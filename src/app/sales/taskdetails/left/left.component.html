@@ -1,0 +1,84 @@
+<div class="section-header">
+  <div class="heading subheading">Details</div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Mobile: </div>
+    <div class="value paragraph">(212) 842-5500</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Phone: </div>
+    <div class="value paragraph">(212) 842-5501</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Due Date: </div>
+    <div class="value paragraph">{{getDueDate(task.sales_task_due_date)}}</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Time: </div>
+    <div class="value paragraph">{{getDueTime(task.sales_task_due_date)}}</div>
+  </div>
+</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Repeat: </div>
+    <div class="value paragraph">{{(task.repeat)?task.repeat:'NA'}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Status: </div>
+    <div class="value paragraph">{{(task.sales_task_status)?task.sales_task_status:'NA'}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Priority: </div>
+    <div class="value paragraph">{{(task.sales_task_priority)?task.sales_task_priority:'NA'}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Description: </div>
+    <div class="value paragraph">{{(task.sales_task_desc)?task.sales_task_desc:'NA'}}</div>
+  </div>
+</div>
+
+<div class="section-header mt-10">
+  <div class="heading subheading">Invite Guests</div>
+</div>
+
+<div class="guest">
+  <div class="name paragraph">Abhay Chaurasia</div>
+  <div class="email smalltext">You</div>
+</div>
+
+<div class="guest">
+  <div class="name paragraph">Sanjeevni Shreshtha</div>
+  <div class="email smalltext">sanjeevani@opple.com</div>
+</div>
+
+<div class="hint">People you invite can make changes.</div>
+
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Created By: </div>
+    <div class="value paragraph">{{(task.sales_task_owner)?task.sales_task_owner:'NA'}}</div>
+  </div>
+</div>
+<div class="content">
+  <div class="main">
+    <div class="label smalltext ">Modified By: </div>
+    <div class="value paragraph">{{(task.sales_task_modify_by)?task.sales_task_modify_by:'NA'}}</div>
+  </div>
+</div>
