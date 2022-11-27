@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy angular application
-        uses: appleboy/ssh-action@v0.1.2
+        uses: actions/checkout@v1
         with:
           host: ${{secrets.SSH_HOST}}
           key: ${{secrets.SSH_KEY}}
