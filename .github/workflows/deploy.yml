@@ -19,7 +19,7 @@ jobs:
           script: |
             cd test/parking
             git pull https://github.com/abhinn02611/parking.git
-            npm install
+            npm install --force
             ng build --prod
             cd dist
             cp -a /root/test/parking/dist/. /var/www/html
