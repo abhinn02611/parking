@@ -17,11 +17,11 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           
           script: |
-            rm -rf test
-            mkdir test
-            cd test
-            git clone https://github.com/abhinn02611/parking.git
-            cd parking
+            cd test/parking
+            git pull https://github.com/abhinn02611/parking.git
+            npm install
             ng build --prod
+            cd dist
+            cp -a /root/test/parking/dist/. /var/www/html
             echo 'deployment successful to digital ocean'
           
