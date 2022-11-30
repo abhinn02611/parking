@@ -21,6 +21,7 @@ jobs:
             mkdir test
             cd test
             git clone https://github.com/abhinn02611/parking.git
+            cd parking
             ng build --prod
             echo 'deployment successful to digital ocean'
           
