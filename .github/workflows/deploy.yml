@@ -17,8 +17,10 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           
           script: |
+            rm -rf test
             mkdir test
             cd test
             git clone https://github.com/abhinn02611/parking.git
+            ng build --prod
             echo 'deployment successful to digital ocean'
           
